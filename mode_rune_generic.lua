@@ -72,6 +72,7 @@ function GetDesire()
 	end	
 	
 	if DotaTime() > dropNeutralItemCheck + 5.0 then
+		uItem.SwapBetterNeutralItem(bot);
 		local canDrop, hItem = uItem.CanDropNeutralItem(bot);
 		if canDrop == true then
 			bot:Action_DropItem(hItem, bot:GetLocation() + RandomVector(100));

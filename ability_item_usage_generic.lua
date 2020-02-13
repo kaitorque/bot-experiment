@@ -82,7 +82,7 @@ local sayMyRole = false;
 function AbilityLevelUpThink()  
 
 	if sayMyRole == false and GetGameMode() == GAMEMODE_CM then
-		if DotaTime() > -80.0 then
+		if DotaTime() > -75.0 then
 			bot:ActionImmediate_Chat("My Role: "..tostring(PairsHeroNameNRole[bot:GetUnitName()]),false);
 			sayMyRole = true;
 		end
