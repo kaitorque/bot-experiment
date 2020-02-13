@@ -370,23 +370,34 @@ local sponsorship = {"GG.bet", "gg.bet", "VPGAME", "LOOT.bet", "loot.bet", "", "
 function U.GetDota2Team()
 	local bot_names = {};
 	local rand = RandomInt(1, #dota2team); 
+	local trand = RandomInt(1, #dota2team); 
 	local srand = RandomInt(1, #sponsorship); 
-	if GetTeam() == TEAM_RADIANT then
-		while rand%2 ~= 0 do
-			rand = RandomInt(1, #dota2team); 
-		end
-	else
-		while rand%2 ~= 1 do
-			rand = RandomInt(1, #dota2team); 
-		end
-	end
+	local prand = RandomInt(1, 5);
+	--if GetTeam() == TEAM_RADIANT then
+	--	while rand%2 ~= 0 do
+	--		rand = RandomInt(1, #dota2team); 
+	--	end
+	--else
+	--	while rand%2 ~= 1 do
+	--		rand = RandomInt(1, #dota2team); 
+	--	end
+	--end
 	local team = dota2team[rand];
+	
+	local pteam = dota2team[rand];
 	for _,player in pairs(team.players) do
-		if sponsorship[srand] == "" then
-			table.insert(bot_names, team.alias.."."..player);
-		else
-			table.insert(bot_names, team.alias.."."..player.."."..sponsorship[srand]);
-		end
+		
+		--if sponsorship[srand] == "" then
+			table.insert(bot_names, team.alias.."."..pteam.players[prand]);
+		--else
+		--	table.insert(bot_names, team.alias.."."..pteam.players[prand].."."..sponsorship[srand]);
+		--end
+		rand = RandomInt(1, #dota2team);
+		trand = RandomInt(1, #dota2team); 
+		srand = RandomInt(1, #sponsorship);
+		prand = RandomInt(1, 5);
+		team = dota2team[rand];
+		pteam = dota2team[trand];
 	end
 	return bot_names;
 end

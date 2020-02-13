@@ -170,8 +170,8 @@ local AllHeroesSelected = false;
 local BanCycle = 1;
 local PickCycle = 1;
 local NeededTime = 29;
-local Min = 27;
-local Max = 28;
+local Min = 25;
+local Max = 29;
 local CMTestMode = false;
 local UnavailableHeroes = {
 
@@ -184,7 +184,7 @@ local HeroLanes = {
 	[5] = LANE_BOT,
 };
 
-local PairsHeroNameNRole = {};
+--PairsHeroNameNRole = {};
 local humanPick = {};
 
 -----------------------------------------------------SELECT HERO FOR BOT WITH CHAT FEATURE-------------------------------------------
@@ -237,6 +237,8 @@ function Think()
 		AddToList();
 	elseif GetGameMode() == GAMEMODE_AR then
 		AllRandomLogic();
+	elseif GetGameMode() == GAMEMODE_RD then
+		RandomDraftLogic();
 	elseif GetGameMode() == GAMEMODE_MO then
 		MidOnlyLogic();	
 	elseif GetGameMode() == GAMEMODE_1V1MID then
@@ -422,6 +424,18 @@ function CanPick()
 end
 -------------------------------------------------------------------------------------------------------
 
+function RandomDraftLogic()
+	--print(tostring(GetGameMode()).."=>"..tostring(GetGameState())..":"..tostring(DotaTime( ))..":"..tostring(GetHeroPickState()))
+	if GetHeroPickState() == 55 and DotaTime() >= -10 or IsHumansDonePicking() then
+		for _,id in pairs(GetTeamPlayers(GetTeam())) do
+			if IsPlayerBot(id) and IsPlayerInHeroSelectionControl(id) and GetSelectedHeroName(id) == "" then
+				hero = GetRandomHero() 
+				SelectHero(id, hero); 
+				return;
+			end
+		end
+	end
+end
 
 ------------------------------------------CAPTAIN'S MODE GAME MODE-------------------------------------------
 --Picking logic for Captain's Mode Game Mode
@@ -491,64 +505,84 @@ function BansHero()
 		return
 	end	
 	local BannedHero = RandomHero();
-	if BanCycle == 1 then
-		while not role.CanBeOfflaner(BannedHero) do
-			BannedHero = RandomHero();
-		end
-	elseif	BanCycle == 2 then
-		while not role.CanBeSupport(BannedHero) do
-			BannedHero = RandomHero();
-		end
-	elseif	BanCycle == 3 then
-		while not role.CanBeMidlaner(BannedHero) do
-			BannedHero = RandomHero();
-		end
-	elseif	BanCycle == 4 then
-		while not role.CanBeSupport(BannedHero) do
-			BannedHero = RandomHero();
-		end
-	elseif	BanCycle == 5 then
-		while not role.CanBeSafeLaneCarry(BannedHero) do
-			BannedHero = RandomHero();
-		end	
-	end
+	--if BanCycle == 1 then
+	--	while not role.CanBeOfflaner(BannedHero) do
+	--		BannedHero = RandomHero();
+	--	end
+	--elseif	BanCycle == 2 then
+	--	while not role.CanBeSupport(BannedHero) do
+	--		BannedHero = RandomHero();
+	--	end
+	--elseif	BanCycle == 3 then
+	--	while not role.CanBeMidlaner(BannedHero) do
+	--		BannedHero = RandomHero();
+	--	end
+	--elseif	BanCycle == 4 then
+	--	while not role.CanBeSupport(BannedHero) do
+	--		BannedHero = RandomHero();
+	--	end
+	--elseif	BanCycle == 5 then
+	--	while not role.CanBeSafeLaneCarry(BannedHero) do
+	--		BannedHero = RandomHero();
+	--	end	
+	--end
 	print(BannedHero.." is banned")
 	CMBanHero(BannedHero);
 	BanCycle = BanCycle + 1;
 end
+--ArrayShuffle
+function FYShuffle( tInput )
+    local tReturn = {}
+    for i = #tInput, 1, -1 do
+        local j = math.random(i)
+        tInput[i], tInput[j] = tInput[j], tInput[i]
+        table.insert(tReturn, tInput[i])
+    end
+    return tReturn
+end
 --Pick hero function
+local rolelist = {"carry","midlaner","offlaner","support", "support"}
+local radiantrolelist = FYShuffle(rolelist)
+local direrolelist = FYShuffle(rolelist)
 function PicksHero()
 	if not IsPlayerBot(GetCMCaptain()) or not IsPlayerInHeroSelectionControl(GetCMCaptain()) then
 		return
 	end	
+	
 	local PickedHero = RandomHero();
-	if PickCycle == 1 then
-		while not role.CanBeOfflaner(PickedHero) do
-			PickedHero = RandomHero();
-		end
-		PairsHeroNameNRole[PickedHero] = "offlaner";
-	elseif	PickCycle == 2 then
-		while not role.CanBeSupport(PickedHero) do
-			PickedHero = RandomHero();
-		end
-		PairsHeroNameNRole[PickedHero] = "support";
-	elseif	PickCycle == 3 then
-		while not role.CanBeMidlaner(PickedHero) do
-			PickedHero = RandomHero();
-		end
-		PairsHeroNameNRole[PickedHero] = "midlaner";
-	elseif	PickCycle == 4 then
-		while not role.CanBeSupport(PickedHero) do
-			PickedHero = RandomHero();
-		end
-		PairsHeroNameNRole[PickedHero] = "support";
-	elseif	PickCycle == 5 then
-		while not role.CanBeSafeLaneCarry(PickedHero) do
-			PickedHero = RandomHero();
-		end	
-		PairsHeroNameNRole[PickedHero] = "carry";
+	if GetTeam() == TEAM_RADIANT then
+		PairsHeroNameNRole[PickedHero] = radiantrolelist[PickCycle]
+		print("Radiant: "..PickedHero.." is picked with role of: "..PairsHeroNameNRole[PickedHero])
+	else
+		PairsHeroNameNRole[PickedHero] = direrolelist[PickCycle]
+		print("Dire: "..PickedHero.." is picked with role of: "..PairsHeroNameNRole[PickedHero])
 	end
-	print(PickedHero.." is picked")
+	--if PickCycle == 1 then
+	--	while not role.CanBeOfflaner(PickedHero) do
+	--		PickedHero = RandomHero();
+	--	end
+	--	PairsHeroNameNRole[PickedHero] = "offlaner";
+	--elseif	PickCycle == 2 then
+	--	while not role.CanBeSupport(PickedHero) do
+	--		PickedHero = RandomHero();
+	--	end
+	--	PairsHeroNameNRole[PickedHero] = "support";
+	--elseif	PickCycle == 3 then
+	--	while not role.CanBeMidlaner(PickedHero) do
+	--		PickedHero = RandomHero();
+	--	end
+	--	PairsHeroNameNRole[PickedHero] = "midlaner";
+	--elseif	PickCycle == 4 then
+	--	while not role.CanBeSupport(PickedHero) do
+	--		PickedHero = RandomHero();
+	--	end
+	--	PairsHeroNameNRole[PickedHero] = "support";
+	--elseif	PickCycle == 5 then
+	--	while not role.CanBeSafeLaneCarry(PickedHero) do
+	--		PickedHero = RandomHero();
+	--	end	
+	--	PairsHeroNameNRole[PickedHero] = "carry";
+	--end
 	CMPickHero(PickedHero);
 	PickCycle = PickCycle + 1;
 end
@@ -933,7 +967,7 @@ end
 
 ---------------------------------------------------------LANE ASSIGNMENT-----------------------------------------------------------------
 function UpdateLaneAssignments()    
-	if GetGameMode() == GAMEMODE_AP or GetGameMode() == GAMEMODE_TM or GetGameMode() == GAMEMODE_SD then
+	if GetGameMode() == GAMEMODE_AP or GetGameMode() == GAMEMODE_TM or GetGameMode() == GAMEMODE_SD or GAMEMODE_RD then
 		--print("AP Lane Assignment")
 		if GetGameState() == GAME_STATE_STRATEGY_TIME or GetGameState() == GAME_STATE_PRE_GAME then
 			InstallChatCallback(function (attr) SelectLaneChatCallback(attr.player_id, attr.string, attr.team_only); end);
@@ -946,6 +980,7 @@ function UpdateLaneAssignments()
 	elseif GetGameMode() == GAMEMODE_CM then
 		--print("CM Lane Assignment")
 		return CMLaneAssignment()	
+		--return APLaneAssignment()
 	elseif GetGameMode() == GAMEMODE_AR then
 		return APLaneAssignment()	
 	elseif GetGameMode() == GAMEMODE_MO then
@@ -1092,6 +1127,7 @@ function FillLaneAssignmentTable()
 					HeroLanes[i] = LANE_TOP;
 				end	
 			end
+			print(PairsHeroNameNRole[unit_name])
 		end
 	end	
 end
