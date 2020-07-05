@@ -373,25 +373,11 @@ function U.GetDota2Team()
 	local trand = RandomInt(1, #dota2team); 
 	local srand = RandomInt(1, #sponsorship); 
 	local prand = RandomInt(1, 5);
-	--if GetTeam() == TEAM_RADIANT then
-	--	while rand%2 ~= 0 do
-	--		rand = RandomInt(1, #dota2team); 
-	--	end
-	--else
-	--	while rand%2 ~= 1 do
-	--		rand = RandomInt(1, #dota2team); 
-	--	end
-	--end
 	local team = dota2team[rand];
 	
 	local pteam = dota2team[rand];
 	for _,player in pairs(team.players) do
-		
-		--if sponsorship[srand] == "" then
-			table.insert(bot_names, team.alias.."."..pteam.players[prand]);
-		--else
-		--	table.insert(bot_names, team.alias.."."..pteam.players[prand].."."..sponsorship[srand]);
-		--end
+		table.insert(bot_names, team.alias.."."..pteam.players[prand]);
 		rand = RandomInt(1, #dota2team);
 		trand = RandomInt(1, #dota2team); 
 		srand = RandomInt(1, #sponsorship);
