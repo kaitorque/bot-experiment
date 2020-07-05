@@ -5,12 +5,8 @@ local utils = require(GetScriptDirectory() .. "/util");
 local hero_roles = role["hero_roles"];
 -- mandate that the bots will pick these heroes - for testing purposes
 local requiredHeroes = {
-	"npc_dota_hero_broodmother",
-	"npc_dota_hero_skeleton_king",
-	"npc_dota_hero_gyrocopter",
-	"npc_dota_hero_vengefulspirit",
-	"npc_dota_hero_death_prophet",
 	
+'npc_dota_hero_arc_warden',
 };
 
 local UnImplementedHeroes = {
@@ -292,8 +288,9 @@ local function IsHumanPlayerInRadiant1Slot()
 end
 
 local lastpick = 10;
+local tmstate = -99;
 function NewTurboModeLogic()
-	if GetHeroPickState() == 58 and GameTime() >= 45 and GameTime() >= lastpick + 1.5 then
+	if GetHeroPickState() == 57 and GameTime() >= 10 and GameTime() >= lastpick + 2 then
 		for i,id in pairs(GetTeamPlayers(GetTeam())) do
 			if IsPlayerBot(id) and IsPlayerInHeroSelectionControl(id) and GetSelectedHeroName(id) == "" then
 				if testMode then
@@ -453,9 +450,13 @@ function CaptainModeLogic()
 	elseif CMTestMode then
 		NeededTime = 29;
 	end	
+	if GetHeroPickState() ~= lastState then
+		--print('Pick State: '..tostring(GetHeroPickState()))
+		lastState = GetHeroPickState();
+	end
 	if GetHeroPickState() == HEROPICK_STATE_CM_CAPTAINPICK then	
 		PickCaptain();
-	elseif GetHeroPickState() >= HEROPICK_STATE_CM_BAN1 and GetHeroPickState() <= 18 and GetCMPhaseTimeRemaining() <= NeededTime then
+	elseif GetHeroPickState() >= HEROPICK_STATE_CM_BAN1 and GetHeroPickState() <= 20 and GetCMPhaseTimeRemaining() <= NeededTime then
 		BansHero();
 		NeededTime = 0 
 	elseif GetHeroPickState() >= HEROPICK_STATE_CM_SELECT1 and GetHeroPickState() <= HEROPICK_STATE_CM_SELECT10 and GetCMPhaseTimeRemaining() <= NeededTime then
@@ -723,7 +724,9 @@ end
 local RandomedHero = nil;
 function MidOnlyLogic()
 	if IsHumanPresentInGame() then
-		if IsHumansDonePicking() then
+		if GameTime() > 45 then
+			PickMidOnlyRandomHero()
+		elseif GameTime() <= 45 and IsHumansDonePicking() then
 			if IsHumanPlayerExist() then
 				local selectedHero = GetSelectedHumanHero(GetTeam())
 				if selectedHero ~= "" and  selectedHero ~= nil then
@@ -751,33 +754,38 @@ function MidOnlyLogic()
 			end 
 		end 
 	else
-		if GetTeam() ==	TEAM_DIRE then
-			if not IsOpposingTeamDonePicking() then
-				return
-			else
-				local selectedHero = GetOpposingTeamSelectedHero()
-				for i,id in pairs(GetTeamPlayers(GetTeam())) 
-				do 
-					if  GetHeroPickState() == HEROPICK_STATE_AP_SELECT and IsPlayerBot(id) and IsPlayerInHeroSelectionControl(id) and GetSelectedHeroName(id) == ""
-					then 
-						SelectHero(id, selectedHero); 
-						return;
-					end
-				end 
-			end
+		PickMidOnlyRandomHero()
+	end	
+end
+
+function PickMidOnlyRandomHero()
+	if GetTeam() ==	TEAM_DIRE then
+		if not IsOpposingTeamDonePicking() then
+			return
 		else
-			local selectedHero = SetRandomHero();
+			local selectedHero = GetOpposingTeamSelectedHero()
 			for i,id in pairs(GetTeamPlayers(GetTeam())) 
 			do 
-				if  GetHeroPickState() == HEROPICK_STATE_AP_SELECT and IsPlayerBot(id) and IsPlayerInHeroSelectionControl(id) and GetSelectedHeroName(id) == ""
+				if  GetHeroPickState() == HEROPICK_STATE_AP_SELECT and IsPlayerInHeroSelectionControl(id) and GetSelectedHeroName(id) == ""
 				then 
 					SelectHero(id, selectedHero); 
 					return;
 				end
 			end 
 		end
-	end	
+	else
+		local selectedHero = SetRandomHero();
+		for i,id in pairs(GetTeamPlayers(GetTeam())) 
+		do 
+			if  GetHeroPickState() == HEROPICK_STATE_AP_SELECT and IsPlayerInHeroSelectionControl(id) and GetSelectedHeroName(id) == ""
+			then 
+				SelectHero(id, selectedHero); 
+				return;
+			end
+		end 
+	end
 end
+
 --Get Human Selected Hero
 function GetSelectedHumanHero(team)
 	for i,id in pairs(GetTeamPlayers(team)) 

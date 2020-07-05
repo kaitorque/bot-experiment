@@ -41,7 +41,9 @@ local mutil = require(GetScriptDirectory() ..  "/MyUtility");
 local utils = require(GetScriptDirectory() ..  "/util");
 local eUtils = require(GetScriptDirectory() ..  "/EnemyUtility");
 local courierUtils = require(GetScriptDirectory() ..  "/CourierUtility");
-local uItem = require(GetScriptDirectory() .. "/ItemUtility" )
+local uItem = require(GetScriptDirectory() .. "/ItemUtility" );
+local itemUseUtils = require(GetScriptDirectory() .. "/ItemUsageUtility" );
+
 
 
 local IdleTime = 0;
@@ -102,7 +104,7 @@ function AbilityLevelUpThink()
 		return
 	end
 	
-	UnImplementedItemUsage()
+	--UnImplementedItemUsage()
 	UseGlyph()
 	
 	local botLoc = bot:GetLocation();
@@ -816,7 +818,7 @@ function ShouldTP()
 		if bot:GetHealth() < 0.15*bot:GetMaxHealth() and bot:WasRecentlyDamagedByAnyHero(2.0) and enemies == 0 then
 			tpLoc = mutil.GetTeamFountain();
 		elseif bot:GetHealth() < 0.25*bot:GetMaxHealth() and bot:WasRecentlyDamagedByAnyHero(3.0) and CanJuke() == true then
-			print(bot:GetUnitName().." JUKE TP")
+			-- print(bot:GetUnitName().." JUKE TP")
 			tpLoc = mutil.GetTeamFountain();	
 		end
 	elseif bot:HasModifier('modifier_bloodseeker_rupture') and enemies <= 1 then
@@ -1007,7 +1009,7 @@ function UnImplementedItemUsage()
 	if irt~=nil and irt:IsFullyCastable() then
 		if bot:GetActiveMode() == BOT_MODE_FARM or mutil.IsDefending(bot) or mutil.IsPushing(bot) 
 		then
-			local neutrals = bot:GetNearbyCreeps(500);
+			local neutrals = bot:GetNearbyCreeps(500, true);
 			local maxHP = 0;
 			local target = nil;
 			for _,c in pairs(neutrals) do
@@ -1070,6 +1072,8 @@ function UnImplementedItemUsage()
 			return;
 		end
 	end
+	
+	
 	
 	local pb=IsItemAvailable("item_phase_boots");
 	if pb~=nil and pb:IsFullyCastable() 
@@ -1436,6 +1440,27 @@ function UnImplementedItemUsage()
 		end
 	end
 	
+	--item_iron_talon
+	local irontalon = uItem.CanCastNeutralItem(bot, "item_iron_talon");
+	if irontalon ~= nil and irontalon:IsFullyCastable() then
+		if bot:GetActiveMode() == BOT_MODE_FARM or mutil.IsDefending(bot) or mutil.IsPushing(bot) 
+		then
+			local neutrals = bot:GetNearbyCreeps(500, true);
+			local maxHP = 0;
+			local target = nil;
+			for _,c in pairs(neutrals) do
+				local cHP = c:GetHealth();
+				if cHP > maxHP and not c:IsAncientCreep() then
+					maxHP = cHP;
+					target = c;
+				end
+			end
+			if target ~= nil then
+				bot:Action_UseAbilityOnEntity(irontalon, target);
+				return;
+			end
+		end
+	end
 	
 	--item_arcane_ring
 	local arc_ring = uItem.CanCastNeutralItem(bot, "item_arcane_ring");
@@ -2037,6 +2062,95 @@ function ItemUsageThinks()
 
 
 end	
+
+bot.castAmuletTime = DotaTime();
+local backpack_item = {};
+local update_bi_time = -90;
+
+function UpdateBackPackItem(bot)
+	local curr_time = DotaTime();
+	for i=6, 8 do
+		local bp_item = bot:GetItemInSlot(i);
+		if bp_item ~= nil then
+			backpack_item[bp_item:GetName()] = curr_time;
+		end
+	end
+	
+	if curr_time > update_bi_time + 7.0 then
+		for k,v in pairs(backpack_item) do
+			if v ~= nil and v + 7.0 < curr_time then
+				backpack_item[k] = nil;
+			end
+		end
+		update_bi_time = curr_time;
+	end
+end
+
+function JustSwapped(item_name)
+	return backpack_item[item_name] ~= nil and backpack_item[item_name] + 6.5 > DotaTime();
+end
+
+function ShouldNotUseNeutralItemFromMainSlot(item_name, slot)
+	return uItem.GetNeutralItemTier(item_name) > 0 and bot:GetItemSlotType(slot) == ITEM_SLOT_TYPE_MAIN
+end
+
+function ItemUsageThink()
+
+	if bot:IsAlive() == false 
+	   or bot:IsHero() == false 
+	   or bot:IsMuted() == true 
+	   or bot:IsHexed() == true
+	   or bot:IsStunned() == true
+	   or bot:IsChanneling() == true
+	   or bot:IsInvulnerable() == true
+	   or bot:IsUsingAbility() == true
+	   or bot:IsCastingAbility() == true
+	   or bot:NumQueuedActions() > 0 
+	   or mutil.IsTaunted(bot) == true
+	   or bot:HasModifier('modifier_teleporting') == true
+	   or bot:HasModifier('modifier_doom_bringer_doom') == true
+	   or bot:HasModifier('modifier_phantom_lancer_phantom_edge_boost') == true
+	   or ( bot:IsInvisible() == true and not bot:HasModifier("modifier_phantom_assassin_blur_active") == true )
+    then 
+		return	BOT_ACTION_DESIRE_NONE 
+	end
+	
+	local extra_range = 0;
+	local aether_lens_slot_type = bot:GetItemSlotType(bot:FindItemSlot('item_aether_lens'));
+	if aether_lens_slot_type == ITEM_SLOT_TYPE_MAIN 
+	then
+		extra_range = extra_range + 250;
+	end
+
+	local item_slot = {0,1,2,3,4,5,15,16};
+	local mode = bot:GetActiveMode();
+	for i=1, #item_slot do
+		local item = bot:GetItemInSlot(item_slot[i]);
+		if itemUseUtils.CanCastItem(item) == true 
+			and JustSwapped(item:GetName()) == false
+			and ShouldNotUseNeutralItemFromMainSlot(item:GetName(), item_slot[i]) == false
+			and itemUseUtils.Use[item:GetName()] ~= nil
+		then
+			local desire, target, target_type = itemUseUtils.Use[item:GetName()](item, bot, mode, extra_range);
+			if desire > BOT_ACTION_DESIRE_NONE 
+			then
+				if target_type == 'no_target' then
+					bot:Action_UseAbility(item);
+					return;
+				elseif target_type == 'point' then
+					bot:Action_UseAbilityOnLocation(item, target)
+					return;	
+				elseif target_type == 'unit' then
+					bot:Action_UseAbilityOnEntity(item, target)
+					return;	
+				elseif target_type == 'tree' then
+					bot:Action_UseAbilityOnTree(item, target)
+					return;	
+				end
+			end
+		end	
+	end
+end
 
 return MyModule;
 

@@ -15,6 +15,9 @@ end
 function CourierUsageThink()
 	ability_item_usage_generic.CourierUsageThink();
 end
+function ItemUsageThink()
+	ability_item_usage_generic.ItemUsageThink();
+end
 
 local ClosingDesire = 0;
 local castSCDesire = 0;
@@ -65,14 +68,14 @@ function AbilityUsageThink()
 	if ( castCHRDesire > 0 ) 
 	then
 		npcBot:Action_UseAbility( abilityCHR );
-		ultLoc = 0; 
+		ultLoc = Vector(-6376, 6419, 0); 
 		return;
 	end
 	
 	if ( castCHR2Desire > 0 ) 
 	then
 		npcBot:Action_UseAbility( abilityCHR2 );
-		ultLoc2 = 0; 
+		ultLoc2 = Vector(-6376, 6419, 0); 
 		return;
 	end
 	
@@ -323,7 +326,7 @@ function ConsiderTimberChain()
 	-- Get some of its values
 	local nRadius = abilityTC:GetSpecialValueInt( "chain_radius" );
 	local nSpeed = abilityTC:GetSpecialValueInt( "speed" );
-	local nCastRange = abilityTC:GetCastRange();
+	local nCastRange = mutil.GetProperCastRange(false, npcBot, abilityTC:GetCastRange());
 	local nDamage = abilityTC:GetSpecialValueInt("damage");
 
 	if mutil.IsStuck(npcBot)
@@ -374,7 +377,7 @@ function ConsiderChakram()
 	-- Get some of its values
 	local nRadius = abilityCH:GetSpecialValueFloat( "radius" );
 	local nSpeed = abilityCH:GetSpecialValueFloat( "speed" );
-	local nCastRange = abilityCH:GetCastRange();
+	local nCastRange = mutil.GetProperCastRange(false, npcBot, abilityCH:GetCastRange());
 	local nManaCost = abilityCH:GetManaCost( );
 	local nDamage = 2*abilityCH:GetSpecialValueInt("pass_damage");
 
@@ -438,7 +441,7 @@ function ConsiderChakram2()
 	-- Get some of its values
 	local nRadius = abilityCH:GetSpecialValueFloat( "radius" );
 	local nSpeed = abilityCH:GetSpecialValueFloat( "speed" );
-	local nCastRange = abilityCH:GetCastRange();
+	local nCastRange = mutil.GetProperCastRange(false, npcBot, abilityCH:GetCastRange());
 	local nManaCost = abilityCH:GetManaCost( );
 	local nDamage = 2*abilityCH:GetSpecialValueInt("pass_damage");
 
@@ -547,6 +550,12 @@ function ConsiderChakramReturn()
 		end
 	end
 	
+	local enemies = npcBot:GetNearbyHeroes(1600, true, BOT_MODE_NONE)
+	local creeps = npcBot:GetNearbyLaneCreeps(1600, true)
+	if #enemies == 0 and #creeps == 0 then
+		return BOT_ACTION_DESIRE_HIGH;
+	end
+	
 	return BOT_ACTION_DESIRE_NONE;
 end
 
@@ -607,6 +616,12 @@ function ConsiderChakramReturn2()
 		if nUnits == 0 or nLowHPUnits >= 1 then
 			return BOT_ACTION_DESIRE_HIGH;
 		end
+	end
+	
+	local enemies = npcBot:GetNearbyHeroes(1600, true, BOT_MODE_NONE)
+	local creeps = npcBot:GetNearbyLaneCreeps(1600, true)
+	if #enemies == 0 and #creeps == 0 then
+		return BOT_ACTION_DESIRE_HIGH;
 	end
 	
 	return BOT_ACTION_DESIRE_NONE;

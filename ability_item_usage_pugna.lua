@@ -16,6 +16,9 @@ end
 function CourierUsageThink()
 	ability_item_usage_generic.CourierUsageThink();
 end
+function ItemUsageThink()
+	ability_item_usage_generic.ItemUsageThink();
+end
 
 local castOODesire = 0;
 local castFBDesire = 0;
@@ -105,7 +108,7 @@ function ConsiderOverwhelmingOdds()
 		local npcTarget = npcBot:GetAttackTarget();
 		if ( mutil.IsRoshan(npcTarget) and mutil.CanCastOnMagicImmune(npcTarget) and mutil.IsInRange(npcTarget, npcBot, nCastRange)  )
 		then
-			return BOT_ACTION_DESIRE_LOW, npcTarget;
+			return BOT_ACTION_DESIRE_LOW, npcTarget:GetLocation();
 		end
 	end
 	

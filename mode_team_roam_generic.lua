@@ -179,35 +179,6 @@ function GetDesire()
 		end
 	end
 	
-	if not bot:IsAlive() or bot:GetCurrentActionType() == BOT_ACTION_TYPE_DELAY then
-		targetShrine = nil;
-		return BOT_MODE_DESIRE_NONE;
-	end
-	
-	if bot:GetUnitName() == "npc_dota_hero_centaur" then
-		for i,id in pairs(GetTeamPlayers(GetTeam())) do
-			local member = GetTeamMember(i);
-			if member ~= nil and member:GetStunDuration(true) > 0 then
-				--print(member:GetUnitName()..":"..tostring(member:GetStunDuration(true)));
-			end
-		end
-	end
-	
-	local manaP = bot:GetMana() / bot:GetMaxMana();
-	local healthP = bot:GetHealth() / bot:GetMaxHealth();
-	
-	if healthP < 0.35 or ( bot:HasModifier("modifier_filler_heal") and ( manaP < 0.5 or healthP < 0.75 ) ) then
-		targetShrine = GetClosestShrine()
-		if targetShrine ~= nil then
-			local enemies = bot:GetNearbyHeroes(1000, true, BOT_MODE_NONE);
-			if bot:HasModifier("modifier_filler_heal") and #enemies > 0 then
-				return BOT_MODE_DESIRE_NONE;
-			else
-				return BOT_MODE_DESIRE_ABSOLUTE;
-			end
-		end		
-	end
-	
 	if bot:GetUnitName() == "npc_dota_hero_shadow_shaman" then
 		if cAbility == nil then cAbility = bot:GetAbilityByName( "shadow_shaman_shackles" ) end;
 		if cAbility:IsInAbilityPhase() or bot:IsChanneling() then
@@ -399,18 +370,6 @@ function Think()
 			end
 		end
 	end
-
-	if targetShrine ~= nil then
-		if bot:IsChanneling() or bot:IsUsingAbility() or bot:IsCastingAbility() then
-			return;
-		elseif GetUnitToUnitDistance(bot, targetShrine) > 500 or bot:HasModifier("modifier_filler_heal") then
-			bot:Action_MoveToLocation(targetShrine:GetLocation());
-			return;
-		else
-			bot:Action_UseShrine(targetShrine)
-			return
-		end
-	end
 	
 	if bot:GetUnitName() == "npc_dota_hero_shadow_shaman" 
 		or  bot:GetUnitName() == "npc_dota_hero_keeper_of_the_light" 
@@ -455,11 +414,12 @@ function Think()
 	elseif bot:GetUnitName() == "npc_dota_hero_chen" then
 		if bot:IsUsingAbility() or bot:IsCastingAbility() or bot:IsChanneling() or cAbility:IsInAbilityPhase() then return end
 		local closestC, i, dist = GetClosestCamp();
-		if closestC ~= nil and dist > 300 then 
+		local clvl = cAbility:GetSpecialValueInt('level_req');
+		if closestC ~= nil and ( dist > 300 or IsLocationVisible(closestC.location) == false ) then 
 			bot:Action_MoveToLocation(closestC.location);
 			return
 		elseif  closestC ~= nil and dist <= 300 then
-			local target = GetDominatedTarget();
+			local target = GetDevouredTarget2(clvl);
 			if target == nil then
 				table.remove(camps, i);
 				return
@@ -474,7 +434,7 @@ function Think()
 	elseif bot:GetUnitName() == "npc_dota_hero_enchantress" then
 		if bot:IsUsingAbility() or bot:IsCastingAbility() or bot:IsChanneling() or cAbility:IsInAbilityPhase() then return end
 		local closestC, i, dist = GetClosestCamp();
-		if closestC ~= nil and dist > 300 then 
+		if closestC ~= nil and ( dist > 300 or IsLocationVisible(closestC.location) == false ) then 
 			bot:Action_MoveToLocation(closestC.location);
 			return
 		elseif  closestC ~= nil and dist <= 300 then
@@ -492,7 +452,7 @@ function Think()
 		if bot:IsUsingAbility() or bot:IsCastingAbility() or bot:IsChanneling() or cAbility:IsInAbilityPhase() then return end
 		local closestC, i, dist = GetClosestCamp();
 		local clvl = cAbility:GetSpecialValueInt('creep_level');
-		if dist > 300 then 
+		if dist > 300 or IsLocationVisible(closestC.location) == false then 
 			bot:Action_MoveToLocation(closestC.location);
 			return
 		elseif dist <= 300 then
@@ -559,6 +519,22 @@ function GetDevouredTarget(clvl)
 			end
 		end	
 	end
+	return target;
+end
+
+function GetDevouredTarget2(clvl)
+	local target = nil;
+	local neutrals = bot:GetNearbyNeutralCreeps(500);
+	local hp = 0;
+	for _,u in pairs(neutrals) do
+		if mutil.CanBeDominatedCreeps(u:GetUnitName()) 
+			and u:GetLevel() <= clvl 
+			and u:GetHealth() > hp 
+		then
+			target = u;
+			hp = u:GetHealth();
+		end
+	end	
 	return target;
 end
 

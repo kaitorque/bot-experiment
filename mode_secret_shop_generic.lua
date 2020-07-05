@@ -67,25 +67,62 @@ end
 
 function HaveItemToSell()
 	 local earlyGameItem = {
+		 "item_tango_single",
 		 "item_clarity",
 		 "item_faerie_fire",
 		 "item_tango",  
 		 "item_flask", 
 		 "item_infused_raindrop",
-		 "item_iron_talon",
-		 "item_poor_mans_shield",
+		 "item_quelling_blade", 
+		 "item_stout_shield", 
 		 "item_magic_wand",
 		 "item_bottle",  
-		 "item_ring_of_aquila", 
-		 "item_urn_of_shadows",
+		 "item_soul_ring",  
+		 "item_bracer",
+		 "item_wraith_band",
+		 "item_null_talisman", 
 		 "item_dust",
 		 "item_ward_observer",
+		 "item_hand_of_midas"
 	}
+	local slotToSell = nil;
 	for _,item in pairs(earlyGameItem) do
-		local slot = npcBot:FindItemSlot(item);
-		if slot >= 0 and slot <= 8 then
-			return true, slot;
+		local itemSlot = npcBot:FindItemSlot(item);
+		if itemSlot >= 0 and itemSlot <= 8 then
+			if item == "item_stout_shield" then
+				if npcBot.buildVanguard == false  then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_magic_wand" then
+				if npcBot.buildHoly == false  then
+					slotToSell = itemSlot;
+					break;
+				end	
+			elseif item == "item_quelling_blade" then
+				if npcBot.buildBFury == false then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_hand_of_midas" then
+				if #npcBot.itemToBuy <= 3 then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_ancient_janggo" then
+				local jg = bot:GetItemInSlot(itemSlot);
+				if jg~=nil and jg:GetCurrentCharges() == 0 and #npcBot.itemToBuy <= 3 then
+					slotToSell = itemSlot;
+					break;
+				end		
+			else
+				slotToSell = itemSlot;
+				break;
+			end
 		end
+	end
+	if slotToSell ~= nil then
+		return true, slotToSell;
 	end
 	return false, nil;
 end

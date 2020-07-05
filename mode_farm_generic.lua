@@ -38,7 +38,7 @@ function GetDesire()
 			--bot:ActionImmediate_Ping(cLoc.x, cLoc.y, true);
 			--tPing = DotaTime();
 			farmLane = true;
-			return BOT_MODE_DESIRE_ABSOLUTE;
+			return BOT_MODE_DESIRE_HIGH;
 		else
 			farmLane = false;
 		end
@@ -151,7 +151,7 @@ function GetDesire()
 					preferedCamp = nil;
 					return BOT_MODE_DESIRE_NONE;
 				else
-					return BOT_MODE_DESIRE_VERYHIGH;
+					return BOT_MODE_DESIRE_HIGH;
 				end
 			end
 		end
@@ -199,6 +199,7 @@ function Think()
 	
 	if cause == "cogs" then
 		print("Attack Cogs")
+		bot:Action_ClearActions(false);
 		bot:Action_AttackUnit( cogsTarget, true );
 		cause = "";
 		return;
@@ -225,7 +226,7 @@ function Think()
 		local cDist = GetUnitToLocationDistance(bot, preferedCamp.cattr.location);
 		local stackMove = campUtils.GetCampMoveToStack(preferedCamp.idx);
 		local stackTime =  campUtils.GetCampStackTime(preferedCamp);
-		if cDist > 300 and farmState == 0 then
+		if ( cDist > 300 or IsLocationVisible(preferedCamp.cattr.location) == false ) and farmState == 0 then
 			bot:Action_MoveToLocation(preferedCamp.cattr.location);
 			return
 		else

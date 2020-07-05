@@ -94,7 +94,10 @@ function X.IsEngagingTarget(npcBot)
 end
 
 function X.IsRetreating(npcBot)
-	return npcBot:GetActiveMode() == BOT_MODE_RETREAT and npcBot:GetActiveModeDesire() >= BOT_MODE_DESIRE_HIGH; 
+	return npcBot:GetActiveMode() == BOT_MODE_RETREAT 
+		and npcBot:GetActiveModeDesire() >= BOT_MODE_DESIRE_HIGH 
+		and npcBot:WasRecentlyDamagedByAnyHero(3.0)
+		and npcBot:DistanceFromFountain() > 0; 
 end
 
 function X.CanBeUseToChaseOrEscape(ability_name)
@@ -434,6 +437,9 @@ function X.GetProperRadius(ability)
 	if aoe == 0 then
 		aoe = ability:GetSpecialValueInt('starfall_radius');
 	end
+	if aoe == 0 then
+		aoe = ability:GetSpecialValueInt('whirling_radius');
+	end
 	return aoe;
 end
 
@@ -533,15 +539,11 @@ function X.ConsiderNoTarget(ability)
 		return BOT_ACTION_DESIRE_NONE;
 		
 	else
-		if X.IsRetreating(npcBot)
+		if X.IsRetreating(npcBot) and npcBot:WasRecentlyDamagedByHero( npcEnemy, 3.0 )
 		then
 			local tableNearbyEnemyHeroes = npcBot:GetNearbyHeroes( nRadius, true, BOT_MODE_NONE );
-			for _,npcEnemy in pairs( tableNearbyEnemyHeroes )
-			do
-				if ( npcBot:WasRecentlyDamagedByHero( npcEnemy, 1.0 ) ) 
-				then
-					return BOT_ACTION_DESIRE_MODERATE;
-				end
+			if tableNearbyEnemyHeroes ~= nil and #tableNearbyEnemyHeroes > 0 then
+				return BOT_ACTION_DESIRE_MODERATE;
 			end
 		end
 		

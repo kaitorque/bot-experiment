@@ -258,6 +258,120 @@ function U.GetAlliesNearLoc(vLoc, nRadius)
 	return allies;
 end
 
+function U.GetShackleCreepTarget(hSource, hTarget, nRadius)
+	local vStart = hSource:GetLocation();
+	local vEnd = hTarget:GetLocation();
+	local creeps = hTarget:GetNearbyCreeps(nRadius, false);
+	for i=1, #creeps do
+		local dist1 = GetUnitToUnitDistance(creeps[i], hTarget);
+		local dist2 = GetUnitToUnitDistance(creeps[i], hSource);
+		local dist3 = GetUnitToUnitDistance(hTarget, hSource);
+		if  dist2 < dist3 and dist1 > 125  then
+			local tResult = PointToLineDistance(vStart, vEnd, creeps[i]:GetLocation());
+			if tResult ~= nil 
+				and tResult.within == true 
+				and tResult.distance < 75
+			then
+				-- print('to creep in front')
+				return creeps[i];
+			end
+		end
+	end
+	return nil;
+end
+
+function U.GetShackleHeroTarget(hSource, hTarget, nRadius)
+	local vStart = hSource:GetLocation();
+	local vEnd = hTarget:GetLocation();
+	local heroes = hTarget:GetNearbyHeroes(nRadius, false, BOT_MODE_NONE);
+	for i=1, #heroes do
+		if heroes[i] ~= hTarget and U.CanCastOnNonMagicImmune(heroes[i]) then
+			local dist1 = GetUnitToUnitDistance(heroes[i], hTarget);
+			local dist2 = GetUnitToUnitDistance(heroes[i], hSource);
+			local dist3 = GetUnitToUnitDistance(hTarget, hSource);
+			if  dist2 < dist3 and dist1 > 125  then
+				local tResult = PointToLineDistance(vStart, vEnd, heroes[i]:GetLocation());
+				if tResult ~= nil 
+					and tResult.within == true 
+					and tResult.distance < 75	
+				then
+					-- print('to hero in front')
+					return heroes[i];
+				end
+			end
+		end
+	end
+	return nil;
+end
+
+function U.CanShackleToCreep(hSource, hTarget, nRadius)
+	local vStart = hSource:GetLocation();
+	local creeps = hTarget:GetNearbyCreeps(nRadius, false);
+	for i=1, #creeps do
+		local vEnd = creeps[i]:GetLocation()
+		local tResult = PointToLineDistance(vStart, vEnd, hTarget:GetLocation());
+		if GetUnitToUnitDistance(creeps[i], hTarget) > 125 and tResult ~= nil 
+			and tResult.within == true  			
+			and tResult.distance < 75  			
+		then
+			-- print('to creep behind')
+			return true;
+		end
+	end
+	return false;
+end
+
+function U.CanShackleToHero(hSource, hTarget, nRadius)
+	local vStart = hSource:GetLocation();
+	local heroes = hTarget:GetNearbyHeroes(nRadius, false, BOT_MODE_NONE);
+	for i=1, #heroes do
+		local vEnd = heroes[i]:GetLocation()
+		local tResult = PointToLineDistance(vStart, vEnd, hTarget:GetLocation());
+		if heroes[i] ~= hTarget and GetUnitToUnitDistance(heroes[i], hTarget) > 125 and tResult ~= nil 
+			and tResult.within == true  
+			and tResult.distance < 75 			
+		then
+			-- print('to hero behind')
+			return true;
+		end
+	end
+	return false;
+end
+
+function U.CanShackleToTree(hSource, hTarget, nRadius)
+	local vStart = hSource:GetLocation();
+	local trees = hTarget:GetNearbyTrees(nRadius);
+	for i=1, #trees do
+		local vEnd = GetTreeLocation(trees[i]);
+		local tResult = PointToLineDistance(vStart, vEnd, hTarget:GetLocation());
+		if tResult ~= nil 
+			and tResult.within == true 
+			and tResult.distance < 75 			
+		then
+			-- print('to tree behind')
+			return true;
+		end
+	end
+	return false;
+end
+
+function U.GetShackleTarget(hero, target, nRadius, nRange)
+	local sTarget = nil;
+	local dist = GetUnitToUnitDistance(hero, target);
+	if dist < nRange and U.CanShackleToCreep(hero, target, nRadius) 
+		or U.CanShackleToHero(hero, target, nRadius)
+		or U.CanShackleToTree(hero, target, nRadius)
+	then
+		sTarget = target;
+	elseif dist < nRange or dist < nRange+nRadius then
+		sTarget = U.GetShackleCreepTarget(hero, target, nRadius);
+		if sTarget == nil then
+			sTarget = U.GetShackleHeroTarget(hero, target, nRadius);
+		end
+	end
+	return sTarget;
+end
+
 function U.IsEnemyCreepBetweenMeAndTarget(hSource, hTarget, vLoc, nRadius)
 	local vStart = hSource:GetLocation();
 	local vEnd = vLoc;
@@ -681,13 +795,26 @@ function U.GetEscapeLoc()
 	end
 end
 
+function U.GetEscapeLoc2(unit)
+	local team = unit:GetTeam();
+	if unit:DistanceFromFountain() > 2500 then
+		return GetAncient(team):GetLocation();
+	else
+		if team == TEAM_DIRE then
+			return DB;
+		else
+			return RB;
+		end
+	end
+end
+
 function U.IsStuck2(npcBot)
 	if npcBot.stuckLoc ~= nil and npcBot.stuckTime ~= nil then 
 		local EAd = GetUnitToUnitDistance(npcBot, GetAncient(GetOpposingTeam()));
 		if DotaTime() > npcBot.stuckTime + 5.0 and GetUnitToLocationDistance(npcBot, npcBot.stuckLoc) < 25  
            and npcBot:GetCurrentActionType() == BOT_ACTION_TYPE_MOVE_TO and EAd > 2200		
 		then
-			print(npcBot:GetUnitName().." is stuck")
+			--print(npcBot:GetUnitName().." is stuck")
 			--DebugPause();
 			return true;
 		end
@@ -705,7 +832,7 @@ function U.IsStuck(npcBot)
 		if npcBot:GetCurrentActionType() == BOT_ACTION_TYPE_MOVE_TO and attackTarget == nil and EAd > 2200 and TAd > 2200 and #Et == 0 and #At == 0  
 		   and DotaTime() > npcBot.stuckTime + 5.0 and GetUnitToLocationDistance(npcBot, npcBot.stuckLoc) < 25    
 		then
-			print(npcBot:GetUnitName().." is stuck")
+			--print(npcBot:GetUnitName().." is stuck")
 			return true;
 		end
 	end
@@ -738,6 +865,20 @@ function U.CountInvUnits(pierceImmune, units)
 	if units ~= nil then
 		for _,u in pairs(units) do
 			if ( pierceImmune and U.CanCastOnMagicImmune(u) ) or ( not pierceImmune and U.CanCastOnNonMagicImmune(u) )  then
+				nUnits = nUnits + 1;
+			end
+		end
+	end
+	return nUnits;
+end
+
+function U.CountUnitsNearLocation(pierceImmune, hUnits, vLoc, nRadius)
+	local nUnits = 0;
+	if hUnits ~= nil then
+		for i=1, #hUnits do
+			if	GetUnitToLocationDistance(hUnits[i], vLoc) <= nRadius 
+				and ( ( pierceImmune and U.CanCastOnMagicImmune(hUnits[i]) ) or ( not pierceImmune and U.CanCastOnNonMagicImmune(hUnits[i]) ) ) 
+			then
 				nUnits = nUnits + 1;
 			end
 		end
