@@ -1,20 +1,68 @@
 X = {}
 local IBUtil = require(GetScriptDirectory() .. "/ItemBuildUtility");
+local KUtil  = require(GetScriptDirectory() .. "/KaitorqueUtility");
 local npcBot = GetBot();
 local talents = IBUtil.FillTalenTable(npcBot);
 local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 
-X["items"] = { 
+-- X["items"] = { 
+-- 	"item_magic_wand",
+-- 	"item_power_treads_str",
+-- 	"item_vanguard",
+-- 	"item_blade_mail",
+-- 	"item_pipe",
+-- 	"item_crimson_guard",
+-- 	"item_shivas_guard",
+-- 	"item_ultimate_scepter_2",
+-- 	"item_octarine_core"
+-- };
+
+earlyItem = {
 	"item_magic_wand",
+	"item_boots",
+	"item_orb_of_venom",
+	"item_soul_ring",
+	"item_medallion_of_courage"
+}
+
+numEarlyItem = KUtil.getNum(#earlyItem)
+
+randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
+
+boot = {
+	"item_phase_boots",
 	"item_power_treads_str",
-	"item_vanguard",
+}
+
+transItem = {
+	"item_vanguard"
+}
+
+numMidItem = KUtil.getNum(#transItem)
+
+randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
+
+randBoot = KUtil.getBoot(boot)
+
+item = {
 	"item_blade_mail",
 	"item_pipe",
 	"item_crimson_guard",
 	"item_shivas_guard",
-	"item_ultimate_scepter_2",
-	"item_octarine_core"
-};
+	"item_octarine_core",
+	"item_solar_crest",
+	"item_lotus_orb",
+	"item_guardian_greaves",
+	"item_vladimir",
+	"item_blade_mail",
+	"item_assault"
+}
+
+randItem = KUtil.getItem(item, 5)
+
+X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
+
+print("Bristleback Item: "..table.concat(X["items"],", "));
 
 X["builds"] = {
 	{2,3,2,3,2,4,2,3,3,1,4,1,1,1,4},

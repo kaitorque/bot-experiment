@@ -1,22 +1,69 @@
 X = {}
 
 local IBUtil = require(GetScriptDirectory() .. "/ItemBuildUtility");
+local KUtil  = require(GetScriptDirectory() .. "/KaitorqueUtility");
 local npcBot = GetBot();
 local talents = IBUtil.FillTalenTable(npcBot);
 local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 
-X["items"] = { 
-	"item_magic_wand",
+-- X["items"] = { 
+-- 	"item_magic_wand",
+-- 	"item_arcane_boots",
+-- 	"item_force_staff",
+-- 	"item_aether_lens",
+-- 	"item_cyclone",
+-- 	"item_kaya",
+-- 	"item_kaya_and_sange",
+-- 	"item_hurricane_pike",
+-- 	"item_ultimate_scepter_2",
+-- 	"item_shivas_guard"
+-- };			
+
+earlyItem = {
+	"item_magic_wand"
+}
+
+numEarlyItem = KUtil.getNum(#earlyItem)
+
+randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
+
+boot = {
 	"item_arcane_boots",
+	"item_phase_boots"
+}
+
+transItem = {
 	"item_force_staff",
+	"item_kaya",
+	"item_veil_of_discord"
+}
+
+numMidItem = KUtil.getNum(#transItem)
+
+randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
+
+randBoot = KUtil.getBoot(boot)
+
+item = {
 	"item_aether_lens",
 	"item_cyclone",
-	"item_kaya",
 	"item_kaya_and_sange",
 	"item_hurricane_pike",
-	"item_ultimate_scepter_2",
-	"item_shivas_guard"
-};			
+	"item_shivas_guard",
+	"item_mjollnir",
+	"item_sphere",
+	"item_sheepstick",
+	"item_aeon_disk",
+	"item_spirit_vessel",
+	"item_bloodthorn",
+	"item_nullifier"
+}
+
+randItem = KUtil.getItem(item, 5)
+
+X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
+
+print("Dark Willow Item: "..table.concat(X["items"],", "));
 
 X["builds"] = {
 	{1,2,2,3,2,4,2,1,1,1,4,3,3,3,4},

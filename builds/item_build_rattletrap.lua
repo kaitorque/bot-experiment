@@ -36,6 +36,7 @@ transItem = {
 	"item_urn_of_shadows",
 	"item_force_staff",
 	"item_ancient_janggo",
+	"item_veil_of_discord",
 	"item_orchid"
 }
 
@@ -55,7 +56,6 @@ item = {
 	"item_glimmer_cape",
 	"item_vladmir",
 	"item_cyclone",
-	"item_veil_of_discord",
 	"item_solar_crest",
 	"item_holy_locket",
 	"item_spirit_vessel"

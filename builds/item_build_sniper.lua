@@ -35,7 +35,8 @@ boot = {
 transItem = {
 	"item_force_staff",
 	"item_dragon_lance",
-	"item_maelstrom"
+	"item_maelstrom",
+	"item_veil_of_discord"
 }
 
 numMidItem = KUtil.getNum(#transItem)
@@ -55,7 +56,6 @@ item = {
 	"item_blink",
 	"item_guardian_greaves",
 	"item_aether_lens",
-	"item_veil_of_discord",
 	"item_glimmer_cape",
 	"item_lotus_orb",
 	"item_sphere",
