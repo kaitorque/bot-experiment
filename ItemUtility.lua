@@ -87,7 +87,8 @@ ItemModule['earlyGameItem'] = {
 	 "item_dust",
 	 "item_ward_observer",
 	 "item_hand_of_midas",
-	 "item_ancient_janggo"
+	 "item_ancient_janggo",
+	 "item_orb_of_venom"
 	 --"item_tpscroll"
 }
 
@@ -252,7 +253,7 @@ ItemModule["item_headdress"] = { "item_ring_of_regen"; "item_recipe_headdress" }
 
 ItemModule["item_heart"] = { "item_ring_of_tarrasque"; "item_vitality_booster"; "item_reaver"; "item_recipe_heart" }
 
-ItemModule["item_heavens_halberd"] = { "item_sange"; "item_talisman_of_evasion"}
+ItemModule["item_heavens_halberd"] = { "item_sange"; "item_talisman_of_evasion"; "item_recipe_heavens_halberd"}
 
 ItemModule["item_helm_of_the_dominator"] = { "item_helm_of_iron_will"; "item_crown"; "item_recipe_helm_of_the_dominator" }
 
@@ -546,20 +547,6 @@ end
 
 function ItemModule.IsRecipeNeutralItem(sItem)
 	return sItem == "item_recipe_ironwood_tree" or sItem == "item_recipe_vambrace" or sItem == "item_recipe_fallen_sky" or sItem == "item_recipe_tri";
-end
-
-function ItemModule.SwapBetterNeutralItem(bot)
-	local neutralItem = bot:GetItemInSlot(16);
-	if neutralItem ~= nil then
-		for i=6,9 do
-			local item = bot:GetItemInSlot(i);	
-			if item ~= nil and ItemModule.GetNeutralItemTier(item:GetName()) > 0 and ItemModule.GetNeutralItemTier(item:GetName()) > ItemModule.GetNeutralItemTier(neutralItem:GetName()) then
-				bot:ActionImmediate_Chat("Swapping neutral item: "..neutralItem:GetName().." with "..item:GetName(),false);
-				bot:ActionImmediate_SwapItems( i, 16 );
-			end
-		end
-	end
-	return
 end
 
 function ItemModule.CanDropNeutralItem(bot)
