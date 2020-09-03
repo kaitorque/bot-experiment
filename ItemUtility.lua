@@ -99,7 +99,15 @@ ItemModule['earlyGameItem'] = {
 	 "item_mekansm",
 	 "item_wind_lace",
 	 "item_echo_sabre",
-	 "item_mask_of_madness"
+	 "item_mask_of_madness",
+	 "item_ring_of_basilius",
+	 "item_veil_of_discord",
+	 "item_ghost",
+	 "item_buckler",
+	 "item_lesser_crit",
+	 "item_javelin",
+	 "item_medallion_of_courage",
+	 "item_kaya"
 	 --"item_tpscroll"
 }
 
