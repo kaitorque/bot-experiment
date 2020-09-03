@@ -109,10 +109,43 @@ end
 bot.buildBFury = false;
 bot.buildVanguard = false;
 bot.buildHoly = false;
+bot.buildSilver = false;
+bot.buildSpirit = false;
+bot.buildHurricane = false;
+bot.buildBloodthorn = false;
+bot.buildMjollnir = false;
+bot.buildGreaves = false;
+bot.buildCyclone = false;
+
 
 for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_bfury" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bfury" then
 		bot.buildBFury = true;
+	end
+	if bot.itemToBuy[i] == "item_silver_edge" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_silver_edge" then
+		bot.buildSilver = true;
+	end
+	if bot.itemToBuy[i] == "item_spirit_vessel" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_spirit_vessel" then
+		bot.buildSpirit = true;
+	end
+	if bot.itemToBuy[i] == "item_hurricane_pike" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_hurricane_pike" then
+		bot.buildHurricane = true;
+	end
+	if bot.itemToBuy[i] == "item_bloodthorn" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bloodthorn" then
+		bot.buildBloodthorn = true;
+	end
+	if bot.itemToBuy[i] == "item_mjollnir" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_mjollnir" then
+		bot.buildMjollnir = true;
+	end
+	if bot.itemToBuy[i] == "item_guardian_greaves" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_guardian_greaves" then
+		bot.buildGreaves = true;
+	end
+	if bot.itemToBuy[i] == "item_cyclone" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_cyclone" 
+	or bot.itemToBuy[i] == "item_ancient_janggo" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_ancient_janggo"
+	or bot.itemToBuy[i] == "item_solar_crest" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_solar_crest"
+	or bot.itemToBuy[i] == "item_tranquil_boots" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_tranquil_boots"
+	then
+		bot.buildCyclone = true;
 	end
 	if bot.itemToBuy[i] == "item_vanguard" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vanguard" 
 	or bot.itemToBuy[i] == "item_crimson_guard" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_crimson_guard"
@@ -392,6 +425,56 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_vanguard" then
+						if bot.buildVanguard == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end	
+					elseif item == "item_invis_sword" then
+						if bot.buildSilver == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end	
+					elseif item == "item_echo_sabre" then
+						if bot.buildSilver == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end	
+					elseif item == "item_urn_of_shadows" then
+						if bot.buildSpirit == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_force_staff" then
+						if bot.buildHurricane == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_dragon_lance" then
+						if bot.buildHurricane == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_orchid" then
+						if bot.buildBloodthorn == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_maelstrom" then
+						if bot.buildMjollnir == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_mekansm" then
+						if bot.buildGreaves == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_wind_lace" then
+						if bot.buildCyclone == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_magic_wand" then
 						if bot.buildHoly == false  then
 							slotToSell = itemSlot;
@@ -403,6 +486,11 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_hand_of_midas" then
+						if #bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_mask_of_madness" then
 						if #bot.itemToBuy <= 2 then
 							slotToSell = itemSlot;
 							break;

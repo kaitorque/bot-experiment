@@ -88,7 +88,18 @@ ItemModule['earlyGameItem'] = {
 	 "item_ward_observer",
 	 "item_hand_of_midas",
 	 "item_ancient_janggo",
-	 "item_orb_of_venom"
+	 "item_orb_of_venom",
+	 "item_vanguard",
+	 "item_invis_sword",
+	 "item_urn_of_shadows",
+	 "item_force_staff",
+	 "item_dragon_lance",
+	 "item_orchid",
+	 "item_maelstrom",
+	 "item_mekansm",
+	 "item_wind_lace",
+	 "item_echo_sabre",
+	 "item_mask_of_madness"
 	 --"item_tpscroll"
 }
 
