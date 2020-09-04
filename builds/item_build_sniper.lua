@@ -63,10 +63,15 @@ item = {
 	"item_solar_crest",
 	"item_cyclone",
 	"item_vladimir",
-	"item_spirit_vessel"
+	"item_spirit_vessel",
+	"item_silver_edge",
+	"item_bloodthorn",
+	"item_satanic",
+	"item_manta",
+	"item_skadi"
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 1, 0, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

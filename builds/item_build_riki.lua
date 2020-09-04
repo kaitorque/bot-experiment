@@ -34,7 +34,8 @@ boot = {
 
 transItem = {
 	"item_basher",
-	"item_lesser_crit"
+	"item_lesser_crit",
+	"item_echo_sabre"
 }
 
 numMidItem = KUtil.getNum(#transItem)

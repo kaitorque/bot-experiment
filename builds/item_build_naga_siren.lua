@@ -28,12 +28,15 @@ randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
 	"item_power_treads_agi",
+	"item_arcane_boots",
 	"item_travel_boots",
 }
 
 transItem = {
 	"item_yasha",
-	"item_invis_sword"
+	"item_invis_sword",
+	"item_urn_of_shadows",
+	"item_force_staff"
 }
 
 numMidItem = KUtil.getNum(#transItem)
@@ -54,7 +57,13 @@ item = {
 	"item_silver_edge",
 	"item_monkey_king_bar",
 	"item_nullifier",
-	"item_skadi"
+	"item_skadi",
+	"item_meteor_hammer",
+	"item_spirit_vessel",
+	"item_solar_crest",
+	"item_blink",
+	"item_refresher",
+	"item_lotus_orb"
 }
 
 randItem = KUtil.getItem(item, 5, 0, 0, 1)
