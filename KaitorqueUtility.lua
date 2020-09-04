@@ -32,7 +32,7 @@ function KaitorqueModule.getBoot(tInput)
 	return tInput[bootNum];
 end
 
-function KaitorqueModule.getItem(tInput, maxItem)
+function KaitorqueModule.getItem(tInput, maxItem, rapier, gem, moon)
 	while (#tInput > maxItem)
 	do
 		table.remove (tInput, RandomInt(1,#tInput));
@@ -43,6 +43,21 @@ function KaitorqueModule.getItem(tInput, maxItem)
 		tReturn = KaitorqueModule.FYShuffle( tInput );
 	until(tReturn[6] ~= "item_ultimate_scepter")
 	table.insert(tReturn, 6,"item_ultimate_scepter_2");
+	if gem == 1 then
+		if RandomInt(0,4) == 4 then
+			table.insert(tReturn, RandomInt(1,#tReturn),"item_gem");
+		end
+	end
+	if moon == 1 then
+		if RandomInt(0,4) == 4 then
+			table.insert(tReturn, RandomInt(1,#tReturn),"item_moon_shard");
+		end
+	end
+	if rapier == 1 then
+		if RandomInt(0,4) == 4 then
+			table.insert(tReturn, RandomInt(6,#tReturn),"item_rapier");
+		end
+	end
 	return tReturn;
 end
 

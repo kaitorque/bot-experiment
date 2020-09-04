@@ -57,7 +57,7 @@ item = {
 	"item_heart"
 }
 
-randItem = KUtil.getItem(item, 5)
+randItem = KUtil.getItem(item, 5, 0, 0, 0)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

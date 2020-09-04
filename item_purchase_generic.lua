@@ -123,7 +123,39 @@ bot.buildDaedalus = false;
 bot.buildMonkey = false;
 bot.buildSolar = false;
 bot.buildBloodstone = false;
-
+bot.buildDesolator = false;
+bot.buildDrum = false;
+bot.buildTranquil = false;
+bot.buildVlad = false;
+bot.buildMek = false;
+bot.buildMaelstrom = false;
+bot.buildCrimson = false;
+bot.buildAbyssal = false;
+bot.buildYK = false;
+bot.buildKS = false;
+bot.buildMedallion = false;
+bot.buildPipe = false;
+bot.buildManta = false;
+bot.buildSY = false;
+bot.buildMidas = false;
+bot.buildArmlet = false;
+bot.buildGlimmer = false;
+bot.buildHeaddress = false;
+bot.buildForce = false;
+bot.buildHood = false;
+bot.buildOblivion = false;
+bot.buildEcho = false;
+bot.buildBasilius = false;
+bot.buildUrn = false;
+bot.buildNecronomicon = false;
+bot.buildOrchid = false;
+bot.buildSoul = false;
+bot.buildBuckler = false;
+bot.buildScepter = false;
+bot.buildScepter2 = false;
+bot.buildBooster = false;
+bot.buildOctarine = false;
+bot.buildSkadi = false;
 
 for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_bfury" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bfury" then
@@ -153,42 +185,122 @@ for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_greater_crit" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_greater_crit" then
 		bot.buildDaedalus = true;
 	end
-	if bot.itemToBuy[i] == "item_medallion_of_courage" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_medallion_of_courage" then
+	if bot.itemToBuy[i] == "item_solar_crest" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_solar_crest" then
 		bot.buildSolar = true;
 	end
-	if bot.itemToBuy[i] == "item_cyclone" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_cyclone" 
-	or bot.itemToBuy[i] == "item_ancient_janggo" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_ancient_janggo"
-	or bot.itemToBuy[i] == "item_solar_crest" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_solar_crest"
-	or bot.itemToBuy[i] == "item_tranquil_boots" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_tranquil_boots"
-	then
+	if bot.itemToBuy[i] == "item_cyclone" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_cyclone" then
 		bot.buildCyclone = true;
 	end
-	if bot.itemToBuy[i] == "item_veil_of_discord" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_veil_of_discord" 
-	or bot.itemToBuy[i] == "item_vladimir" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vladimir"
-	then
+	if bot.itemToBuy[i] == "item_ancient_janggo" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_ancient_janggo" then
+		bot.buildDrum = true;
+	end
+	if bot.itemToBuy[i] == "item_tranquil_boots" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_tranquil_boots" then
+		bot.buildTranquil = true;
+	end
+	if bot.itemToBuy[i] == "item_veil_of_discord" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_veil_of_discord" then
 		bot.buildVeil = true;
 	end
-	if bot.itemToBuy[i] == "item_assault" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_assault" 
-	or bot.itemToBuy[i] == "item_mekansm" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_mekansm"
-	then
+	if bot.itemToBuy[i] == "item_vladimir" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vladimir" then
+		bot.buildVlad = true;
+	end
+	if bot.itemToBuy[i] == "item_assault" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_assault" then
 		bot.buildAssault = true;
 	end
-	if bot.itemToBuy[i] == "item_monkey_king_bar" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_monkey_king_bar" 
-	or bot.itemToBuy[i] == "item_maelstrom" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_maelstrom"
-	then
+	if bot.itemToBuy[i] == "item_mekansm" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_mekansm" then
+		bot.buildMek = true;
+	end
+	if bot.itemToBuy[i] == "item_monkey_king_bar" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_monkey_king_bar" then
 		bot.buildMonkey = true;
 	end
-	if bot.itemToBuy[i] == "item_vanguard" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vanguard" 
-	or bot.itemToBuy[i] == "item_crimson_guard" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_crimson_guard"
-	or bot.itemToBuy[i] == "item_abyssal_blade" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_abyssal_blade"
-	then
+	if bot.itemToBuy[i] == "item_maelstrom" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_maelstrom" then
+		bot.buildMaelstrom = true;
+	end
+	if bot.itemToBuy[i] == "item_vanguard" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vanguard" then
 		bot.buildVanguard = true;
 	end
-	if bot.itemToBuy[i] == "item_bloodstone" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bloodstone" 
-	or bot.itemToBuy[i] == "item_yasha_and_kaya" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_yasha_and_kaya"
-	or bot.itemToBuy[i] == "item_kaya_and_sange" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_kaya_and_sange"
-	then
+	if bot.itemToBuy[i] == "item_ultimate_scepter" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_ultimate_scepter" then
+		bot.buildScepter = true;
+	end
+	if bot.itemToBuy[i] == "item_ultimate_scepter_2" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_ultimate_scepter_2" then
+		bot.buildScepter2 = true;
+	end
+	if bot.itemToBuy[i] == "item_soul_booster" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_soul_booster" then
+		bot.buildBooster = true;
+	end
+	if bot.itemToBuy[i] == "item_octarine_core" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_octarine_core" then
+		bot.buildOctarine = true;
+	end
+	if bot.itemToBuy[i] == "item_skadi" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_skadi" then
+		bot.buildSkadi = true;
+	end
+	if bot.itemToBuy[i] == "item_soul_ring" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_soul_ring" then
+		bot.buildSoul = true;
+	end
+	if bot.itemToBuy[i] == "item_buckler" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_buckler" then
+		bot.buildBuckler = true;
+	end
+	if bot.itemToBuy[i] == "item_orchid" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_orchid" then
+		bot.buildOrchid = true;
+	end
+	if bot.itemToBuy[i] == "item_oblivion_staff" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_oblivion_staff" then
+		bot.buildOblivion = true;
+	end
+	if bot.itemToBuy[i] == "item_echo_sabre" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_echo_sabre" then
+		bot.buildEcho = true;
+	end
+	if bot.itemToBuy[i] == "item_echo_sabre" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_echo_sabre" then
+		bot.buildBasilius = true;
+	end
+	if bot.itemToBuy[i] == "item_urn_of_shadows" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_urn_of_shadows" then
+		bot.buildUrn = true;
+	end
+	if bot.itemToBuy[i] == "item_necronomicon_3" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_necronomicon_3" then
+		bot.buildNecronomicon = true;
+	end
+	if bot.itemToBuy[i] == "item_headdress" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_headdress" then
+		bot.buildHeaddress = true;
+	end
+	if bot.itemToBuy[i] == "item_force_staff" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_force_staff" then
+		bot.buildForce = true;
+	end
+	if bot.itemToBuy[i] == "item_hood_of_defiance" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_hood_of_defiance" then
+		bot.buildHood = true;
+	end
+	if bot.itemToBuy[i] == "item_hand_of_midas" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_hand_of_midas" then
+		bot.buildMidas = true;
+	end
+	if bot.itemToBuy[i] == "item_armlet" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_armlet" then
+		bot.buildArmlet = true;
+	end
+	if bot.itemToBuy[i] == "item_glimmer_cape" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_glimmer_cape" then
+		bot.buildGlimmer = true;
+	end
+	if bot.itemToBuy[i] == "item_crimson_guard" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_crimson_guard" then
+		bot.buildCrimson = true;
+	end
+	if bot.itemToBuy[i] == "item_abyssal_blade" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_abyssal_blade" then
+		bot.buildAbyssal = true;
+	end
+	if bot.itemToBuy[i] == "item_bloodstone" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bloodstone" then
 		bot.buildBloodstone = true;
+	end
+	if bot.itemToBuy[i] == "item_yasha_and_kaya" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_yasha_and_kaya" then
+		bot.buildYK = true;
+	end
+	if bot.itemToBuy[i] == "item_kaya_and_sange" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_kaya_and_sange" then
+		bot.buildKS = true;
+	end
+	if bot.itemToBuy[i] == "item_medallion_of_courage" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_medallion_of_courage" then
+		bot.buildMedallion = true;
+	end
+	if bot.itemToBuy[i] == "item_pipe" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_pipe" then
+		bot.buildPipe = true;
+	end
+	if bot.itemToBuy[i] == "item_manta" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_manta" then
+		bot.buildManta = true;
+	end
+	if bot.itemToBuy[i] == "item_sange_and_yasha" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_sange_and_yasha" then
+		bot.buildSY = true;
 	end
 	if bot.itemToBuy[i] == "item_holy_locket" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_holy_locket" then
 		bot.buildHoly = true;
@@ -463,7 +575,7 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_vanguard" then
-						if bot.buildVanguard == false and bot.itemToBuy <= 2 then
+						if bot.buildVanguard == false and bot.buildCrimson == false and bot.buildAbyssal == false and bot.itemToBuy <= 2 then
 							slotToSell = itemSlot;
 							break;
 						end	
@@ -508,12 +620,12 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_wind_lace" then
-						if bot.buildCyclone == false and bot.itemToBuy <= 2 then
+						if bot.buildCyclone == false and bot.buildDrum == false and bot.buildSolar == false and bot.buildTranquil == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_ring_of_basilius" then
-						if bot.buildVeil == false and bot.itemToBuy <= 2 then
+						if bot.buildVeil == false and bot.buildVlad == false then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -523,7 +635,7 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_buckler" then
-						if bot.buildAssault == false and bot.itemToBuy <= 2 then
+						if bot.buildAssault == false and bot.buildMek == false then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -532,18 +644,78 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_basher" then
+						if bot.buildAbyssal == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_javelin" then
-						if bot.buildMonkey == false and bot.buildMjollnir == false and bot.itemToBuy <= 2 then
+						if bot.buildMonkey == false and bot.buildMjollnir == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_medallion_of_courage" then
-						if bot.buildSolar == false and bot.itemToBuy <= 2 then
+						if bot.buildSolar == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_hood_of_defiance" then
+						if bot.buildPipe == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_kaya" then
-						if bot.buildBloodstone == false and bot.itemToBuy <= 2 then
+						if bot.buildBloodstone == false and bot.buildYK == false and bot.buildKS == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_yasha" then
+						if bot.buildManta == false and bot.buildYK == false and bot.buildSY == false and bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_blight_stone" then
+						if bot.buildMedallion == false and bot.buildSolar == false and bot.buildDesolator == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_gloves" then
+						if bot.buildMidas == false and bot.buildArmlet == false and bot.buildGlimmer == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_point_booster" then
+						if bot.buildScepter== false and bot.buildScepter2 == false and bot.buildBooster == false and bot.buildOctarine == false
+						and bot.buildBloodstone == false and bot.buildSkadi == false
+						then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_ring_of_protection" then
+						if bot.buildBuckler== false and bot.buildAssault == false and bot.buildMek == false and bot.buildGreaves == false
+						and bot.buildUrn == false and bot.buildSpirit == false and bot.buildSoul == false 
+						then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_ring_of_regen" then
+						if bot.buildHeaddress == false and bot.buildMek == false and bot.buildPipe == false and bot.buildForce == false
+						and bot.buildHood == false 
+						then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_sobi_mask" then
+						if bot.buildOblivion == false and bot.buildOrchid == false and bot.buildBloodthorn == false and bot.buildEcho == false 
+						and bot.buildSilver == false and bot.buildBasilius == false and bot.buildVeil == false and bot.buildVlad == false 
+						and bot.buildUrn == false and bot.buildSpirit == false and bot.buildNecronomicon == false and bot.buildDrum == false 
+						and bot.buildMedallion == false and bot.buildSolar == false 
+						then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_headdress" then
+						if bot.buildMek == false and bot.buildPipe == false then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -572,6 +744,16 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_armlet" then
+						if #bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_helm_of_the_dominator" then
+						if #bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_ancient_janggo" then
 						local jg = bot:GetItemInSlot(itemSlot);
 						if jg~=nil and jg:GetCurrentCharges() == 0 and #bot.itemToBuy <= 3 then
@@ -592,7 +774,7 @@ function ItemPurchaseThink()
 	end
 	
 	--Sell non BoT boots when have BoT
-	if DotaTime() > 30*60 and ( items.HasItem( bot, "item_travel_boots") or items.HasItem( bot, "item_travel_boots_2")) and
+	if DotaTime() > 30*60 and ( items.HasItem( bot, "item_travel_boots") or items.HasItem( bot, "item_travel_boots_2")) or items.HasItem( bot, "item_guardian_greaves")) and
 	   ( bot:DistanceFromFountain() == 0 or bot:DistanceFromSecretShop() == 0 )
 	then	
 		for i=1,#items['earlyBoots']

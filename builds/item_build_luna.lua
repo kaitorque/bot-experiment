@@ -1,22 +1,71 @@
 X = {}
 
 local IBUtil = require(GetScriptDirectory() .. "/ItemBuildUtility");
+local KUtil  = require(GetScriptDirectory() .. "/KaitorqueUtility");
 local npcBot = GetBot();
 local talents = IBUtil.FillTalenTable(npcBot);
 local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 
-X["items"] = { 
+-- X["items"] = { 
+-- 	"item_magic_wand",
+-- 	"item_power_treads_agi",
+-- 	"item_dragon_lance",
+-- 	"item_yasha",
+-- 	"item_black_king_bar",
+-- 	"item_manta",
+-- 	"item_hurricane_pike",
+-- 	"item_butterfly",
+-- 	"item_ultimate_scepter_2",
+-- 	"item_satanic"
+-- };			
+
+earlyItem = {
 	"item_magic_wand",
+	"item_ring_of_basilius",
+	"item_boots",
+	"item_wind_lace"
+}
+
+numEarlyItem = KUtil.getNum(#earlyItem)
+
+randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
+
+boot = {
 	"item_power_treads_agi",
+}
+
+transItem = {
 	"item_dragon_lance",
 	"item_yasha",
+	"item_urn_of_shadows",
+	"item_force_staff",
+	"item_medallion_of_courage"
+}
+
+numMidItem = KUtil.getNum(#transItem)
+
+randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
+
+randBoot = KUtil.getBoot(boot)
+
+item = {
 	"item_black_king_bar",
 	"item_manta",
 	"item_hurricane_pike",
 	"item_butterfly",
-	"item_ultimate_scepter_2",
-	"item_satanic"
-};			
+	"item_satanic",
+	"item_vladimir",
+	"item_refresher",
+	"item_spirit_vessel",
+	"item_glimmer_cape",
+	"item_pipe",
+	"item_lotus_orb",
+}
+
+randItem = KUtil.getItem(item, 5, 0, 0, 0)
+X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
+
+print("Luna Item: "..table.concat(X["items"],", "));
 
 X["builds"] = {
 	{3,1,1,2,1,4,1,2,2,2,4,3,3,3,4},

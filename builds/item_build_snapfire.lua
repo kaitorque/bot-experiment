@@ -33,7 +33,8 @@ boot = {
 transItem = {
 	"item_force_staff",
 	"item_ancient_janggo",
-	"item_ghost"
+	"item_ghost",
+	"item_helm_of_the_dominator"
 }
 
 numMidItem = KUtil.getNum(#transItem)
@@ -60,11 +61,10 @@ item = {
 	"item_black_king_bar",
 	"item_solar_crest",
 	"item_blink",
-	"item_helm_of_the_dominator",
 	"item_assault"
 }
 
-randItem = KUtil.getItem(item, 5)
+randItem = KUtil.getItem(item, 5, 0, 0, 0)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

@@ -55,10 +55,16 @@ item = {
 	"item_glimmer_cape",
 	"item_desolator",
 	"item_greater_crit",
-	"item_aeon_disk"
+	"item_aeon_disk",
+	"item_dagon_5",
+	"item_mjollnir",
+	"item_black_king_baar",
+	"item_yasha_and_kaya",
+	"item_refresher",
+	"item_ethereal_blade"
 }
 
-randItem = KUtil.getItem(item, 5)
+randItem = KUtil.getItem(item, 5, 0, 0, 0)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

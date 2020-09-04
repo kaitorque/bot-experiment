@@ -1,22 +1,65 @@
 X = {}
 
 local IBUtil = require(GetScriptDirectory() .. "/ItemBuildUtility");
+local KUtil  = require(GetScriptDirectory() .. "/KaitorqueUtility");
 local npcBot = GetBot();
 local talents = IBUtil.FillTalenTable(npcBot);
 local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 
-X["items"] = { 
-	"item_magic_wand",
-	"item_power_treads_int",
+-- X["items"] = { 
+-- 	"item_magic_wand",
+-- 	"item_power_treads_int",
+-- 	"item_cyclone",
+-- 	"item_ultimate_scepter",
+-- 	"item_sphere",
+-- 	"item_orchid",
+-- 	"item_bloodthorn",
+-- 	"item_shivas_guard",
+-- 	"item_ultimate_scepter_2",
+-- 	"item_octarine_core"
+-- };			
+
+earlyItem = {
+	"item_magic_wand"
+}
+
+numEarlyItem = KUtil.getNum(#earlyItem)
+
+randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
+
+boot = {
+	"item_travel_boots",
+	"item_power_treads_int"
+}
+
+transItem = {
+	"item_orchid"
+}
+
+numMidItem = KUtil.getNum(#transItem)
+
+randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
+
+randBoot = KUtil.getBoot(boot)
+
+item = {
 	"item_cyclone",
-	"item_ultimate_scepter",
 	"item_sphere",
-	"item_orchid",
 	"item_bloodthorn",
 	"item_shivas_guard",
-	"item_ultimate_scepter_2",
-	"item_octarine_core"
-};			
+	"item_octarine_core",
+	"item_black_king_bar",
+	"item_sheepstick",
+	"item_blade_mail",
+	"item_mjollnir",
+	"item_monkey_king_bar"
+}
+
+randItem = KUtil.getItem(item, 5, 0, 0, 0)
+
+X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
+
+print("Queen of Pain Item: "..table.concat(X["items"],", "));
 
 X["builds"] = {
 	{1,2,1,3,3,4,3,3,2,2,4,2,1,1,4},

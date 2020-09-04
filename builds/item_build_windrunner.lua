@@ -40,7 +40,8 @@ boot = {
 transItem = {
 	"item_force_staff",
 	"item_maelstrom",
-	"item_orchid"
+	"item_orchid",
+	"item_invis_sword"
 }
 
 numMidItem = KUtil.getNum(#transItem)
@@ -67,7 +68,7 @@ item = {
 	"item_nullifier"
 }
 
-randItem = KUtil.getItem(item, 5)
+randItem = KUtil.getItem(item, 5, 0, 0, 0)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

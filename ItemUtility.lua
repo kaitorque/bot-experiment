@@ -107,7 +107,20 @@ ItemModule['earlyGameItem'] = {
 	 "item_lesser_crit",
 	 "item_javelin",
 	 "item_medallion_of_courage",
-	 "item_kaya"
+	 "item_kaya",
+	 "item_blight_stone",
+	 "item_hood_of_defiance",
+	 "item_armlet",
+	 "item_yasha",
+	 "item_basher",
+	 "item_headdress",
+	 "item_gloves",
+	 "item_ring_of_regen",
+	 "item_sobi_mask",
+	 "item_ring_of_protection",
+	 "item_point_booster",
+	 "item_helm_of_the_dominator",
+	 "item_holy_locket"
 	 --"item_tpscroll"
 }
 
