@@ -120,7 +120,9 @@ ItemModule['earlyGameItem'] = {
 	 "item_ring_of_protection",
 	 "item_point_booster",
 	 "item_helm_of_the_dominator",
-	 "item_holy_locket"
+	 "item_holy_locket",
+	 "item_ring_of_health",
+	 "item_lifesteal"
 	 --"item_tpscroll"
 }
 

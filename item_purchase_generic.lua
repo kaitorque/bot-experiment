@@ -156,6 +156,13 @@ bot.buildScepter2 = false;
 bot.buildBooster = false;
 bot.buildOctarine = false;
 bot.buildSkadi = false;
+bot.buildPerseverance = false;
+bot.buildRefresher = false;
+bot.buildSphere = false;
+bot.buildLotus = false;
+bot.buildMeteor = false;
+bot.buildSatanic = false;
+bot.buildMask = false;
 
 for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_bfury" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bfury" then
@@ -302,8 +309,29 @@ for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_sange_and_yasha" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_sange_and_yasha" then
 		bot.buildSY = true;
 	end
+	if bot.itemToBuy[i] == "item_satanic" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_satanic" then
+		bot.buildSatanic = true;
+	end
+	if bot.itemToBuy[i] == "item_mask_of_madness" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_mask_of_madness" then
+		bot.buildMask = true;
+	end
 	if bot.itemToBuy[i] == "item_holy_locket" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_holy_locket" then
 		bot.buildHoly = true;
+	end
+	if bot.itemToBuy[i] == "item_pers" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_pers" then
+		bot.buildPerseverance = true;
+	end
+	if bot.itemToBuy[i] == "item_refresher" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_refresher" then
+		bot.buildRefresher = true;
+	end
+	if bot.itemToBuy[i] == "item_sphere" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_sphere" then
+		bot.buildSphere = true;
+	end
+	if bot.itemToBuy[i] == "item_lotus_orb" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_lotus_orb" then
+		bot.buildLotus = true;
+	end
+	if bot.itemToBuy[i] == "item_meteor_hammer" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_meteor_hammer" then
+		bot.buildMeteor = true;
 	end
 end
 
@@ -679,6 +707,11 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_lifesteal" then
+						if bot.buildSatanic == false and bot.buildMask == false and bot.buildVlad == false then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_gloves" then
 						if bot.buildMidas == false and bot.buildArmlet == false and bot.buildGlimmer == false then
 							slotToSell = itemSlot;
@@ -710,6 +743,13 @@ function ItemPurchaseThink()
 						and bot.buildSilver == false and bot.buildBasilius == false and bot.buildVeil == false and bot.buildVlad == false 
 						and bot.buildUrn == false and bot.buildSpirit == false and bot.buildNecronomicon == false and bot.buildDrum == false 
 						and bot.buildMedallion == false and bot.buildSolar == false 
+						then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_ring_of_health" then
+						if bot.buildPerseverance == false and bot.buildRefresher == false and bot.buildSphere == false and bot.buildLotus == false 
+						and bot.buildMeteor == false and bot.buildBFury == false and bot.buildVanguard == false and bot.buildHood == false
 						then
 							slotToSell = itemSlot;
 							break;
