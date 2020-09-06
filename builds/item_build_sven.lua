@@ -42,7 +42,7 @@ transItem = {
 	"item_mask_of_madness"
 }
 
-numMidItem = KUtil.getNum(#transItem)
+numTransItem = KUtil.getNum(#transItem)
 
 randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 

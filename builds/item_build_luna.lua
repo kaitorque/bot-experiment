@@ -46,7 +46,7 @@ transItem = {
 	"item_ancient_janggo"
 }
 
-numMidItem = KUtil.getNum(#transItem)
+numTransItem = KUtil.getNum(#transItem)
 
 randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 

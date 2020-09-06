@@ -36,7 +36,7 @@ transItem = {
 	"item_hand_of_midas"
 }
 
-numMidItem = KUtil.getNum(#transItem)
+numTransItem = KUtil.getNum(#transItem)
 
 randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 

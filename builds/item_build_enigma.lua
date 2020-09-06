@@ -41,7 +41,7 @@ transItem = {
 	"item_helm_of_the_dominator"
 }
 
-numMidItem = KUtil.getNum(#transItem)
+numTransItem = KUtil.getNum(#transItem)
 
 randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 

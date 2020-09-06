@@ -34,7 +34,7 @@ transItem = {
 	"item_hood_of_defiance"
 }
 
-numMidItem = KUtil.getNum(#transItem)
+numTransItem = KUtil.getNum(#transItem)
 
 randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 
@@ -45,7 +45,7 @@ item = {
 	"item_manta",
 	"item_skadi",
 	"item_heart",
-	"item_abyssal_blade".
+	"item_abyssal_blade",
 	"item_butterfly",
 	"item_heavens_halberd",
 	"item_silver_edge",
