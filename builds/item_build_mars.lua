@@ -59,7 +59,6 @@ item = {
 	"item_blade_mail",
 	"item_heart",
 	"item_crimson_guard",
-	"item_heavens_halberd",
 	"item_radiance",
 	"item_solar_crest",
 	"item_shivas_guard"

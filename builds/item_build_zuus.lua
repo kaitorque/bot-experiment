@@ -51,7 +51,6 @@ item = {
 	"item_sheepstick",
 	"item_blink",
 	"item_refresher",
-	"item_octarine_core",
 	"item_bloodstone",
 	"item_aeon_disk",
 	"item_sphere"

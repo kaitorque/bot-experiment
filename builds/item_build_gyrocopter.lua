@@ -57,7 +57,7 @@ randItem = KUtil.getItem(item, 5, 1, 0, 0)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 
-print("Abaddon Item: "..table.concat(X["items"],", "));
+print("Gyrocopter Item: "..table.concat(X["items"],", "));
 
 X["builds"] = {
 	{1,2,1,3,1,4,1,3,3,3,4,2,2,2,4},

@@ -1,7 +1,6 @@
 -- generic database
 ----------------------------------------------------------------------------------------------------
 
-PairsHeroNameNRole = {};
 local X = {}
 
 ----------------------------------------------------------------------------------------------------
@@ -1467,6 +1466,18 @@ X["bottle"] = {
 	["npc_dota_hero_pugna"] = 1;
 	["npc_dota_hero_naga_siren"] = 1;
 	["npc_dota_hero_void_spirit"] = 1;
+	["npc_dota_hero_wisp"] = 1;
+	["npc_dota_hero_dark_willow"] = 1;
+	["npc_dota_hero_rubick"] = 1;
+	["npc_dota_hero_shadow_shaman"] = 1;
+	["npc_dota_hero_grim_stroke"] = 1;
+	["npc_dota_hero_leshrac"] = 1;
+	["npc_dota_hero_batrider"] = 1;
+	["npc_dota_hero_weaver"] = 1;
+	["npc_dota_hero_pangolier"] = 1;
+	["npc_dota_hero_kunkka"] = 1;
+	["npc_dota_hero_earth_spirit"] = 1;
+	["npc_dota_hero_rattletrap"] = 1;
 }
 
 X["phase_boots"] = {

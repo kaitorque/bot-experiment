@@ -53,7 +53,7 @@ item = {
 	"item_blink",
 	"item_aeon_disk",
 	"item_shivas_guard",
-	"item_kaya_sange",
+	"item_kaya_and_sange",
 	"item_rod_of_atos",
 	"item_lotus_orb"
 }

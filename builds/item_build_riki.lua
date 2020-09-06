@@ -52,7 +52,6 @@ item = {
 	"item_butterfly",
 	"item_manta",
 	"item_black_king_bar",
-	"item_abyssal_blade",
 	"item_monkey_king_bar",
 	"item_greater_crit",
 	"item_desolator",

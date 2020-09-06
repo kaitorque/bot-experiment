@@ -526,7 +526,16 @@ function ItemPurchaseThink()
 	
 	--add bottle to item to purchase for midlaner 
 	if DotaTime() > 0 and DotaTime() < 15 and #bot.currListItemToBuy > 0 and GetGameMode() ~= GAMEMODE_1V1MID
-	   and bot:GetAssignedLane() == LANE_MID and role["bottle"][unitName] == 1 and buyBottle == false
+	   and bot:GetAssignedLane() == LANE_MID 
+	   and role["bottle"][unitName] == 1 and buyBottle == false
+	then
+		bot.currListItemToBuy[#bot.currListItemToBuy+1]  =  "item_bottle";
+		bot.currentComponentToBuy = nil;
+		buyBottle = true;
+		return
+	elseif 
+		DotaTime() > 0 and DotaTime() < 15 and #bot.currListItemToBuy > 0 and GetGameMode() ~= GAMEMODE_1V1MID
+		and role["bottle"][unitName] == 1 and buyBottle == false and RandomInt(1,4) == 4
 	then
 		bot.currListItemToBuy[#bot.currListItemToBuy+1]  =  "item_bottle";
 		bot.currentComponentToBuy = nil;
@@ -610,224 +619,223 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_vanguard" then
-						if bot.buildVanguard == false and bot.buildCrimson == false and bot.buildAbyssal == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end	
-					elseif item == "item_invis_sword" then
-						if bot.buildSilver == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end	
-					elseif item == "item_echo_sabre" then
-						if bot.buildSilver == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end	
-					elseif item == "item_urn_of_shadows" then
-						if bot.buildSpirit == false and bot.itemToBuy <= 2 then
+					elseif item == "item_quelling_blade" then --130
+						if bot.buildBFury == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_force_staff" then
-						if bot.buildHurricane == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_dragon_lance" then
-						if bot.buildHurricane == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_orchid" then
-						if bot.buildBloodthorn == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_maelstrom" then
-						if bot.buildMjollnir == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_mekansm" then
-						if bot.buildGreaves == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_wind_lace" then
-						if bot.buildCyclone == false and bot.buildDrum == false and bot.buildSolar == false and bot.buildTranquil == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_ring_of_basilius" then
-						if bot.buildVeil == false and bot.buildVlad == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_ghost" then
-						if bot.buildEthereal == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_buckler" then
-						if bot.buildAssault == false and bot.buildMek == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_lesser_crit" then
-						if bot.buildDaedalus == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_basher" then
-						if bot.buildAbyssal == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_javelin" then
-						if bot.buildMonkey == false and bot.buildMjollnir == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_medallion_of_courage" then
-						if bot.buildSolar == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_hood_of_defiance" then
-						if bot.buildPipe == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_kaya" then
-						if bot.buildBloodstone == false and bot.buildYK == false and bot.buildKS == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_yasha" then
-						if bot.buildManta == false and bot.buildYK == false and bot.buildSY == false and bot.itemToBuy <= 2 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_blight_stone" then
-						if bot.buildMedallion == false and bot.buildSolar == false and bot.buildDesolator == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_lifesteal" then
-						if bot.buildSatanic == false and bot.buildMask == false and bot.buildVlad == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_gloves" then
-						if bot.buildMidas == false and bot.buildArmlet == false and bot.buildGlimmer == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_cloak" then
-						if bot.buildHood == false and bot.buildGlimmer == false and bot.buildPipe == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_blitz_knuckles" then
-						if bot.buildMonkey == false and bot.buildShadow == false and bot.buildSilver == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_point_booster" then
-						if bot.buildScepter== false and bot.buildScepter2 == false and bot.buildBooster == false and bot.buildOctarine == false
-						and bot.buildBloodstone == false and bot.buildSkadi == false
+					elseif item == "item_ring_of_protection" then --175
+						if bot.buildBuckler== false and bot.buildAssault == false and bot.buildMek == false
+						and bot.buildGreaves == false and bot.buildUrn == false and bot.buildSpirit == false 
+						and bot.buildSoul == false 
 						then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_ring_of_protection" then
-						if bot.buildBuckler== false and bot.buildAssault == false and bot.buildMek == false and bot.buildGreaves == false
-						and bot.buildUrn == false and bot.buildSpirit == false and bot.buildSoul == false 
+					elseif item == "item_ring_of_regen" then --175
+						if bot.buildHeaddress == false and bot.buildMek == false and bot.buildPipe == false 
+						and bot.buildForce == false and bot.buildHood == false 
 						then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_ring_of_regen" then
-						if bot.buildHeaddress == false and bot.buildMek == false and bot.buildPipe == false and bot.buildForce == false
-						and bot.buildHood == false 
-						then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_sobi_mask" then
-						if bot.buildOblivion == false and bot.buildOrchid == false and bot.buildBloodthorn == false and bot.buildEcho == false 
-						and bot.buildSilver == false and bot.buildBasilius == false and bot.buildVeil == false and bot.buildVlad == false 
-						and bot.buildUrn == false and bot.buildSpirit == false and bot.buildNecronomicon == false and bot.buildDrum == false 
+					elseif item == "item_sobi_mask" then --175
+						if bot.buildOblivion == false and bot.buildOrchid == false and bot.buildBloodthorn == false 
+						and bot.buildEcho == false and bot.buildSilver == false and bot.buildBasilius == false 
+						and bot.buildVeil == false and bot.buildVlad == false and bot.buildUrn == false 
+						and bot.buildSpirit == false and bot.buildNecronomicon == false and bot.buildDrum == false 
 						and bot.buildMedallion == false and bot.buildSolar == false 
 						then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_ring_of_health" then
-						if bot.buildPerseverance == false and bot.buildRefresher == false and bot.buildSphere == false and bot.buildLotus == false 
-						and bot.buildMeteor == false and bot.buildBFury == false and bot.buildVanguard == false and bot.buildHood == false
-						then
+					elseif item == "item_wind_lace" then --250
+						if bot.buildCyclone == false and bot.buildDrum == false and bot.buildSolar == false 
+						and bot.buildTranquil == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_headdress" then
+					elseif item == "item_blight_stone" then --300
+						if bot.buildMedallion == false and bot.buildSolar == false and bot.buildDesolator == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_buckler" then --375
+						if bot.buildAssault == false and bot.buildMek == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_ring_of_basilius" then --425
+						if bot.buildVeil == false and bot.buildVlad == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_headdress" then --425
 						if bot.buildMek == false and bot.buildPipe == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_ring_of_tarrasque" then
-						if bot.buildHeart == false and bot.buildHoly == false then
+					elseif item == "item_gloves" then --450
+						if bot.buildMidas == false and bot.buildArmlet == false and bot.buildGlimmer == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_necronomicon" then
-						if bot.buildNecronomicon == false then
+					elseif item == "item_cloak" then --450
+						if bot.buildHood == false and bot.buildGlimmer == false and bot.buildPipe == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_magic_wand" then
+					elseif item == "item_magic_wand" then --450
 						if bot.buildHoly == false  then
 							slotToSell = itemSlot;
 							break;
 						end	
-					elseif item == "item_quelling_blade" then
-						if bot.buildBFury == false then
+					elseif item == "item_ring_of_tarrasque" then --650
+						if bot.buildHeart == false and bot.buildHoly == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_hand_of_midas" then
-						if #bot.itemToBuy <= 2 then
+					elseif item == "item_ring_of_health" then --825
+						if bot.buildPerseverance == false and bot.buildRefresher == false and bot.buildSphere == false 
+						and bot.buildLotus == false and bot.buildMeteor == false and bot.buildBFury == false 
+						and bot.buildVanguard == false and bot.buildHood == false
+						then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_mask_of_madness" then
-						if #bot.itemToBuy <= 2 then
+					elseif item == "item_urn_of_shadows" then --840
+						if bot.buildSpirit == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_veil_of_discord" then
-						if #bot.itemToBuy <= 2 then
+					elseif item == "item_lifesteal" then --900
+						if bot.buildSatanic == false and bot.buildMask == false and bot.buildVlad == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_armlet" then
-						if #bot.itemToBuy <= 2 then
+					elseif item == "item_blitz_knuckles" then --1000
+						if bot.buildMonkey == false and bot.buildShadow == false and bot.buildSilver == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_helm_of_the_dominator" then
-						if #bot.itemToBuy <= 2 then
+					elseif item == "item_medallion_of_courage" then --1025
+						if bot.buildSolar == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_ancient_janggo" then
+					elseif item == "item_javelin" then --1100
+						if bot.buildMonkey == false and bot.buildMjollnir == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_point_booster" then --1200
+						if bot.buildScepter== false and bot.buildScepter2 == false and bot.buildBooster == false 
+						and bot.buildOctarine == false and bot.buildBloodstone == false and bot.buildSkadi == false
+						then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_ancient_janggo" then --1475
 						local jg = bot:GetItemInSlot(itemSlot);
 						if jg~=nil and jg:GetCurrentCharges() == 0 and #bot.itemToBuy <= 3 then
 							slotToSell = itemSlot;
 							break;
 						end	
+					elseif item == "item_ghost" then --1500
+						if bot.buildEthereal == false and bot.itemToBuy <= 3 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_veil_of_discord" then --1525
+						if #bot.itemToBuy <= 3 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_hood_of_defiance" then --1750
+						if bot.buildPipe == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_mask_of_madness" then --1775
+						if #bot.itemToBuy <= 3 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_dragon_lance" then --1900
+						if bot.buildHurricane == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_vanguard" then --1925
+						if bot.buildCrimson == false and bot.buildAbyssal == false  then
+							slotToSell = itemSlot;
+							break;
+						end	
+					elseif item == "item_lesser_crit" then --1950
+						if bot.buildDaedalus == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_mekansm" then --1975
+						if bot.buildGreaves == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_kaya" then --2050
+						if bot.buildBloodstone == false and bot.buildYK == false and bot.buildKS == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_yasha" then --2050
+						if bot.buildManta == false and bot.buildYK == false and bot.buildSY == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_necronomicon" then --2050
+						if bot.buildNecronomicon == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_force_staff" then --2175
+						if bot.buildHurricane == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_hand_of_midas" then --2200
+						if #bot.itemToBuy <= 2 then
+							slotToSell = itemSlot;
+							break;
+						end
+					end
+					elseif item == "item_helm_of_the_dominator" then --2350
+						if #bot.itemToBuy <= 3 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_echo_sabre" then --2500
+						if bot.buildSilver == false then
+							slotToSell = itemSlot;
+							break;
+						end	
+					elseif item == "item_maelstrom" then --2700
+						if bot.buildMjollnir == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_basher" then --2950
+						if bot.buildAbyssal == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_invis_sword" then --3000
+						if bot.buildSilver == false then
+							slotToSell = itemSlot;
+							break;
+						end	
+					elseif item == "item_orchid" then --3475
+						if bot.buildBloodthorn == false then
+							slotToSell = itemSlot;
+							break;
 					else
 						slotToSell = itemSlot;
 						break;

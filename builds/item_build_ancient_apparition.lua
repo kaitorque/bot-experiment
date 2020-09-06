@@ -46,7 +46,6 @@ randBoot = KUtil.getBoot(boot)
 
 item = {
 	"item_glimmer_cape",
-	"item_force_staff",
 	"item_rod_of_atos",
 	"item_sheepstick",
 	"item_hurricane_pike",

@@ -44,17 +44,17 @@ function KaitorqueModule.getItem(tInput, maxItem, rapier, gem, moon)
 	until(tReturn[6] ~= "item_ultimate_scepter")
 	table.insert(tReturn, 6,"item_ultimate_scepter_2");
 	if gem == 1 then
-		if RandomInt(0,4) == 4 then
+		if RandomInt(1,4) == 4 then
 			table.insert(tReturn, RandomInt(1,#tReturn+1),"item_gem");
 		end
 	end
 	if moon == 1 then
-		if RandomInt(0,4) == 4 then
+		if RandomInt(1,4) == 4 then
 			table.insert(tReturn, RandomInt(1,#tReturn+1),"item_moon_shard");
 		end
 	end
 	if rapier == 1 then
-		if RandomInt(0,4) == 4 then
+		if RandomInt(1,4) == 4 then
 			table.insert(tReturn, RandomInt(6,#tReturn+1),"item_rapier");
 		end
 	end
