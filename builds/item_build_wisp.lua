@@ -21,6 +21,8 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 
 earlyItem = {
 	"item_magic_wand",
+	"item_headdress",
+	"item_soul_ring"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -34,7 +36,9 @@ boot = {
 transItem = {
 	"item_urn_of_shadows",
 	"item_mekansm",
-	"item_helm_of_the_dominator"
+	"item_helm_of_the_dominator",
+	"item_ghost",
+	"item_force_staff"
 }
 
 numMidItem = KUtil.getNum(#transItem)

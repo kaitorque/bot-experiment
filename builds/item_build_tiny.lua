@@ -20,7 +20,8 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 earlyItem = {
 	"item_magic_wand",
 	"item_boots",
-	"item_ring_of_protection"
+	"item_ring_of_protection",
+	"item_wind_lace"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -63,7 +64,9 @@ item = {
 	"item_solar_crest",
 	"item_pipe",
 	"item_blade_mail",
-	"item_lotus_orb"
+	"item_lotus_orb",
+	"item_monkey_king_bar",
+	"item_octarine_core"
 }
 
 randItem = KUtil.getItem(item, 5, 1, 0, 0)

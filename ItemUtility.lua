@@ -122,7 +122,11 @@ ItemModule['earlyGameItem'] = {
 	 "item_helm_of_the_dominator",
 	 "item_holy_locket",
 	 "item_ring_of_health",
-	 "item_lifesteal"
+	 "item_lifesteal",
+	 "item_blitz_knuckles",
+	 "item_necronomicon",
+	 "item_ring_of_tarrasque",
+	 "item_cloak"
 	 --"item_tpscroll"
 }
 

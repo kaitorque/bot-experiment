@@ -22,7 +22,8 @@ earlyItem = {
 	"item_boots",
 	"item_orb_of_venom",
 	"item_soul_ring",
-	"item_medallion_of_courage"
+	"item_medallion_of_courage",
+	"item_ring_of_health"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -35,7 +36,9 @@ boot = {
 }
 
 transItem = {
-	"item_vanguard"
+	"item_vanguard",
+	"item_hood_of_defiance",
+	"item_ancient_janggo"
 }
 
 numMidItem = KUtil.getNum(#transItem)
@@ -55,7 +58,11 @@ item = {
 	"item_guardian_greaves",
 	"item_vladimir",
 	"item_blade_mail",
-	"item_assault"
+	"item_assault",
+	"item_black_king_bar",
+	"item_heavens_halberd",
+	"item_heart",
+	"item_radiance"
 }
 
 randItem = KUtil.getItem(item, 5, 0, 0, 0)

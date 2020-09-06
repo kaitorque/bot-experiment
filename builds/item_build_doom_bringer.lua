@@ -31,7 +31,8 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_phase_boots"
+	"item_phase_boots",
+	"item_travel_boots"
 }
 
 transItem = {

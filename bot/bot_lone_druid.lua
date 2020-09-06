@@ -1,5 +1,6 @@
 --local minion = dofile( GetScriptDirectory().."/MinionUtility" )
 local utils = require(GetScriptDirectory() ..  "/util")
+local KUtil  = require(GetScriptDirectory() .. "/KaitorqueUtility");
 local npcBot = GetBot();
 local castRTDesire = 0;
 local castSRDesire = 0;
@@ -11,11 +12,17 @@ local ProxRange = 1300;
 local bearState = "";
 
 local BearItem = {
-	"item_stout_shield",
+	-- "item_stout_shield",
+	"item_quelling_blade"
 	"item_boots",
 	"item_orb_of_venom",
-	"item_blight_stone"
+	"item_blight_stone",
+	"item_lifesteal",
+	"item_wind_lace",
 }
+
+BearItem = KUtil.FYShuffle(BearItem)
+
 function  MinionThink(  hMinionUnit ) 
 
 if not hMinionUnit:IsNull() and hMinionUnit ~= nil then 

@@ -163,10 +163,15 @@ bot.buildLotus = false;
 bot.buildMeteor = false;
 bot.buildSatanic = false;
 bot.buildMask = false;
+bot.buildShadow = false;
+bot.buildHeart = false;
 
 for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_bfury" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bfury" then
 		bot.buildBFury = true;
+	end
+	if bot.itemToBuy[i] == "item_heart" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_heart" then
+		bot.buildHeart = true;
 	end
 	if bot.itemToBuy[i] == "item_silver_edge" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_silver_edge" then
 		bot.buildSilver = true;
@@ -221,6 +226,9 @@ for i=1, math.ceil(#bot.itemToBuy/2) do
 	end
 	if bot.itemToBuy[i] == "item_maelstrom" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_maelstrom" then
 		bot.buildMaelstrom = true;
+	end
+	if bot.itemToBuy[i] == "item_invis_sword" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_invis_sword" then
+		bot.buildShadow = true;
 	end
 	if bot.itemToBuy[i] == "item_vanguard" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vanguard" then
 		bot.buildVanguard = true;
@@ -717,6 +725,16 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_cloak" then
+						if bot.buildHood == false and bot.buildGlimmer == false and bot.buildPipe == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_blitz_knuckles" then
+						if bot.buildMonkey == false and bot.buildShadow == false and bot.buildSilver == false then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_point_booster" then
 						if bot.buildScepter== false and bot.buildScepter2 == false and bot.buildBooster == false and bot.buildOctarine == false
 						and bot.buildBloodstone == false and bot.buildSkadi == false
@@ -756,6 +774,16 @@ function ItemPurchaseThink()
 						end
 					elseif item == "item_headdress" then
 						if bot.buildMek == false and bot.buildPipe == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_ring_of_tarrasque" then
+						if bot.buildHeart == false and bot.buildHoly == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_necronomicon" then
+						if bot.buildNecronomicon == false then
 							slotToSell = itemSlot;
 							break;
 						end
