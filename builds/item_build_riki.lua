@@ -6,16 +6,16 @@ local npcBot = GetBot();
 local talents = IBUtil.FillTalenTable(npcBot);
 local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 
-X["items"] = { 
-	"item_magic_wand",
-	"item_phase_boots",
-	"item_sange_and_yasha",
-	"item_diffusal_blade",
-	"item_abyssal_blade",
-	"item_skadi",
-	"item_ultimate_scepter_2",
-	"item_butterfly"
-};			
+-- X["items"] = { 
+-- 	"item_magic_wand",
+-- 	"item_phase_boots",
+-- 	"item_sange_and_yasha",
+-- 	"item_diffusal_blade",
+-- 	"item_abyssal_blade",
+-- 	"item_skadi",
+-- 	"item_ultimate_scepter_2",
+-- 	"item_butterfly"
+-- };			
 
 earlyItem = {
 	"item_magic_wand",

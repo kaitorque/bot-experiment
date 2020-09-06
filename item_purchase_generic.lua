@@ -850,7 +850,7 @@ function ItemPurchaseThink()
 	end
 	
 	--Sell non BoT boots when have BoT
-	if DotaTime() > 30*60 and ( items.HasItem( bot, "item_travel_boots") or items.HasItem( bot, "item_travel_boots_2")) or items.HasItem( bot, "item_guardian_greaves")) and
+	if DotaTime() > 30*60 and ( items.HasItem( bot, "item_travel_boots") or items.HasItem( bot, "item_travel_boots_2") or items.HasItem( bot, "item_guardian_greaves")) and
 	   ( bot:DistanceFromFountain() == 0 or bot:DistanceFromSecretShop() == 0 )
 	then	
 		for i=1,#items['earlyBoots']

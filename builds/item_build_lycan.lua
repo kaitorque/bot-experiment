@@ -22,6 +22,7 @@ earlyItem = {
 	"item_sobi_mask",
 	"item_ring_of_protection",
 	"item_necronomicon"
+}
 
 numEarlyItem = KUtil.getNum(#earlyItem)
 

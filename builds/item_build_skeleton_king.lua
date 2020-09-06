@@ -22,6 +22,7 @@ earlyItem = {
 	"item_magic_wand",
 	"item_boots",
 	"item_blitz_knuckles"
+}
 
 numEarlyItem = KUtil.getNum(#earlyItem)
 

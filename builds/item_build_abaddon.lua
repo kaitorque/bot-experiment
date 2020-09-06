@@ -23,6 +23,7 @@ earlyItem = {
 	"item_boots",
 	"item_ring_of_protection",
 	"item_buckler"
+}
 
 numEarlyItem = KUtil.getNum(#earlyItem)
 

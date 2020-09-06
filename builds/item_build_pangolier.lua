@@ -20,7 +20,7 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 
 earlyItem = {
 	"item_magic_wand",
-	"item_boots"
+	"item_boots",
 	"item_javelin"
 }
 
