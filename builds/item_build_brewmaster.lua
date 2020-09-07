@@ -50,7 +50,7 @@ item = {
 	"item_blink",
 	"item_lotus_orb",
 	"item_shivas_guard",
-	"item_radiance".
+	"item_radiance",
 	"item_assault",
 	"item_black_king_bar",
 	"item_abyssal_blade",
@@ -63,6 +63,8 @@ item = {
 randItem = KUtil.getItem(item, 5, 0, 0, 0)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
+
+KUtil.chatItem(npcBot, X["items"]);
 
 print("Brewmaster Item: "..table.concat(X["items"],", "));
 

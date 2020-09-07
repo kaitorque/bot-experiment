@@ -61,6 +61,8 @@ randItem = KUtil.getItem(item, 5, 1, 0, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 
+KUtil.chatItem(npcBot, X["items"]);
+
 print("Phantom Assassin Item: "..table.concat(X["items"],", "));
 
 X["builds"] = {

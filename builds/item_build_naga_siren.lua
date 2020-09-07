@@ -69,6 +69,8 @@ item = {
 randItem = KUtil.getItem(item, 5, 0, 0, 1)
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 
+KUtil.chatItem(npcBot, X["items"]);
+
 print("Naga Siren Item: "..table.concat(X["items"],", "));
 
 X["builds"] = {
