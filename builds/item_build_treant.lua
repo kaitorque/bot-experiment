@@ -55,7 +55,7 @@ item = {
 	"item_refresher",
 	"item_octarine_core",
 	"item_sheepstick",
-	"item_aeon_disk"
+	"item_aeon_disk",
 	"item_black_king_bar",
 	"item_spirit_vessel"
 }

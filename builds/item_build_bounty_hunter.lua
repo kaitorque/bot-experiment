@@ -53,7 +53,7 @@ item = {
 	"item_orchid",
 	"item_bloodthorn",
 	"item_black_king_bar",
-	"item_dagon_5"
+	"item_dagon_5",
 	"item_monkey_king_bar",
 	"item_assault",
 	"item_abyssal_blade",
