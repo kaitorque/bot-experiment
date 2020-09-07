@@ -60,7 +60,7 @@ item = {
 	"item_silver_edge",
 	"item_sheepstick",
 	"item_vladimir",
-	"item_solar_crest".
+	"item_solar_crest",
 	"item_guardian_greaves",
 	"item_meteor_hammer",
 	"item_lotus_orb",
