@@ -83,11 +83,15 @@ teamItem  = {["item_ancient_janggo"] = "Drum of Endurance", ["item_mekansm"] = "
 ["item__pipe"] = "Pipe of Insight", ["item_guardian_greaves"] = "Guardian Greaves", ["item_shivas_guard"] = "Shiva's Guard", ["item_assault"] = "Assault Cuirass",
 ["item_crimson_guard"] = "Crimson Guard", ["item_spirit_vessel"] = "Spirit Vessel"}
 function KaitorqueModule.chatItem(bot, item)
+	itemList = {}
 	for i=1, #item
 	do
 		if teamItem[item[i]] ~= nil then
-			bot:ActionImmediate_Chat("I will buy "..teamItem[item[i]], false); 
+			table.insert(itemList, teamItem[item[i]]);
 		end
+	end
+	if #itemList > 0 then
+		bot:ActionImmediate_Chat("I will buy "..table.concat(itemList,", "), false); 
 	end
 end
 
