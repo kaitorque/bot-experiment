@@ -81,7 +81,7 @@ end
 
 teamItem  = {["item_ancient_janggo"] = "Drum of Endurance", ["item_mekansm"] = "Mekansm", ["item_vladmir"] = "Vladimir's Offering", ["item_urn_of_shadows"] = "Urn of Shadows",
 ["item__pipe"] = "Pipe of Insight", ["item_guardian_greaves"] = "Guardian Greaves", ["item_shivas_guard"] = "Shiva's Guard", ["item_assault"] = "Assault Cuirass",
-["item_crimson_guard"] = "Crimson Guard", ["item_spirit_vessel"] = "Spirit Vessel"}
+["item_crimson_guard"] = "Crimson Guard", ["item_urn_of_shadows"] = "Urn of Shadows", ["item_spirit_vessel"] = "Spirit Vessel", ["item_desolator"] = "Desolator"}
 function KaitorqueModule.chatItem(bot, item)
 	itemList = {}
 	for i=1, #item

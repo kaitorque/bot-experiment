@@ -1,6 +1,7 @@
 local items = require(GetScriptDirectory() .. "/ItemUtility" )
 --local roles = require(GetScriptDirectory() .. "/RoleUtilityAlt" )
 local role = require(GetScriptDirectory() .. "/RoleUtility" )
+local KUtil  = require(GetScriptDirectory() .. "/KaitorqueUtility");
 
 local bot = GetBot();
 
@@ -370,6 +371,7 @@ local courier = nil;
 local t3AlreadyDamaged = false;
 local t3Check = -90;
 
+
 --General item purchase logis
 local function GeneralPurchase()
 
@@ -496,6 +498,7 @@ end
 local lastInvCheck = -90;
 local fullInvCheck = -90;
 local lastBootsCheck = -90;
+local chatItemTime = 0;
 local buyBootsStatus = false;
 local addVeryLateGameItem = false
 local buyRD = false;
@@ -925,6 +928,12 @@ function ItemPurchaseThink()
 				GeneralPurchase();
 			end	
 		end
+	end
+
+	
+	if DotaTime() > chatItemTime then
+		KUtil.chatItem(bot, bot.itemToBuy);
+		chatItemTime = chatItemTime + 5*60;
 	end
 
 end
