@@ -51,7 +51,7 @@ item = {
 	"item_solar_crest",
 	"item_lotus_orb",
 	"item_blink",
-	"item_vladimir",
+	"item_vladmir",
 	"item_refresher",
 	"item_octarine_core",
 	"item_sheepstick",

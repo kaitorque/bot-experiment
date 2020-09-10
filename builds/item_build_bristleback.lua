@@ -56,7 +56,7 @@ item = {
 	"item_solar_crest",
 	"item_lotus_orb",
 	"item_guardian_greaves",
-	"item_vladimir",
+	"item_vladmir",
 	"item_assault",
 	"item_black_king_bar",
 	"item_heavens_halberd",

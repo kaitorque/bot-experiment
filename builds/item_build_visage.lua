@@ -55,7 +55,7 @@ item = {
 	"item_pipe",
 	"item_shivas_guard",
 	"item_monkey_king_bar",
-	"item_vladimir",
+	"item_vladmir",
 	"item_assault",
 	"item_sheepstick",
 	"item_black_king_bar",

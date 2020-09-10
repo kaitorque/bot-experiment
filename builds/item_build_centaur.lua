@@ -56,7 +56,7 @@ item = {
 	"item_shivas_guard",
 	"item_blink",
 	"item_assault",
-	"item_vladimir",
+	"item_vladmir",
 	"item_blade_mail",
 	"item_black_king_bar",
 	"item_refresher",

@@ -51,7 +51,7 @@ item = {
 	"item_aeon_disk",
 	"item_aether_lens",
 	"item_blink",
-	"item_vladimir",
+	"item_vladmir",
 	"item_lotus_orb"
 }
 

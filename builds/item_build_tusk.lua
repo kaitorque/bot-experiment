@@ -56,7 +56,7 @@ item = {
 	"item_assault",
 	"item_crimson_guard",
 	"item_blade_mail",
-	"item_vladimir",
+	"item_vladmir",
 	"item_necronomicon_3",
 	"item_solar_crest",
 	"item_abyssal_blade",

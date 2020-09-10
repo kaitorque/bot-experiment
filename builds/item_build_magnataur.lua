@@ -59,7 +59,7 @@ item = {
 	"item_heart",
 	"item_guardian_greaves",
 	"item_refresher",
-	"item_vladimir",
+	"item_vladmir",
 	"item_pipe",
 	"item_lotus_orb"
 }

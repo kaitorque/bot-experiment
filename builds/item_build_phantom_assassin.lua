@@ -52,7 +52,7 @@ item = {
 	"item_nullifier",
 	"item_bfury",
 	"item_satanic",
-	"item_vladimir",
+	"item_vladmir",
 	"item_assault",
 	"item_skadi"
 }

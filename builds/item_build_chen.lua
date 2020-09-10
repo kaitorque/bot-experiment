@@ -56,7 +56,7 @@ item = {
 	"item_sheepstick",
 	"item_hurricane_pike",
 	"item_shivas_guard",
-	"item_vladimir",
+	"item_vladmir",
 	"item_pipe",
 	"item_solar_crest"
 }

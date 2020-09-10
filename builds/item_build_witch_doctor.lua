@@ -55,7 +55,7 @@ item = {
 	"item_sphere",
 	"item_guardian_greaves",
 	"item_blink",
-	"item_vladimir",
+	"item_vladmir",
 	"item_lotus_orb"
 }
 

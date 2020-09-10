@@ -57,7 +57,7 @@ item = {
 	"item_monkey_king_bar",
 	"item_assault",
 	"item_abyssal_blade",
-	"item_vladimir",
+	"item_vladmir",
 	"item_manta",
 	"item_crimson_guard",
 	"item_pipe",

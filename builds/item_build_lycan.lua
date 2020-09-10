@@ -49,7 +49,7 @@ item = {
 	"item_black_king_bar",
 	"item_abyssal_blade",
 	"item_assault",
-	"item_vladimir",
+	"item_vladmir",
 	"item_nullifier",
 	"item_heavens_halberd",
 	"item_sheepstick",

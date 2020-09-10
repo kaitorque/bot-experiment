@@ -53,7 +53,7 @@ item = {
 	"item_guardian_greaves",
 	"item_lotus_orb",
 	"item_sheepstick",
-	"item_vladimir",
+	"item_vladmir",
 	"item_cyclone",
 	"item_spirit_vessel",
 	"item_crimson_guard",

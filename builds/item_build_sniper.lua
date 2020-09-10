@@ -62,7 +62,7 @@ item = {
 	"item_sphere",
 	"item_solar_crest",
 	"item_cyclone",
-	"item_vladimir",
+	"item_vladmir",
 	"item_spirit_vessel",
 	"item_silver_edge",
 	"item_bloodthorn",

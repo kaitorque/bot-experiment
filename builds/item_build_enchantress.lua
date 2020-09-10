@@ -54,7 +54,7 @@ item = {
 	"item_bloodthorn",
 	"item_sheepstick",
 	"item_shivas_guard",
-	"item_vladimir",
+	"item_vladmir",
 	"item_solar_crest",
 	"item_pipe",
 	"item_lotus_orb",

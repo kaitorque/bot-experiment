@@ -59,7 +59,7 @@ item = {
 	"item_solar_crest",
 	"item_monkey_king_bar",
 	"item_satanic",
-	"item_vladimir",
+	"item_vladmir",
 	"item_pipe",
 	"item_sphere",
 	"item_aeon_disk",

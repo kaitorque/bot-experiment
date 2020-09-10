@@ -54,7 +54,7 @@ item = {
 	"item_monkey_king_bar",
 	"item_nullifier",
 	"item_lotus_orb",
-	"item_vladimir",
+	"item_vladmir",
 	"item_desolator",
 	"item_satanic",
 	"item_heavens_halberd",

@@ -58,7 +58,7 @@ item = {
 	"item_hurricane_pike",
 	"item_butterfly",
 	"item_satanic",
-	"item_vladimir",
+	"item_vladmir",
 	"item_refresher",
 	"item_spirit_vessel",
 	"item_glimmer_cape",

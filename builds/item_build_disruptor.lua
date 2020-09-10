@@ -59,7 +59,7 @@ item = {
 	"item_aether_lens",
 	"item_spirit_vessel",
 	"item_aeon_disk",
-	"item_vladimir",
+	"item_vladmir",
 	"item_lotus_orb"
 }
 

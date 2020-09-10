@@ -55,7 +55,7 @@ item = {
 	"item_octarine_core",
 	"item_sphere",
 	"item_refresher",
-	"item_vladimir",
+	"item_vladmir",
 	"item_pipe",
 	"item_aeon_disk",
 	"item_necronomicon_3",

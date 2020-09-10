@@ -51,7 +51,7 @@ item = {
 	"item_hurricane_pike",
 	"item_octarine_core",
 	"item_lotus_orb",
-	"item_vladimir",
+	"item_vladmir",
 	"item_cyclone",
 	"item_solar_crest",
 	"item_spirit_vessel",

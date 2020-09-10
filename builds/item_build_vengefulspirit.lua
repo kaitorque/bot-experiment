@@ -55,7 +55,7 @@ item = {
 	"item_cyclone",
 	"item_hurricane_pike",
 	"item_monkey_king_bar",
-	"item_vladimir",
+	"item_vladmir",
 	"item_glimmer_cape",
 	"item_guardian_greaves",
 	"item_spirit_vessel",

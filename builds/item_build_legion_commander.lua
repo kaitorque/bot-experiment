@@ -50,7 +50,7 @@ item = {
 	"item_silver_edge",
 	"item_monkey_king_bar",
 	"item_black_king_bar",
-	"item_vladimir",
+	"item_vladmir",
 	"item_heavens_halberd",
 	"item_sange_and_yasha",
 	"item_abyssal_blade",

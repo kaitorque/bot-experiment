@@ -54,7 +54,7 @@ item = {
 	"item_shivas_guard",
 	"item_octarine_core",
 	"item_guardian_greaves",
-	"item_vladimir",
+	"item_vladmir",
 	"item_radiance",
 	"item_rod_of_atos",
 	"item_solar_crest",

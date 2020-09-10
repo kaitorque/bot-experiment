@@ -59,7 +59,7 @@ item = {
 	"item_glimmer_cape",
 	"item_pipe",
 	"item_spirit_vessel",
-	"item_vladimir",
+	"item_vladmir",
 	"item_solar_crest",
 	"item_rod_of_atos",
 	"item_cyclone",

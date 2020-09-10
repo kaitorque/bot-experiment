@@ -55,7 +55,7 @@ item = {
 	"item_greater_crit",
 	"item_assault",
 	"item_spirit_vessel",
-	"item_vladimir",
+	"item_vladmir",
 	"item_glimmer_cape",
 	"item_blade_mail",
 	"item_guardian_greaves",

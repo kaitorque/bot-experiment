@@ -51,7 +51,7 @@ item = {
 	"item_blink",
 	"item_shivas_guard",
 	"item_octarine_core",
-	"item_vladimir",
+	"item_vladmir",
 	"item_guardian_greaves",
 	"item_refresher",
 	"item_solar_crest",

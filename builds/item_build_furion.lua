@@ -59,7 +59,7 @@ item = {
 	"item_mjollnir",
 	"item_silver_edge",
 	"item_sheepstick",
-	"item_vladimir",
+	"item_vladmir",
 	"item_solar_crest",
 	"item_guardian_greaves",
 	"item_meteor_hammer",

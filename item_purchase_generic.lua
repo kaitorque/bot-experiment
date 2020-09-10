@@ -212,7 +212,7 @@ for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_veil_of_discord" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_veil_of_discord" then
 		bot.buildVeil = true;
 	end
-	if bot.itemToBuy[i] == "item_vladimir" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vladimir" then
+	if bot.itemToBuy[i] == "item_vladmir" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_vladmir" then
 		bot.buildVlad = true;
 	end
 	if bot.itemToBuy[i] == "item_assault" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_assault" then

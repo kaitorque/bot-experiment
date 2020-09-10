@@ -61,7 +61,7 @@ item = {
 	"item_heart",
 	"item_abyssal_blade",
 	"item_solar_crest",
-	"item_vladimir",
+	"item_vladmir",
 	"item_spirit_vessel",
 	"item_pipe",
 	"item_heavens_halberd"

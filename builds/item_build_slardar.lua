@@ -49,7 +49,7 @@ item = {
 	"item_black_king_bar",
 	"item_heart",
 	"item_assault",
-	"item_vladimir",
+	"item_vladmir",
 	"item_solar_crest",
 	"item_sange_and_yasha",
 	"item_crimson_guard",
