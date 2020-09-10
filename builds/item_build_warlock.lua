@@ -49,7 +49,7 @@ item = {
 	"item_sheepstick",
 	"item_octarine_core",
 	"item_aeon_disk",
-	"item_arther_lens",
+	"item_aether_lens",
 	"item_blink",
 	"item_vladimir",
 	"item_lotus_orb"
