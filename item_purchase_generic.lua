@@ -651,7 +651,8 @@ function ItemPurchaseThink()
 						end
 					elseif item == "item_wind_lace" then --250
 						if bot.buildCyclone == false and bot.buildDrum == false and bot.buildSolar == false 
-						and bot.buildTranquil == false then
+						and bot.buildTranquil == false 
+						then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -806,7 +807,6 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
-					end
 					elseif item == "item_helm_of_the_dominator" then --2350
 						if #bot.itemToBuy <= 3 then
 							slotToSell = itemSlot;
@@ -836,6 +836,7 @@ function ItemPurchaseThink()
 						if bot.buildBloodthorn == false then
 							slotToSell = itemSlot;
 							break;
+						end
 					else
 						slotToSell = itemSlot;
 						break;
