@@ -50,7 +50,7 @@ item = {
 	"item_heavens_halberd",
 	"item_pipe",
 	"item_black_king_bar",
-	"item_lotus_orb"
+	"item_lotus_orb",
 	"item_desolator",
 	"item_assault",
 	"item_blink",
