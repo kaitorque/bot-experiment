@@ -741,17 +741,17 @@ function ItemPurchaseThink()
 						end
 					elseif item == "item_ancient_janggo" then --1475
 						local jg = bot:GetItemInSlot(itemSlot);
-						if jg~=nil and jg:GetCurrentCharges() == 0 and #bot.itemToBuy <= 3 then
+						if jg~=nil and jg:GetCurrentCharges() == 0 and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end	
 					elseif item == "item_ghost" then --1500
-						if bot.buildEthereal == false and bot.itemToBuy <= 3 then
+						if bot.buildEthereal == false and bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_veil_of_discord" then --1525
-						if #bot.itemToBuy <= 3 then
+						if #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -761,7 +761,7 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_mask_of_madness" then --1775
-						if #bot.itemToBuy <= 3 then
+						if #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -811,7 +811,7 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_helm_of_the_dominator" then --2350
-						if #bot.itemToBuy <= 3 then
+						if #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
