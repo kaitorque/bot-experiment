@@ -36,7 +36,7 @@ boot = {
 transItem = {
 	"item_force_staff",
 	"item_ancient_janggo",
-	"item_invis_sworm"
+	"item_invis_sword"
 }
 
 numTransItem = KUtil.getNum(#transItem)
