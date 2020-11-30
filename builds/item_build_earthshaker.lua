@@ -39,7 +39,7 @@ transItem = {
 	"item_force_staff",
 	"item_ghost",
 	"item_soul_ring",
-	"item_invis_edge"
+	"item_invis_sword"
 }
 
 numTransItem = KUtil.getNum(#transItem)

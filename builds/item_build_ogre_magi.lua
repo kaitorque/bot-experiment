@@ -54,7 +54,7 @@ item = {
 	"item_cyclone",
 	"item_sheepstick",
 	"item_lotus_orb",
-	"item_dagon_5"
+	"item_dagon_5",
 	"item_pipe",
 	"item_solar_crest",
 	"item_black_king_bar",
