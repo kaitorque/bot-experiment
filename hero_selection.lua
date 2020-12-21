@@ -5,13 +5,9 @@ local utils = require(GetScriptDirectory() .. "/util");
 local hero_roles = role["hero_roles"];
 -- mandate that the bots will pick these heroes - for testing purposes
 local requiredHeroes = {
-	
-'npc_dota_hero_bloodseeker',
-'npc_dota_hero_clinkz',
-'npc_dota_hero_centaur',
-'npc_dota_hero_medusa',
-'npc_dota_hero_tiny',
-'npc_dota_hero_treant',
+	'npc_dota_hero_hoodwink',
+	'npc_dota_hero_tusk',
+	'npc_dota_hero_skeleton_king',
 };
 
 local UnImplementedHeroes = {
@@ -31,6 +27,7 @@ local quickMode = false;
 local testMode = false;
 
 local allBotHeroes = {
+	'npc_dota_hero_hoodwink',
     'npc_dota_hero_snapfire',
 	'npc_dota_hero_void_spirit',
 	'npc_dota_hero_mars',
@@ -509,7 +506,6 @@ function GetFirstBot()
     end
 	return BotId;
 end
---Ban hero function
 --Ban hero function
 function BansHero()
 	if not IsPlayerBot(GetCMCaptain()) or not IsPlayerInHeroSelectionControl(GetCMCaptain()) then
