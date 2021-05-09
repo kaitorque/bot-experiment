@@ -452,6 +452,7 @@ ItemModule["item_gungir"] = { "item_maelstrom"; "item_rod_of_atos"; "item_recipe
 ItemModule["item_mage_slayer"] = { "item_cloak"; "item_blade_of_alacrity"; "item_claymore"; "item_recipe_mage_slayer" }
 ItemModule["item_eternal_shroud"] = { "item_hood_of_defiance"; "item_voodoo_mask"; "item_recipe_eternal_shroud" }
 ItemModule["item_helm_of_the_dominator_2"] = { "item_helm_of_the_dominator"; "item_ultimate_orb"; "item_recipe_helm_of_the_dominator_2" }
+ItemModule["item_helm_of_the_overlord"] = { "item_helm_of_the_dominator"; "item_ultimate_orb"; "item_recipe_helm_of_the_overlord" }
 ItemModule["item_overwhelming_blink"] = { "item_blink"; "item_reaver"; "item_recipe_overwhelming_blink" }
 ItemModule["item_swift_blink"] = { "item_blink"; "item_eagle"; "item_recipe_swift_blink" }
 ItemModule["item_arcane_blink"] = { "item_blink"; "item_mystic_staff"; "item_recipe_arcane_blink" }

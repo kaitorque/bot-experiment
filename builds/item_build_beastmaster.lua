@@ -57,6 +57,7 @@ item = {
 	"item_eternal_shroud",
 	"item_heart",
 	"item_heavens_halberd",
+	"item_helm_of_the_overlord",
 	"item_kaya_and_sange",
 	"item_sheepstick",
 	"item_silver_edge",

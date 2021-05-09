@@ -899,6 +899,16 @@ function U.CanBeDominatedCreeps(name)
 		 or name == "npc_dota_neutral_satyr_trickster"	
 end
 
+function U.CanBeDominatedAncientCreeps(name)
+	return
+		name == "npc_dota_neutral_elder_jungle_stalker"
+		or name == "npc_dota_neutral_prowler_shaman"
+		or name == "npc_dota_neutral_granite_golem"
+		or name == "npc_dota_neutral_big_thunder_lizard"
+		or name == "npc_dota_neutral_black_dragon"
+
+end
+
 function U.CheckFlag(bitfield, flag)
     return ((bitfield/flag) % 2) >= 1;
 end
@@ -1037,5 +1047,36 @@ function U.GetClosestEnemyUnitToLocation(hUnit, nRange, vLoc)
 	
 end
 
+function U.HasInMainSlot(bot, item_name)
+	local slotType = bot:GetItemSlotType(bot:FindItemSlot(item_name));
+	if slotType == ITEM_SLOT_TYPE_MAIN then
+		return true;
+	end
+	return false;
+end
+
+function U.CalcExtraCastRange(bot)
+	local extra_range = 0;
+	--Buyable items
+	if(U.HasInMainSlot(bot, 'item_aether_lens') or U.HasInMainSlot(bot, 'item_octarine_core')) then
+		extra_range = extra_range + 225;
+	end
+
+	--Neutral items
+	if(U.HasInMainSlot(bot, 'item_keen_optic')) then
+		extra_range = extra_range + 75;
+	end
+	if(U.HasInMainSlot(bot, 'item_psychic_headband')) then
+		extra_range = extra_range + 100;
+	end
+	if(bot:HasModifier('modifier_item_spy_gadget')) then
+		extra_range = extra_range + 125;
+	end
+	if(U.HasInMainSlot(bot, 'item_seer_stone')) then
+		extra_range = extra_range + 350;
+	end
+
+	return extra_range;
+end
 
 return U;

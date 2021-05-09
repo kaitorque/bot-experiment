@@ -1867,7 +1867,7 @@ function X.UpdateInvisEnemyStatus(bot)
 			end
 		end
 		globalEnemyCheck = true;	
-	elseif globalEnemyCheck == true and DotaTime() > 10*60 and DotaTime() > lastCheck + 3.0 then
+	elseif globalEnemyCheck == true and DotaTime() > 3*60 and DotaTime() > lastCheck + 3.0 then
 		local enemies = bot:GetNearbyHeroes(1600, true, BOT_MODE_NONE);
 		if #enemies > 0 then
 			for i=1,#enemies
@@ -1877,7 +1877,8 @@ function X.UpdateInvisEnemyStatus(bot)
 					local GCSlot = enemies[i]:FindItemSlot("item_glimmer_cape");
 					local ISSlot = enemies[i]:FindItemSlot("item_invis_sword");
 					local SESlot = enemies[i]:FindItemSlot("item_silver_edge");
-					if  SASlot >= 0 or GCSlot >= 0 or ISSlot >= 0 or SESlot >= 0 
+					local TCSlot = enemies[i]:FindItemSlot("item_trickster_cloak");
+					if  SASlot >= 0 or GCSlot >= 0 or ISSlot >= 0 or SESlot >= 0 or TCSlot >= 0
 					then
 						X['invisEnemyExist'] = true;
 						break;

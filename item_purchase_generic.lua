@@ -371,7 +371,7 @@ for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_gungir" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_gungir" then
 		bot.buildGleipnir = true;
 	end
-	if bot.itemToBuy[i] == "item_helm_of_the_dominator_2" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_helm_of_the_dominator_2" then
+	if bot.itemToBuy[i] == "item_helm_of_the_overlord" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_helm_of_the_overlord" then
 		bot.buildOverlord = true;
 	end
 end

@@ -289,10 +289,14 @@ function utilsModule.Fountain(team)
 	return Vector(7015,6534);
 end
 
+function utilsModule.GetDistanceSqr(s,t)
+    return (s[1]-t[1])*(s[1]-t[1]) + (s[2]-t[2])*(s[2]-t[2]);
+end
+
 -- CONTRIBUTOR: Function below was based off above function by Platinum_dota2
 function utilsModule.GetDistance(s, t)
     --print("S1: "..s[1]..", S2: "..s[2].." :: T1: "..t[1]..", T2: "..t[2]);
-    return math.sqrt((s[1]-t[1])*(s[1]-t[1]) + (s[2]-t[2])*(s[2]-t[2]));
+    return math.sqrt(utilsModule.GetDistanceSqr(s,t));
 end
 
 -- CONTRIBUTOR: Function below was based off above function by Platinum_dota2

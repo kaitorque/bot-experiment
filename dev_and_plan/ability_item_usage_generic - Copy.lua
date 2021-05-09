@@ -1154,6 +1154,7 @@ end
 -- check skill build vs current level
 local npcBot = GetBot()
 local ability_name = BotAbilityPriority[1];
+print("hi");
 local ability = GetBot():GetAbilityByName(ability_name);
 --print(ability:GetLevel())
 if(ability ~= nil and ability:GetLevel() > 0) then

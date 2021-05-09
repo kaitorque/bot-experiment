@@ -60,6 +60,7 @@ item = {
 	"item_hurricane_pike",
 	"item_kaya_and_sange",
 	"item_octarine_core",
+	"item_refresher",
 	"item_sheepstick",
 	"item_silver_edge",
 	"item_sphere",
@@ -76,7 +77,8 @@ print("Earthshaker Item: "..table.concat(X["items"],", "));
 X["builds"] = {
 	{1,2,3,3,3,4,3,1,1,1,4,2,2,2,4},
 	{1,2,3,1,1,4,1,3,3,3,4,2,2,2,4},
-	{1,2,3,2,2,4,2,3,3,3,4,1,1,1,4}
+	{1,2,3,2,2,4,2,3,3,3,4,1,1,1,4},
+	{2,3,2,1,2,4,2,3,3,3,4,1,1,1,4}
 }
 
 X["skills"] = IBUtil.GetBuildPattern(

@@ -103,7 +103,7 @@ local function ConsiderW()
 		return BOT_ACTION_DESIRE_NONE, nil;
 	end
 	
-	local nCastRange = mutils.GetProperCastRange(false, bot, abilities[2]:GetCastRange());
+	local nCastRange = mutils.GetProperCastRange(false, bot, abilities[2]:GetCastRange()) * 0.6;
 	local nCastPoint = abilities[2]:GetCastPoint();
 	local manaCost   = abilities[2]:GetManaCost();
 	

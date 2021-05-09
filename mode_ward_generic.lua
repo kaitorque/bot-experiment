@@ -1,10 +1,18 @@
-if GetBot():IsInvulnerable() or not GetBot():IsHero() or not string.find(GetBot():GetUnitName(), "hero") or  GetBot():IsIllusion() then
+if 
+	GetBot():IsIllusion() 
+	or GetBot():IsInvulnerable()
+	or not (GetBot():IsHero() or string.find(GetBot():GetUnitName(), "npc_dota_lone_druid_bear"))
+then
 	return;
 end
 
 local utils = require(GetScriptDirectory() ..  "/util")
+local mutil = require(GetScriptDirectory() .. "/MyUtility")
 local wardUtils = require(GetScriptDirectory() ..  "/WardUtility")
 local role = require(GetScriptDirectory() .. "/RoleUtility");
+
+
+
 local bot = GetBot();
 local AvailableSpots = {};
 local nWardCastRange = 500;
@@ -15,86 +23,246 @@ local smoke = nil;
 local wardCastTime = -90;
 local swapTime = -90;
 local enemyPids = nil;
+local modeEntryTime = -1000;
 
 bot.ward = false;
 bot.steal = false;
 
 local route = {
-	Vector(-6263.000000, 2265.000000, 0.000000),
-	Vector(-5012.000000, 4765.000000, 0.000000),
-	Vector(-3212.000000, 4865.000000, 0.000000),
-	Vector(-3706.000000, 2950.000000, 0.000000)
+	Vector(-576.000000, -4160.000000, 0.000000),
+	Vector(384.000000, -2880.000000, 0.000000),
+	Vector(1792.000000, 0.000000, 0.000000),
+	Vector(3200.000000, -576.000000, 0.000000)
 }
 
 local route2 = {
-	Vector(6041.000000, -1978.000000, 0.000000),
-	Vector(4622.000000, -4873.000000, 0.000000),
-	Vector(3561.000000, -4297.000000, 0.000000),
-	Vector(3957.000000, -2808.000000, 0.000000)
+	Vector(-3584.000000, 3776.000000, 0.000000),
+	Vector(-4736.000000, 1728.000000, 0.000000),
+	Vector(-4096.000000, -64.000000, 0.000000)
+	--Vector(3957.000000, -2808.000000, 0.000000)
 }
 
 local vNonStuck = Vector(-2610.000000, 538.000000, 0.000000);
 
 local chat = false;
 local height = -1;
-function GetDesire()
-	-- "morphling_replicate"
-	-- "morphling_morph_replicate"
 
-	-- local numPlayer =  GetTeamPlayers(GetTeam());
-	-- for i = 1, #numPlayer
-	-- do
-	-- 	local player = GetTeamMember(i);
-	-- 	if player ~= nil and not IsPlayerBot(player:GetPlayerID()) then
-	-- 		local ab = player:GetAbilityInSlot(0);
-	-- 		print(ab:GetName());
-	-- 		local m1 = player:GetAbilityByName('morphling_replicate');
-	-- 		local m2 = player:GetAbilityByName('morphling_morph_replicate');
-	-- 		if m1:IsHidden() == false then
-	-- 			print('morphling_replicate');
-	-- 		end	
-
-	-- 		if m2:IsHidden() == false then
-	-- 			print('morphling_morph_replicate');
-	-- 		end	
-	-- 			-- local mods = player:GetModifierList( );
-	-- 			-- for _,r in pairs(mods) do
-	-- 			-- 	if r ~= nil then
-	-- 			-- 		print(r);
-	-- 			-- 	end
-	-- 			-- end
-	-- 	end
-	-- end
-
-	-- if bot:GetPlayerID() == 2 then
-		-- print(bot:GetUnitName())
-		-- local at = GetAmountAlongLane(LANE_TOP, bot:GetLocation())
-		-- local am = GetAmountAlongLane(LANE_MID, bot:GetLocation())
-		-- local ab = GetAmountAlongLane(LANE_BOT, bot:GetLocation())
-		-- print("AT: "..tostring(at.amount).."|"..tostring(at.distance))
-		-- print("AM: "..tostring(am.amount).."|"..tostring(am.distance))
-		-- print("AB: "..tostring(ab.amount).."|"..tostring(ab.distance))
-	-- end
-	
-	--[[print(bot:GetUnitName())
-	print("tp:"..tostring(bot:FindItemSlot('item_tpscroll')))
-	for i=0, 23 do
-		local it = bot:GetItemInSlot(i)
-		if(it ~= nil) then
-			print("Slot "..tostring(i)..":"..it:GetName());
+function GetWardItemIndex()
+	for i = 0,8 do
+		local item = bot:GetItemInSlot(i);
+		if item ~= nil then
+			local itemName = item:GetName();
+			if itemName == 'item_ward_observer' or itemName == 'item_ward_dispenser' then
+				return item;
+			end
 		end
-	end]]--
+	end
+	return nil;
+end
 
-	-- local pg = wardUtils.GetHumanPing();
-	-- if pg ~= nil and pg.time > 0 and GameTime() - pg.time < 0.25 then
-		-- print(tostring(pg.location)..":Vis:"..tostring(IsLocationVisible(pg.location))..":Pas:"..tostring(IsLocationPassable(pg.location)).."HLvl:"..tostring(GetHeightLevel(pg.location)));
-	-- end
+function GetDesireNew()
+	--Should I think about warding at all?
+	if 
+		bot:IsHero() == false
+		or bot:IsAlive() == false
+		or bot:IsIllusion() == true
+		or bot:IsChanneling() == true
+		or bot:IsInvulnerable() == true
+		or bot:HasModifier('modifier_doom_bringer_doom') == true
+		or bot:HasModifier('modifier_teleporting') == true
+	then
+		return BOT_MODE_DESIRE_NONE;
+	end
 
-	--[[if bot.lastPlayerChat ~= nil and string.find(bot.lastPlayerChat.text, "ward") then
-		bot:ActionImmediate_Chat("Catch this in mode_ward_generic", false);
-		bot.lastPlayerChat = nil;
-	end]]--
-	
+	local wardItemIndex = GetWardItemIndex();
+	if wardItemIndex == nil then
+		return BOT_MODE_DESIRE_NONE;
+	end
+
+	local mode = bot:GetActiveMode();
+	if mode == BOT_MODE_EVASIVE_MANEUVERS then
+		return BOT_MODE_DESIRE_NONE;
+	end
+
+	--What's my best opportunity right now?
+	local maximumAcceptableDistance = 7500;
+	local castRange = 500 + mutil.CalcExtraCastRange(bot);
+	-- local safeRange = 1300;
+	-- local safeRangeSqr = safeRange * safeRange;
+	local significantRange = 1800;
+	local traceCoolDownPeriod = 40.0;
+	local expectedEnemySpeed = 380;
+	local desiredDistanceAdvance = 600;
+
+	local spots = wardUtils.GetAvailableSpot(bot);
+	local bestSpotIndex = nil;
+	local maxSpotDesire = BOT_ACTION_DESIRE_NONE;
+	local enemyPids = GetTeamPlayers(GetOpposingTeam());
+
+	for spotIndex, spot in pairs(spots) do
+		local fromMeToSpot = GetUnitToLocationDistance(bot, spot);
+		local initialDesire = RemapValClamped(
+			fromMeToSpot,
+			castRange,
+			maximumAcceptableDistance,
+			BOT_ACTION_DESIRE_VERYHIGH,
+			BOT_ACTION_DESIRE_NONE 
+		);
+
+		local desire = initialDesire;
+		
+		if desire > maxSpotDesire then
+			for i = 1, #enemyPids do
+				local table = GetHeroLastSeenInfo(enemyPids[i]);
+				local info = table[1];
+				local fromEnemyToSpot = utils.GetDistance(info.location, spot);
+				-- Consider worst case - enemy moving right towards spot
+				-- But once reached, started going somewhere else
+				fromEnemyToSpot = math.abs(fromEnemyToSpot - info.time_since_seen * expectedEnemySpeed);
+
+				local traceDistanceWeight = RemapValClamped(
+					fromEnemyToSpot,
+					0,   significantRange,
+					1.0, 0.0
+				);
+				local traceFreshnessWeight = RemapValClamped(
+					info.time_since_seen,
+					0,   traceCoolDownPeriod,
+					1.0, 0.0
+				);
+				local advance = fromMeToSpot - fromEnemyToSpot;
+				local advanceFactor = RemapValClamped(
+					advance,
+					0,   desiredDistanceAdvance,
+					1.0, 0.0
+				);
+				local traceWeight = traceDistanceWeight * traceFreshnessWeight * advanceFactor;
+				desire = desire - inititalDesire * traceWeight;
+				if desire <= 0 then break end
+			end
+
+			if desire > maxSpotDesire then
+				maxSpotDesire = desire;
+				bestSpotIndex = spotIndex;
+			end
+		end
+	end
+
+	if maxSpotDesire == BOT_ACTION_DESIRE_NONE then
+		return BOT_ACTION_DESIRE_NONE
+	end
+
+	--Is this opportunity the best right now?
+
+	--Possible implementation: (1 - retreat_desire) * maxSpotDesire
+	--But this requires calculation of other desires to be clear
+	if mode == BOT_MODE_RETREAT then
+		local desiredDistanceToEnemy = 3000;
+		
+		local enemyPresence = 0.0;
+		for _, pid in pairs(enemyPids) do
+			local table = GetHeroLastSeenInfo(enemyPids[i]);
+			local info = table[1];
+			local distance = GetUnitToLocationDistance(bot, info.location) - info.time_since_seen * expectedEnemySpeed;
+			local presence = RemapValClamped(
+				distance,
+				--150 - Melee attack range
+				150, desiredDistanceToEnemy,
+				1.0, 0
+			);
+			enemyPresence = enemyPresence + presence;
+			if(enemyPresence >= 1) then
+				enemyPresence = 1;
+				break;
+			end
+		end
+		local enemyPresenceFactor = 1 - enemyPresence;
+
+		local hpFactor = RemapValClamped(
+			bot:GetHealth()/bot:GetMaxHealth(),
+			0.0, 0.20,
+			0.0, 1.0
+		);
+
+		local distance = GetUnitToLocationDistance(bot, spots[bestSpotIndex]);
+		local regeneratedHp = bot:GetHealthRegen() * (distance / bot:GetCurrentMovementSpeed());
+		local regenFactor = RemapValClamped(
+			(bot:GetHealth() + regeneratedHp) / bot:GetMaxHealth(),
+			0.0, 0,50,
+			1.0, 1.25
+		);
+		hpFactor = math.min(1.0, hpFactor * regenFactor);
+		
+		local dotFactor;
+		if bot:WasRecentlyDamagedByAnyHero(3.1) then
+			--The less the presence, the more likely we are having a dot
+			--Don't have means to measure it yet, but DOT is generaly a very bad sign
+			dotFactor = 0.6 * enemyPresenceFactor;
+		else
+			dotFactor = 1.0;
+		end
+
+		local movementSpeedFactor = RemapValClamped(
+			bot:GetCurrentMovementSpeed() / expectedEnemySpeed,
+			0.0, 				 1.0,
+			enemyPresenceFactor, 1.0
+		);
+
+		maxSpotDesire = maxSpotDesire * enemyPresenceFactor * hpFactor * dotFactor * movementSpeedFactor;
+	elseif
+		bot:GetTarget() ~= nil
+		and (
+			mode == BOT_MODE_DEFEND_ALLY
+			or mode == BOT_MODE_DEFEND_TOWER_TOP
+			or mode == BOT_MODE_DEFEND_TOWER_MID
+			or mode == BOT_MODE_DEFEND_TOWER_BOT
+			or mode == BOT_MODE_ATTACK
+			or mode == BOT_MODE_PUSH_TOWER_TOP
+			or mode == BOT_MODE_PUSH_TOWER_MID
+			or mode == BOT_MODE_PUSH_TOWER_BOT
+		)
+	then
+		local maxArrivalTime = 40;
+		local target = bot:GetTarget();
+
+		local distance = GetUnitToUnitDistance(bot, target);
+		local distanceFactor = RemapValClamped(
+			distance,
+			400, maximumAcceptableDistance,
+			0.0, 1.0
+		);
+
+		local movementSpeedFactor = RemapValClamped(
+			distance / bot:GetCurrentMovementSpeed(),
+			0.0, maxArrivalTime,
+			0.0, 1.75
+		);
+		distanceFactor = math.min(distanceFactor * movementSpeedFactor, 1.0);
+
+		local targetHpFactor = RemapValClamped(
+			target:GetHealth() / target:GetMaxHealth(),
+			0.15, 0.6,
+			1.0,  0.0
+		);
+
+		if target:IsHero() == true then
+			local targetManaFactor = RemapValClamped(
+				target:GetMana() / target:GetMaxMana(),
+				0.0, 1.0,
+				1.0, 1.4
+			);
+			targetHpFactor = math.min(targetHpFactor * targetManaFactor, 1.0);
+		end
+
+		maxSpotDesire = maxSpotDesire * distanceFactor * targetHpFactor;
+	end
+
+	-- BOT_MODE_ROSHAN
+	-- Item cool down factor
+	return maxSpotDesire;
+end
+
+function GetDesire()
 
 	if bot:IsChanneling() or bot:IsIllusion() or bot:IsInvulnerable() or not bot:IsHero() or not IsSuitableToWard() 
 	   or bot:GetCurrentActionType() == BOT_ACTION_TYPE_IDLE 
@@ -146,6 +314,7 @@ function GetDesire()
 		targetLoc, targetDist = wardUtils.GetClosestSpot(bot, AvailableSpots);
 		if targetLoc ~= nil and DotaTime() > wardCastTime + 1.0 and IsEnemyCloserToWardLoc(targetLoc, targetDist) == false then
 			bot.ward = true;
+			modeEntryTime = DotaTime();
 			return RemapValClamped(targetDist, 6000, 0, BOT_MODE_DESIRE_MODERATE, BOT_MODE_DESIRE_VERYHIGH);
 		end
 	else
@@ -155,19 +324,32 @@ function GetDesire()
 end
 
 function OnStart()
-	if itemWard ~= nil then
-		local wardSlot = bot:FindItemSlot(itemWard:GetName());
-		if bot:GetItemSlotType(wardSlot) == ITEM_SLOT_TYPE_BACKPACK then
-			local leastCostItem = FindLeastItemSlot();
-			if leastCostItem ~= -1 then
-				swapTime = DotaTime();
-				bot:ActionImmediate_SwapItems( wardSlot, leastCostItem );
-				return
-			end
-			local active = bot:GetItemInSlot(leastCostItem);
-			print(tostring(active:IsFullyCastable()));
+	local wardSlot = -1;
+	for i = 0,8 do
+		local item = bot:GetItemInSlot(i);
+		if item ~= nil and item:GetName() == 'item_ward_observer' then
+			wardSlot = i;
+			break;
 		end
 	end
+
+	--bot:ActionImmediate_Chat('slot: ' .. wardSlot,false);
+
+	if wardSlot >= 0 then
+		-- bot:ActionImmediate_Chat('item ward name: ' .. itemWard:GetName(),false);
+		-- bot:ActionImmediate_Chat('slot: ' .. wardSlot,false);
+		if bot:GetItemSlotType(wardSlot) == ITEM_SLOT_TYPE_BACKPACK then
+			-- bot:ActionImmediate_Chat('wards are in the backpack',false);
+			local leastCostItem = FindLeastItemSlot();
+			swapTime = DotaTime();
+			bot:ActionImmediate_SwapItems(wardSlot, leastCostItem);
+			return
+			-- local active = bot:GetItemInSlot(leastCostItem);
+			-- print(tostring(active:IsFullyCastable()));
+		end
+	end
+
+	bot:ActionImmediate_Chat('enter',false);
 end
 
 function OnEnd()
@@ -183,6 +365,8 @@ function OnEnd()
 			return
 		end
 	end
+
+	bot:ActionImmediate_Chat("exit",false);
 end
 
 function Think()
@@ -192,12 +376,14 @@ function Think()
 	end
 	
 	if wt ~= nil then
+		print("placing");
 		bot:Action_UseAbilityOnEntity(itemWard, wt);
 		return
 	end
 	
 	if bot.ward then
 		if targetDist <= nWardCastRange then
+			OnStart();
 			if  DotaTime() > swapTime + 7.0 then
 				bot:Action_UseAbilityOnLocation(itemWard, targetLoc);
 				wardCastTime = DotaTime();	
@@ -303,12 +489,21 @@ function FindLeastItemSlot()
 	local minCost = 100000;
 	local idx = -1;
 	for i=0,5 do
-		if  bot:GetItemInSlot(i) ~= nil and bot:GetItemInSlot(i):GetName() ~= "item_aegis"  then
-			local _item = bot:GetItemInSlot(i):GetName()
-			if( GetItemCost(_item) < minCost ) then
-				minCost = GetItemCost(_item);
-				idx = i;
+		if bot:GetItemInSlot(i) ~= nil then
+			local itemName = bot:GetItemInSlot(i):GetName();
+			if 
+				itemName ~= "item_aegis"
+				and itemName ~= "item_ward_observer"
+				and itemName ~= "item_ward_dispenser"
+			then
+				local cost = GetItemCost(itemName);
+				if( cost < minCost ) then
+					minCost = cost;
+					idx = i;
+				end
 			end
+		else
+			return i;
 		end
 	end
 	return idx;
@@ -369,13 +564,17 @@ function IsIBecameTheTarget(units)
 end
 
 function IsSafelaneCarry()
-	return role.CanBeSafeLaneCarry(bot:GetUnitName()) and ( (GetTeam()==TEAM_DIRE and bot:GetAssignedLane()==LANE_TOP) or (GetTeam()==TEAM_RADIANT and bot:GetAssignedLane()==LANE_BOT)  )	
+	return 
+		role.CanBeSafeLaneCarry(bot:GetUnitName()) and 
+		(
+			(GetTeam()==TEAM_DIRE and bot:GetAssignedLane()==LANE_TOP) 
+			or
+			(GetTeam()==TEAM_RADIANT and bot:GetAssignedLane()==LANE_BOT)  
+		)	
 end
 
 function IsEnemyCloserToWardLoc(wardLoc, botDist)
-	if enemyPids == nil then
-		enemyPids = GetTeamPlayers(GetOpposingTeam())
-	end	
+	local enemyPids = GetTeamPlayers(GetOpposingTeam());
 	for i = 1, #enemyPids do
 		local info = GetHeroLastSeenInfo(enemyPids[i])
 		if info ~= nil then

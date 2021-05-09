@@ -50,6 +50,7 @@ randBoot = KUtil.getBoot(boot)
 
 item = {
 	"item_aeon_disk",
+	"item_bloodstone",
 	"item_glimmer_cape",
 	"item_hurricane_pike",
 	"item_lotus_orb",
@@ -58,6 +59,7 @@ item = {
 	"item_solar_crest",
 	"item_spirit_vessel",
 	"item_vladmir",
+	"item_wind_waker",
 }
 
 randItem = KUtil.getItem(item, 5, 0, 1, 0, 1, 1)

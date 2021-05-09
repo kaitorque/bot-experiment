@@ -1,6 +1,7 @@
 local mutil = require(GetScriptDirectory() ..  "/MyUtility");
 local utils = require(GetScriptDirectory() ..  "/util");
 local role = require(GetScriptDirectory() .. "/RoleUtility");
+local sim = require(GetScriptDirectory() .. "/simonaUtil");
 
 ItemUsageModule = {}
 
@@ -45,11 +46,13 @@ function ItemUsageModule.IsHPHealing(bot)
 		or bot:HasModifier("modifier_item_urn_heal")
 		or bot:HasModifier("modifier_item_spirit_vessel_heal")
 		or bot:HasModifier("modifier_bottle_regeneration")
+		or bot:HasModifier("modifier_rune_regen")
 end
 
 function ItemUsageModule.IsManaHealing(bot)
 	return bot:HasModifier('modifier_clarity_potion') 
 		or bot:HasModifier('modifier_fountain_aura') 
+		or bot:HasModifier("modifier_rune_regen")
 end
 
 function ItemUsageModule.IsForceStafed(target)
@@ -122,6 +125,13 @@ function ItemUsageModule.GetNonDisabledStrongestEnemy(bot, nCastRange)
 end
 
 local enemyPids = nil;
+function getEnemyPids()
+	if enemyPids == nil then
+		enemyPids = GetTeamPlayers(GetOpposingTeam());
+	end	
+	return enemyPids;
+end
+
 local tpThreshold = 4500;
 
 function ItemUsageModule.GetDefendTPLocation(nLane)
@@ -133,9 +143,7 @@ function ItemUsageModule.GetPushTPLocation(nLane)
 end
 
 function ItemUsageModule.CanJuke(bot)
-	if enemyPids == nil then
-		enemyPids = GetTeamPlayers(GetOpposingTeam())
-	end	
+	getEnemyPids();
 	local heroHG = GetHeightLevel(bot:GetLocation())
 	for i = 1, #enemyPids do
 		local info = GetHeroLastSeenInfo(enemyPids[i])
@@ -164,9 +172,7 @@ function ItemUsageModule.GetLaningTPLocation(nLane)
 end	
 
 function ItemUsageModule.GetNumHeroWithinRange(bot, nRange)
-	if enemyPids == nil then
-		enemyPids = GetTeamPlayers(GetOpposingTeam())
-	end	
+	getEnemyPids();
 	local cHeroes = 0;
 	for i = 1, #enemyPids do
 		local info = GetHeroLastSeenInfo(enemyPids[i])
@@ -366,7 +372,6 @@ function ItemUsageModule.IsClosestToDustLocation(bot, loc)
 end
 
 -------ITEM USAGE---------
-local enemyPids = nil;
 local castDustTime = -90;
 --item_dust
 ItemUsageModule.Use['item_dust'] = function(item, bot, mode, extra_range)
@@ -375,15 +380,15 @@ ItemUsageModule.Use['item_dust'] = function(item, bot, mode, extra_range)
 	
 	local nRadius = 1050;
 	
-	if enemyPids == nil then
-		enemyPids = GetTeamPlayers(GetOpposingTeam())
-	end	
+	getEnemyPids();
+
+	--Just lost unit sight
 	for i = 1, #enemyPids do
 		local info = GetHeroLastSeenInfo(enemyPids[i])
 		if IsHeroAlive(enemyPids[i]) == true and info ~= nil then
 			local dInfo = info[1]; 
 			if dInfo ~= nil 
-				and dInfo.time_since_seen > 0.20 
+				and dInfo.time_since_seen > 0.10 
 				and dInfo.time_since_seen < 0.50 
 				and GetUnitToLocationDistance(bot, dInfo.location) + 150 <  nRadius 
 				and ItemUsageModule.IsClosestToDustLocation(bot, dInfo.location)
@@ -393,7 +398,7 @@ ItemUsageModule.Use['item_dust'] = function(item, bot, mode, extra_range)
 					front_loc = ItemUsageModule.GetXUnitsTowardsLocation( dInfo.location, RadiantFountain, 200)
 				end
 				if IsLocationVisible(front_loc) == true and IsLocationPassable(front_loc) == true then
-					-- print('sec 1')
+					bot:ActionImmediate_Chat('Dust: lost sight', true);
 					castDustTime = DotaTime();
 					return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
 				end
@@ -401,31 +406,48 @@ ItemUsageModule.Use['item_dust'] = function(item, bot, mode, extra_range)
 		end	
 	end
 	
+	--Noone can be seen
 	local enemies = bot:GetNearbyHeroes(1000, true, BOT_MODE_NONE)
 	if #enemies == 0 then
-		if bot:HasModifier('modifier_item_radiance_debuff') 
-			or bot:HasModifier('modifier_sandking_sand_storm_slow') 
-			or bot:HasModifier('modifier_sandking_sand_storm_slow_aura_thinker') 
-		then
-			-- print('sec 2')
+		--But someone is definitely here
+		if sim.IsAffectedByInviser(bot) == true then
+			bot:ActionImmediate_Chat('Dust: suspicious conditions', true);
 			castDustTime = DotaTime();
 			return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
 		end
+
+		-- local visible_enemy_heroes = GetUnitList(UNIT_LIST_ENEMY_HEROES);
+		-- local enemyPids = GetTeamPlayers(GetOpposingTeam());
+		-- for i = 1, #enemyPids do
+		-- 	if IsHeroAlive(enemyPids[i]) == true
+		-- 		and npcBot:WasRecentlyDamagedByPlayer(enemyPids[i], 0.2) == true
+		-- 	then
+		-- 		local owned_hero = -1;
+		-- 		for h = 1, #visible_enemy_heroes do
+		-- 			if visible_enemy_heroes[h]:GetPlayerID() == enemyPids[i] then owned_hero = h; end
+		-- 		end
+		-- 		if owned_hero == -1 then
+		-- 			print('wtf');
+		-- 		end
+		-- 	end
+		-- end
+		
+		-- But receiving damage from someone, who's probably nearby
+		-- The proper condition shall be: receiving more damage, then all debuffs together can deal
 		for i = 1, #enemyPids do
-			if IsHeroAlive(enemyPids[i]) == true 
-				and bot:WasRecentlyDamagedByPlayer(enemyPids[i], 0.5) == true  
+			if IsHeroAlive(enemyPids[i]) == true
+				and bot:WasRecentlyDamagedByPlayer(enemyPids[i], 0.2) == true
+				--Don't panic in case of short sight loss
+				-- and GetHeroLastSeenInfo(enemyPids[i])[1].time_since_seen > 3
+				and sim.CanDamageFromInvisWithoutRevealing(enemyPids[i]) == true
 			then
-				-- print('sec 3')
-				local info = GetHeroLastSeenInfo(enemyPids[i])	
-				local dInfo = info[1]; 
-				if dInfo ~= nil and GetUnitToLocationDistance(bot, dInfo.location) < nRadius 
-				then
-					castDustTime = DotaTime();
-					return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
-				end
+				castDustTime = DotaTime();
+				bot:ActionImmediate_Chat('Dust: taking damage from unknown source', true);
+				return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
 			end
 		end
 	else
+		-- Someone can be seen, and can try go invis
 		for i=1, #enemies do
 			if mutil.IsValidTarget(enemies[i])
 				and ItemUsageModule.HasInvisCounterBuff(enemies[i]) == false
@@ -434,7 +456,7 @@ ItemUsageModule.Use['item_dust'] = function(item, bot, mode, extra_range)
 			then
 				local towers = enemies[i]:GetNearbyTowers(750, true);
 				if towers == nil or #towers == 0 then
-					-- print('sec 4')
+					bot:ActionImmediate_Chat('Dust: preventing going invisible', true);
 					castDustTime = DotaTime();
 					return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
 				end
@@ -461,24 +483,36 @@ ItemUsageModule.Use['item_tpscroll'] = function(item, bot, mode, extra_range)
 end
 
 --item_tango
+--Only share logic here, check ['item_tango_single'] for usage logic
 ItemUsageModule.Use['item_tango'] = function(item, bot, mode, extra_range)
 	
+	local health_regen = 7.0;
+	local duration = 16;
+	local total_heal = health_regen * duration;
+
 	local tCharge = item:GetCurrentCharges()
-	if DotaTime() > -80 and DotaTime() < 0 and bot:DistanceFromFountain() == 0 and role.CanBeSupport(bot:GetUnitName())
-	   and bot:GetAssignedLane() ~= LANE_MID and tCharge > 2 and DotaTime() > giveTime + 2.0 then
-		local target = ItemUsageModule.GiveToMidLaner(bot)
-		if target ~= nil then
-			giveTime = DotaTime();
-			return BOT_ACTION_DESIRE_ABSOLUTE, target, 'unit';
-		end
-	elseif bot:GetActiveMode() == BOT_MODE_LANING and role.CanBeSupport(bot:GetUnitName()) and tCharge > 1 and DotaTime() > giveTime + 2.0 then
+	--No more valid since shared tangos disappears in 70 seconds
+	--
+	-- if DotaTime() > -80 and DotaTime() < 0 and bot:DistanceFromFountain() == 0 and role.CanBeSupport(bot:GetUnitName())
+	--    and bot:GetAssignedLane() ~= LANE_MID and tCharge > 2 and DotaTime() > giveTime + 2.0 then
+	-- 	local target = ItemUsageModule.GiveToMidLaner(bot)
+	-- 	if target ~= nil then
+	-- 		giveTime = DotaTime();
+	-- 		return BOT_ACTION_DESIRE_ABSOLUTE, target, 'unit';
+	-- 	end
+	if bot:GetActiveMode() == BOT_MODE_LANING and role.CanBeSupport(bot:GetUnitName()) and tCharge > 1 and DotaTime() > giveTime + 2.0 then
 		local allies = bot:GetNearbyHeroes(600, false, BOT_MODE_NONE)
 		for _,ally in pairs(allies)
 		do
 			local tangoSlot = ally:FindItemSlot('item_tango');
 			local single_tangoSlot = ally:FindItemSlot('item_tango_single');
-			if ally:GetUnitName() ~= bot:GetUnitName() and not ally:IsIllusion() 
-			   and tangoSlot == -1 and single_tangoSlot == -1
+			local ally_will_should_be_healed = ally:GetMaxHealth() - (ally:GetHealth() + ally:GetHealthRegen() * duration);
+			if 
+				ally:GetUnitName() ~= bot:GetUnitName() 
+				and not ally:IsIllusion() 
+			   	and tangoSlot == -1
+				and single_tangoSlot == -1
+				and ally_will_should_be_healed > total_heal * 1.5
 			then
 				giveTime = DotaTime();
 				return BOT_ACTION_DESIRE_ABSOLUTE, ally, 'unit';
@@ -492,49 +526,152 @@ end
 --item_tango_single
 ItemUsageModule.Use['item_tango_single'] = function(item, bot, mode, extra_range)
 
-	if bot:DistanceFromFountain() < 2500 or ItemUsageModule.IsHPHealing(bot) == true then return BOT_ACTION_DESIRE_NONE end
+	-- if bot:DistanceFromFountain() < 2500 or ItemUsageModule.IsHPHealing(bot) == true then return BOT_ACTION_DESIRE_NONE end
+	if 
+		bot:DistanceFromFountain() < 2500
+		or bot:HasModifier('modifier_tango_heal')
+	then return BOT_ACTION_DESIRE_NONE end
 	
-	local health_regen = 7.0;
-	local duration = 16;
-	local total_heal = ( bot:GetHealthRegen() + health_regen ) * duration;
-	
-	if bot:GetHealth() + total_heal <= bot:GetMaxHealth() then
-		local trees = bot:GetNearbyTrees(600);
-		local enemies = bot:GetNearbyHeroes(1300, true, BOT_MODE_NONE);
-		local closest_enemy = enemies[1];
-		local towers = bot:GetNearbyTowers(1300, true);
-		local closest_tower = towers[1];
+	local cast_range = 165;
+	local tower_attack_range = 700;
+	local tower_attack_range_sqr = tower_attack_range*tower_attack_range;
+	-- local health_regen = 7.0;
+	-- local duration = 16;
+	-- local tango_heal = health_regen * duration;
+	-- local basic_heal = bot:GetHealthRegen() * duration;
+	-- local total_heal = bot:GetHealthRegen() * duration + tango_heal;
+
+	local desire = RemapValClamped(
+		bot:GetHealth()/bot:GetMaxHealth(),
+		0.15,
+		0.75,
+		BOT_ACTION_DESIRE_VERYHIGH,
+		BOT_ACTION_DESIRE_NONE
+	);
+
+	if desire == BOT_ACTION_DESIRE_NONE then return BOT_ACTION_DESIRE_NONE end
+
+	local trees;
+	local enemies = bot:GetNearbyHeroes(1300, true, BOT_MODE_NONE);
+	local towers = bot:GetNearbyTowers(1300, true);
+
+	function IsLocationReachableByTowers(location)
+		
+		if #towers == 0 then return false end
+
+		for i=1, #towers do
+			if GetUnitToLocationDistanceSqr(towers[i], location) <= tower_attack_range_sqr then
+				return true;
+			end
+		end
+		return false;
+	end
+
+	function IsLocationReachableByEnemies(location)
+
+		if #enemies == 0 then return false end
+
+		for i=1, #enemies do
+			local attack_range = enemies[i]:GetAttackRange() * 1.75;
+			local attack_range_sqr = attack_range * attack_range;
+			if GetUnitToLocationDistanceSqr(enemies[i], location) <= attack_range_sqr then
+				return true;
+			end
+		end
+		return false;
+	end
+
+	if #enemies > 0 then
+		-- Danger, but some tree is vvvery close
+		trees = bot:GetNearbyTrees(cast_range + extra_range + bot:GetCurrentMovementSpeed()*0.25);
+		if #trees > 0 then
+			for i=1, #trees do
+				local tree_location = GetTreeLocation(trees[i]);
+				if 
+					IsLocationVisible(tree_location) == true
+					and IsLocationPassable(tree_location) == true
+					and IsLocationReachableByTowers(tree_location) == false
+				then
+					return desire, trees[i], 'tree';
+				end
+			end
+		end
+
+		--Danger, no trees nearby - select the closest safe tree
+		trees = bot:GetNearbyTrees(600 + cast_range + extra_range);
+		local farest_tree_index = -1;
+		local farest_tree_distance = 0;
 		for i=1, #trees do
-			local tree_loc = GetTreeLocation(trees[i]);
-			if IsLocationVisible(tree_loc)
-				and IsLocationPassable(tree_loc)
-				and ( #enemies == 0 or GetUnitToLocationDistance(bot, tree_loc) * 1.5 <  GetUnitToUnitDistance(bot, closest_enemy) )
-				and ( #towers == 0 or GetUnitToLocationDistance(closest_tower, tree_loc) > 750 )
+			local tree_location = GetTreeLocation(trees[i]);
+			if 
+				IsLocationVisible(tree_location) == true
+				and IsLocationPassable(tree_location) == true
+				and IsLocationReachableByTowers(tree_location) == false
+				and IsLocationReachableByEnemies(tree_location) == false
 			then
-				return BOT_ACTION_DESIRE_ABSOLUTE, trees[i], 'tree';
-			end	
+				return desire, trees[i], 'tree';
+			end
+		end
+	else
+		--No danger, get the closest tree
+		trees = bot:GetNearbyTrees(600 + cast_range + extra_range);
+		for i=1, #trees do
+			local tree_location = GetTreeLocation(trees[i]);
+			if
+				IsLocationVisible(tree_location) == true
+				and IsLocationPassable(tree_location) == true
+				and IsLocationReachableByTowers(tree_location) == false
+			then
+				return desire, trees[i], 'tree';
+			end
 		end
 	end
-	
+
 	return BOT_ACTION_DESIRE_NONE;
 end
 
 --item_flask
 ItemUsageModule.Use['item_flask'] = function(item, bot, mode, extra_range)
 
-	if ItemUsageModule.IsHPHealing(bot) == true then return BOT_ACTION_DESIRE_NONE end
+	if bot:DistanceFromFountain() < 2500 then return BOT_ACTION_DESIRE_NONE end
 
-	local health_regen = 50;
-	local duration = 8;
-	local total_heal = ( bot:GetHealthRegen() + health_regen ) * duration;
-	
-	if bot:GetHealth() + total_heal <= bot:GetMaxHealth() 
-	and bot:WasRecentlyDamagedByAnyHero(3.1) == false 
-	then
-		local enemies = bot:GetNearbyHeroes(800, true, BOT_MODE_NONE);
-		if #enemies == 0 then
-			return BOT_ACTION_DESIRE_ABSOLUTE, bot, 'unit';
+	local allies = bot:GetNearbyHeroes(600, false, BOT_MODE_NONE);
+	local most_damaged_ally = nil;
+	local max_desire = 0;
+	for _,ally in pairs(allies) do
+		if ally:IsIllusion() == false then
+			local hp = ally:GetHealth()/ally:GetMaxHealth();
+			local desire = RemapValClamped(
+				hp,
+				0.15,
+				0.75,
+				BOT_ACTION_DESIRE_VERYHIGH,
+				BOT_ACTION_DESIRE_NONE
+			);
+
+			local should_be_healed;
+			if hp <= 0.5 then
+				local enemies = ally:GetNearbyHeroes(1200,true,BOT_MODE_NONE);
+				should_be_healed = #enemies == 0;
+			elseif hp <= 0.3 then
+				should_be_healed = true;
+			end
+
+			if 
+				ally:HasModifier('modifier_flask_healing') == false
+				and should_be_healed == true
+				and desire > max_desire
+				--Detect damage over time
+				and ally:WasRecentlyDamagedByAnyHero(3.1) == false
+			then
+				most_damaged_ally = ally;
+				max_desire = desire;
+			end
 		end
+	end
+
+	if most_damaged_ally ~= nil then
+		return max_desire, most_damaged_ally, 'unit';
 	end
 	
 	return BOT_ACTION_DESIRE_NONE;
@@ -543,19 +680,56 @@ end
 --item_clarity
 ItemUsageModule.Use['item_clarity'] = function(item, bot, mode, extra_range)
 
-	if ItemUsageModule.IsManaHealing(bot) == true then return BOT_ACTION_DESIRE_NONE end
+	-- if ItemUsageModule.IsManaHealing(bot) == true then return BOT_ACTION_DESIRE_NONE end
 
-	local mana_regen = 6;
-	local duration = 30;
-	local total_mana = ( bot:GetManaRegen() + mana_regen ) * duration;
+	-- local mana_regen = 6;
+	-- local duration = 30;
+	-- local total_mana = ( bot:GetManaRegen() + mana_regen ) * duration;
 	
-	if bot:GetMana() + total_mana <= bot:GetMaxMana() 
-	and bot:WasRecentlyDamagedByAnyHero(3.1) == false 
-	then
-		local enemies = bot:GetNearbyHeroes(800, true, BOT_MODE_NONE);
-		if #enemies == 0 then
-			return BOT_ACTION_DESIRE_ABSOLUTE, bot, 'unit';
+	-- if bot:GetMana() + total_mana <= bot:GetMaxMana() 
+	-- and bot:WasRecentlyDamagedByAnyHero(3.1) == false 
+	-- then
+	-- 	local enemies = bot:GetNearbyHeroes(800, true, BOT_MODE_NONE);
+	-- 	if #enemies == 0 then
+	-- 		return BOT_ACTION_DESIRE_ABSOLUTE, bot, 'unit';
+	-- 	end
+	-- end
+
+	if bot:DistanceFromFountain() < 2500 then return BOT_ACTION_DESIRE_NONE end
+
+	local allies = bot:GetNearbyHeroes(600, false, BOT_MODE_NONE);
+	local most_starving_ally = nil;
+	local max_desire = 0;
+	for _,ally in pairs(allies) do
+		local enemies = ally:GetNearbyHeroes(800,true,BOT_MODE_NONE);
+		local mana = ally:GetMana();
+		local mana_level = mana/ally:GetMaxMana();
+		local desire;
+		if mana <= 150 then
+			desire = BOT_ACTION_DESIRE_VERYHIGH;
+		else
+			desire = RemapValClamped(
+				mana,
+				0.0,
+				0.70,
+				BOT_ACTION_DESIRE_VERYHIGH,
+				BOT_ACTION_DESIRE_NONE
+			);
 		end
+		if 
+			ItemUsageModule.IsManaHealing(ally) == false
+			and #enemies == 0
+			and desire > max_desire
+			--Detect damage over time
+			and ally:WasRecentlyDamagedByAnyHero(3.1) == false 
+		then
+			most_starving_ally = ally;
+			max_desire = desire;
+		end
+	end
+
+	if most_starving_ally ~= nil then
+		return max_desire, most_starving_ally, 'unit';
 	end
 	
 	return BOT_ACTION_DESIRE_NONE;
@@ -564,9 +738,9 @@ end
 --item_faerie_fire
 ItemUsageModule.Use['item_faerie_fire'] = function(item, bot, mode, extra_range)
 	
-	if ( mutil.IsRetreating(bot) and
+	if 
+		( mutil.IsRetreating(bot) and
 		( bot:GetHealth() / bot:GetMaxHealth() ) < 0.15 ) 
-		or DotaTime() > 10*60
 	then
 		return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
 	end
@@ -581,12 +755,38 @@ end
 --item_enchanted_mango
 ItemUsageModule.Use['item_enchanted_mango'] = function(item, bot, mode, extra_range)
 	
-	if bot:GetMana() < 0.10*bot:GetMaxMana() 
-		and mode == BOT_MODE_ATTACK 
-	then
-		return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
-	end
+	-- if 
+	-- 	bot:GetMana() < 150 
+	-- 	and mode == BOT_MODE_ATTACK 
+	-- 	or mode == BOT_MODE_DEFEND_ALLY
+	-- then
+	-- 	return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
+	-- end
 	
+	local most_starving_ally = nil;
+	
+	local allies = bot:GetNearbyHeroes(600, false, BOT_MODE_ATTACK);
+	for _,ally in pairs(allies) do
+		if 
+			ally:GetMana() < 150
+		then
+			most_starving_ally = ally;
+		end
+	end
+
+	local allies = bot:GetNearbyHeroes(600, false, BOT_MODE_DEFEND_ALLY);
+	for _,ally in pairs(allies) do
+		if 
+			ally:GetMana() < 150
+		then
+			most_starving_ally = ally;
+		end
+	end
+
+	if most_starving_ally ~= nil then
+		return BOT_ACTION_DESIRE_HIGH, most_starving_ally, 'unit';
+	end
+
 	return BOT_ACTION_DESIRE_NONE;
 end
 
@@ -785,7 +985,12 @@ ItemUsageModule.Use['item_shadow_amulet'] = function(item, bot, mode, extra_rang
 			   and allies[i]:HasModifier('modifier_item_glimmer_cape') == false
 			   and allies[i]:HasModifier('modifier_item_shadow_amulet_fade') == false
 			   and ItemUsageModule.HasInvisCounterBuff(allies[i]) == false
-			   and ( allies[i]:IsStunned() == true or allies[i]:IsSilenced() == true or allies[i]:IsNightmared() == true )
+			   and ( 
+					allies[i]:IsStunned() == true
+				    or allies[i]:IsSilenced() == true
+					or allies[i]:IsNightmared() == true 
+					or allies[i]:IsChanneling() == true
+				)
 			then
 				return BOT_ACTION_DESIRE_ABSOLUTE, allies[i], 'unit';
 			end
@@ -986,12 +1191,24 @@ end
 
 --item_helm_of_the_dominator
 ItemUsageModule.Use['item_helm_of_the_dominator'] = function(item, bot, mode, extra_range)
-	local nCastRange = 700 + extra_range;
-	local neutrals = bot:GetNearbyNeutralCreeps(nCastRange);
+	-- local nCastRange = 700 + extra_range;
+	local neutrals = bot:GetNearbyNeutralCreeps(1599);
 	for _,u in pairs(neutrals) do
 		if mutil.CanBeDominatedCreeps(u:GetUnitName()) 
 		then
-			return BOT_ACTION_DESIRE_ABSOLUTE, u, 'unit';
+			return BOT_ACTION_DESIRE_MODERATE, u, 'unit';
+		end
+	end	
+	return BOT_ACTION_DESIRE_NONE;
+end
+
+--item_helm_of_the_overlord
+ItemUsageModule.Use['item_helm_of_the_overlord'] = function(item, bot, mode, extra_range)
+	local neutrals = bot:GetNearbyNeutralCreeps(1599);
+	for _,u in pairs(neutrals) do
+		if mutil.CanBeDominatedCreeps(u:GetUnitName()) or mutil.CanBeDominatedAncientCreeps(u:GetUnitName())
+		then
+			return BOT_ACTION_DESIRE_MODERATE, u, 'unit';
 		end
 	end	
 	return BOT_ACTION_DESIRE_NONE;
@@ -2091,7 +2308,22 @@ ItemUsageModule.Use['item_invis_sword'] = function(item, bot, mode, extra_range)
 		if #enemies > 0 then
 			return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
 		end
+	elseif
+		mutil.IsGoingOnSomeone(bot) == true
+		and bot:GetTarget() ~= nil
+		and bot:GetTarget():IsAlive() == true
+	then
+		local info_table = GetHeroLastSeenInfo(bot:GetTarget():GetPlayerID());
+		local info = info_table[0];
+		local distance = GetUnitToLocationDistance(bot, info.location);
+		local distance_sqr = distance * distance;
+		local threshlod_min = 300 * 300;
+		local threshlod_max = 2000 * 2000;
+		if distance_sqr < threshlod and distance_sqr > threshlod_min then
+			return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
+		end
 	end
+
 	return BOT_ACTION_DESIRE_NONE;
 end
 
@@ -2293,7 +2525,7 @@ ItemUsageModule.Use['item_trusty_shovel'] = function(item, bot, mode, extra_rang
 	local nCastRange = 250;
 	local enemies = bot:GetNearbyHeroes(1600, true, BOT_MODE_NONE);
 	if #enemies == 0 then
-		return BOT_ACTION_DESIRE_ABSOLUTE, bot:GetLocation() + RandomVector(nCastRange), 'point';
+		return BOT_ACTION_DESIRE_HIGH, bot:GetLocation() + RandomVector(nCastRange), 'point';
 	end
 	return BOT_ACTION_DESIRE_NONE;
 end
@@ -2583,6 +2815,7 @@ ItemUsageModule.Use['item_refresher_shard'] = function(item, bot, mode, extra_ra
 	end
 	return BOT_ACTION_DESIRE_NONE;
 end
+
 --item_cheese
 ItemUsageModule.Use['item_cheese'] = function(item, bot, mode, extra_range)
 	local maxHP = 2500;
@@ -2622,26 +2855,26 @@ end
 ItemUsageModule.Use['item_eternal_shroud'] = function(item, bot, mode, extra_range)
 	return ItemUsageModule.Use['item_hood_of_defiance'](item, bot, mode, extra_range);
 end
---item_helm_of_the_dominator_2
-ItemUsageModule.Use['item_helm_of_the_dominator_2'] = function(item, bot, mode, extra_range)
-	return ItemUsageModule.Use['item_helm_of_the_dominator'](item, bot, mode, extra_range);
-end
 --item_overwhelming_blink
 ItemUsageModule.Use['item_overwhelming_blink'] = function(item, bot, mode, extra_range)
 	return ItemUsageModule.Use['item_blink'](item, bot, mode, extra_range);
 end
+
 --item_swift_blink
 ItemUsageModule.Use['item_swift_blink'] = function(item, bot, mode, extra_range)
 	return ItemUsageModule.Use['item_blink'](item, bot, mode, extra_range);
 end
+
 --item_arcane_blink
 ItemUsageModule.Use['item_arcane_blink'] = function(item, bot, mode, extra_range)
 	return ItemUsageModule.Use['item_blink'](item, bot, mode, extra_range);
 end
+
 --item_wind_waker
 ItemUsageModule.Use['item_wind_waker'] = function(item, bot, mode, extra_range)
 	return ItemUsageModule.Use['item_cyclone'](item, bot, mode, extra_range);
 end
+
 --item_bullwhip
 ItemUsageModule.Use['item_bullwhip'] = function(item, bot, mode, extra_range)
 	local nCastRange = 850 + extra_range;
@@ -2700,6 +2933,7 @@ ItemUsageModule.Use['item_psychic_headband'] = function(item, bot, mode, extra_r
 
 	return BOT_ACTION_DESIRE_NONE;
 end
+
 --item_stormcrafter
 ItemUsageModule.Use['item_stormcrafter'] = function(item, bot, mode, extra_range)
 	
@@ -2713,19 +2947,12 @@ ItemUsageModule.Use['item_stormcrafter'] = function(item, bot, mode, extra_range
 	
 	return BOT_ACTION_DESIRE_NONE;
 end
+
 --item_trickster_cloak
 ItemUsageModule.Use['item_trickster_cloak'] = function(item, bot, mode, extra_range)
-	
-	if mutil.IsRetreating(bot) == true
-		and ( bot:WasRecentlyDamagedByAnyHero(3.0) == true or bot:WasRecentlyDamagedByTower(3.0) == true )
-	then
-		local enemies = bot:GetNearbyHeroes(1300, true, BOT_MODE_NONE);
-		if #enemies > 0 then
-			return BOT_ACTION_DESIRE_ABSOLUTE, nil, 'no_target';
-		end
-	end
-	return BOT_ACTION_DESIRE_NONE;
+	return ItemUsageModule.Use['item_invis_sword'](item, bot, mode, extra_range);
 end
+
 --item_book_of_shadows
 ItemUsageModule.Use['item_book_of_shadows'] = function(item, bot, mode, extra_range)
 	local nCastRange = 700 + extra_range

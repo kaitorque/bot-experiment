@@ -33,8 +33,9 @@ boot = {
 }
 
 transItem = {
-	"item_invis_sword",
 	"item_dragon_lance",
+	"item_invis_sword",
+	"item_maelstrom",
 	"item_yasha",
 }
 

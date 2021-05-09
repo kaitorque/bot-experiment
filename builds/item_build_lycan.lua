@@ -49,7 +49,7 @@ item = {
 	"item_desolator",
 	"item_heart",
 	"item_heavens_halberd",
-	"item_helm_of_the_dominator_2",
+	"item_helm_of_the_overlord",
 	"item_nullifier",
 	"item_sange_and_yasha",
 	"item_sheepstick",
