@@ -11,7 +11,7 @@ ItemModule['neutralItem'] = {
 	-- ['item_mango_tree'] = 1,
 	['item_ocean_heart'] = 1,
 	-- ['item_poor_mans_shield'] = 1,
-	['item_royal_jelly'] = 1,
+	-- ['item_royal_jelly'] = 1,
 	['item_trusty_shovel'] = 1,
 	['item_ironwood_tree'] = 1,
 	['item_mysterious_hat'] = 1,
@@ -295,7 +295,7 @@ ItemModule["item_cyclone"] = { "item_wind_lace"; "item_void_stone"; "item_staff_
 
 ItemModule["item_skadi"] = { "item_point_booster"; "item_ultimate_orb"; "item_ultimate_orb" }
 
-ItemModule["item_force_staff"] = { "item_staff_of_wizardry"; "item_ring_of_regen"; "item_recipe_force_staff" }
+ItemModule["item_force_staff"] = { "item_staff_of_wizardry"; "item_fluffy_hat"; "item_recipe_force_staff" }
 
 ItemModule["item_glimmer_cape"] = { "item_cloak"; "item_shadow_amulet"; "item_recipe_glimmer_cape" }
 
@@ -397,7 +397,7 @@ ItemModule["item_silver_edge"] = { "item_invis_sword"; "item_oblivion_staff"; "i
 
 ItemModule["item_basher"] = { "item_mithril_hammer"; "item_belt_of_strength"; "item_recipe_basher" }
 
-ItemModule["item_solar_crest"] = { "item_medallion_of_courage"; "item_wind_lace"; "item_ultimate_orb"; "item_recipe_solar_crest" }
+ItemModule["item_solar_crest"] = { "item_medallion_of_courage"; "item_wind_lace"; "item_crown"; "item_recipe_solar_crest" }
 
 ItemModule["item_soul_booster"] = { "item_point_booster"; "item_vitality_booster"; "item_energy_booster" }
 
@@ -438,7 +438,7 @@ ItemModule["item_ultimate_scepter_2"] = { "item_ultimate_scepter"; "item_recipe_
 
 ---------- 7.28 NEW ITEMS ---------------
 ItemModule["item_falcon_blade"] = { "item_fluffy_hat"; "item_sobi_mask"; "item_blades_of_attack"; "item_recipe_falcon_blade" }
-ItemModule["item_orb_of_corrosion"] = { "item_blight_stone"; "item_orb_of_venom"; "item_fluffy_hat" }
+ItemModule["item_orb_of_corrosion"] = { "item_blight_stone"; "item_orb_of_venom"; "item_fluffy_hat"; "item_recipe_orb_of_corrosion" }
 ItemModule["item_witch_blade"] = { "item_blitz_knuckles"; "item_chainmail"; "item_robe"; "item_recipe_witch_blade" }
 ItemModule["item_gungir"] = { "item_maelstrom"; "item_rod_of_atos"; "item_recipe_gungir" }
 ItemModule["item_mage_slayer"] = { "item_cloak"; "item_blade_of_alacrity"; "item_claymore"; "item_recipe_mage_slayer" }

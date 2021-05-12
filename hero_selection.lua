@@ -5,9 +5,9 @@ local utils = require(GetScriptDirectory() .. "/util");
 local hero_roles = role["hero_roles"];
 -- mandate that the bots will pick these heroes - for testing purposes
 local requiredHeroes = {
+	'npc_dota_hero_broodmother',
+	'npc_dota_hero_dawnbreaker',
 	'npc_dota_hero_hoodwink',
-	'npc_dota_hero_tusk',
-	'npc_dota_hero_skeleton_king',
 };
 
 local UnImplementedHeroes = {
@@ -27,6 +27,7 @@ local quickMode = false;
 local testMode = false;
 
 local allBotHeroes = {
+	'npc_dota_hero_dawnbreaker',
 	'npc_dota_hero_hoodwink',
     'npc_dota_hero_snapfire',
 	'npc_dota_hero_void_spirit',
@@ -172,7 +173,7 @@ local Min = 27;
 local Max = 28;
 local CMTestMode = false;
 local UnavailableHeroes = {
-
+	'npc_dota_hero_dawnbreaker'
 }
 local HeroLanes = {
 	[1] = LANE_MID,

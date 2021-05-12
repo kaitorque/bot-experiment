@@ -123,6 +123,18 @@ X["hero_roles"] = {
 		['support'] = 0,
 		['pusher'] = 0
 	},
+	
+	["npc_dota_hero_dawnbreaker"] = {
+		['carry'] = 2,
+		['disabler'] = 2,
+		['durable'] = 2,
+		['escape'] = 1,
+		['initiator'] = 3,
+		['jungler'] = 0,
+		['nuker'] = 1,
+		['support'] = 0,
+		['pusher'] = 0
+	},
 
 	["npc_dota_hero_doom_bringer"] = {
 		['carry'] = 1,
@@ -1605,6 +1617,7 @@ X['off'] = {
 	'npc_dota_hero_centaur',
 	'npc_dota_hero_dark_seer',
 	'npc_dota_hero_doom_bringer',
+	'npc_dota_hero_dawnbreaker',
 	'npc_dota_hero_enchantress',
 	'npc_dota_hero_furion',
 	'npc_dota_hero_legion_commander',

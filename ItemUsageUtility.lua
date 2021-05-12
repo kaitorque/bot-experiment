@@ -1540,7 +1540,7 @@ end
 --item_cyclone
 ItemUsageModule.Use['item_cyclone'] = function(item, bot, mode, extra_range)
 	
-	local nCastRange = 575 + extra_range;
+	local nCastRange = 550 + extra_range;
 	
 	if item:GetName() == 'item_rod_of_atos' then
 		nCastRange = 1100 + extra_range;
@@ -1979,7 +1979,7 @@ end
 --item_abyssal_blade
 ItemUsageModule.Use['item_abyssal_blade'] = function(item, bot, mode, extra_range)
 	
-	local nCastRange = 600 + extra_range;
+	local nCastRange = 200 + extra_range;
 	
 	if mutil.IsRetreating(bot)
 	then
@@ -2621,10 +2621,6 @@ end
 --item_arcane_blink
 ItemUsageModule.Use['item_arcane_blink'] = function(item, bot, mode, extra_range)
 	return ItemUsageModule.Use['item_blink'](item, bot, mode, extra_range);
-end
---item_wind_waker
-ItemUsageModule.Use['item_wind_waker'] = function(item, bot, mode, extra_range)
-	return ItemUsageModule.Use['item_cyclone'](item, bot, mode, extra_range);
 end
 --item_wind_waker
 ItemUsageModule.Use['item_wind_waker'] = function(item, bot, mode, extra_range)

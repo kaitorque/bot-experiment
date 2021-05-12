@@ -148,7 +148,7 @@ bot.buildOblivion = false;
 bot.buildEcho = false;
 bot.buildBasilius = false;
 bot.buildUrn = false;
-bot.buildNecronomicon = false;
+-- bot.buildNecronomicon = false;
 bot.buildOrchid = false;
 bot.buildSoul = false;
 bot.buildBuckler = false;
@@ -166,6 +166,14 @@ bot.buildSatanic = false;
 bot.buildMask = false;
 bot.buildShadow = false;
 bot.buildHeart = false;
+bot.buildShroud = false;
+bot.buildFalcon = false;
+bot.buildWaker = false;
+bot.buildCorrosion = false;
+bot.buildMage = false;
+bot.buildWitch = false;
+bot.buildGleipnir = false;
+bot.buildOverlord = false;
 
 for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_bfury" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_bfury" then
@@ -270,9 +278,9 @@ for i=1, math.ceil(#bot.itemToBuy/2) do
 	if bot.itemToBuy[i] == "item_urn_of_shadows" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_urn_of_shadows" then
 		bot.buildUrn = true;
 	end
-	if bot.itemToBuy[i] == "item_necronomicon_3" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_necronomicon_3" then
-		bot.buildNecronomicon = true;
-	end
+	-- if bot.itemToBuy[i] == "item_necronomicon_3" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_necronomicon_3" then
+	-- 	bot.buildNecronomicon = true;
+	-- end
 	if bot.itemToBuy[i] == "item_headdress" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_headdress" then
 		bot.buildHeaddress = true;
 	end
@@ -341,6 +349,30 @@ for i=1, math.ceil(#bot.itemToBuy/2) do
 	end
 	if bot.itemToBuy[i] == "item_meteor_hammer" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_meteor_hammer" then
 		bot.buildMeteor = true;
+	end
+	if bot.itemToBuy[i] == "item_eternal_shroud" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_eternal_shroud" then
+		bot.buildShroud = true;
+	end
+	if bot.itemToBuy[i] == "item_falcon_blade" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_falcon_blade" then
+		bot.buildFalcon = true;
+	end
+	if bot.itemToBuy[i] == "item_wind_waker" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_wind_waker" then
+		bot.buildWaker = true;
+	end
+	if bot.itemToBuy[i] == "item_orb_of_corrosion" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_orb_of_corrosion" then
+		bot.buildCorrosion = true;
+	end
+	if bot.itemToBuy[i] == "item_mage_slayer" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_mage_slayer" then
+		bot.buildMage = true;
+	end
+	if bot.itemToBuy[i] == "item_witch_blade" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_witch_blade" then
+		bot.buildWitch = true;
+	end
+	if bot.itemToBuy[i] == "item_gungir" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_gungir" then
+		bot.buildGleipnir = true;
+	end
+	if bot.itemToBuy[i] == "item_helm_of_the_dominator_2" or bot.itemToBuy[#bot.itemToBuy-i+1] == "item_helm_of_the_dominator_2" then
+		bot.buildOverlord = true;
 	end
 end
 
@@ -628,7 +660,7 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_ring_of_protection" then --175
-						if bot.buildBuckler== false and bot.buildAssault == false and bot.buildMek == false
+						if bot.buildBuckler== false and bot.buildAssault == false and bot.buildVlad == false
 						and bot.buildGreaves == false and bot.buildUrn == false and bot.buildSpirit == false 
 						and bot.buildSoul == false 
 						then
@@ -637,7 +669,8 @@ function ItemPurchaseThink()
 						end
 					elseif item == "item_ring_of_regen" then --175
 						if bot.buildHeaddress == false and bot.buildMek == false and bot.buildPipe == false 
-						and bot.buildForce == false and bot.buildHood == false 
+						and bot.buildForce == false and bot.buildHood == false and bot.buildHoly == false
+						and bot.buildShroud == false and bot.buildGreaves == false
 						then
 							slotToSell = itemSlot;
 							break;
@@ -646,7 +679,7 @@ function ItemPurchaseThink()
 						if bot.buildOblivion == false and bot.buildOrchid == false and bot.buildBloodthorn == false 
 						and bot.buildEcho == false and bot.buildSilver == false and bot.buildBasilius == false 
 						and bot.buildVeil == false and bot.buildVlad == false and bot.buildUrn == false 
-						and bot.buildSpirit == false and bot.buildNecronomicon == false and bot.buildDrum == false 
+						and bot.buildSpirit == false and bot.buildFalcon == false
 						and bot.buildMedallion == false and bot.buildSolar == false 
 						then
 							slotToSell = itemSlot;
@@ -654,18 +687,21 @@ function ItemPurchaseThink()
 						end
 					elseif item == "item_wind_lace" then --250
 						if bot.buildCyclone == false and bot.buildDrum == false and bot.buildSolar == false 
-						and bot.buildTranquil == false 
+						and bot.buildTranquil == false and bot.buildWaker == false
 						then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_blight_stone" then --300
-						if bot.buildMedallion == false and bot.buildSolar == false and bot.buildDesolator == false then
+						if bot.buildMedallion == false and bot.buildSolar == false and bot.buildDesolator == false 
+						and bot.buildCorrosion == false
+						then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_buckler" then --375
-						if bot.buildAssault == false and bot.buildMek == false then
+					elseif item == "item_buckler" then --425
+						if bot.buildAssault == false and bot.buildVlad == false and bot.buildGreaves == false
+						then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -675,17 +711,13 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_headdress" then --425
-						if bot.buildMek == false and bot.buildPipe == false then
+						if bot.buildMek == false and bot.buildPipe == false and bot.buildHoly == false
+						then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_gloves" then --450
-						if bot.buildMidas == false and bot.buildArmlet == false and bot.buildGlimmer == false then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_cloak" then --450
-						if bot.buildHood == false and bot.buildGlimmer == false and bot.buildPipe == false then
+						if bot.buildMidas == false and bot.buildArmlet == false then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -694,15 +726,23 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end	
-					elseif item == "item_ring_of_tarrasque" then --650
-						if bot.buildHeart == false and bot.buildHoly == false then
+					elseif item == "item_cloak" then --500
+						if bot.buildHood == false and bot.buildGlimmer == false and bot.buildPipe == false 
+						and bot.buildShroud == false and bot.buildMage == false 
+						then
 							slotToSell = itemSlot;
 							break;
 						end
+					-- elseif item == "item_ring_of_tarrasque" then --650
+					-- 	if bot.buildHeart == false and bot.buildHoly == false then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
 					elseif item == "item_ring_of_health" then --825
 						if bot.buildPerseverance == false and bot.buildRefresher == false and bot.buildSphere == false 
 						and bot.buildLotus == false and bot.buildMeteor == false and bot.buildBFury == false 
-						and bot.buildVanguard == false and bot.buildHood == false
+						and bot.buildVanguard == false and bot.buildHood == false and bot.buildShroud == false
+						aand bot.buildPipe == false and bot.buildCrimson == false and bot.buildAbyssal == false
 						then
 							slotToSell = itemSlot;
 							break;
@@ -718,7 +758,9 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_blitz_knuckles" then --1000
-						if bot.buildMonkey == false and bot.buildShadow == false and bot.buildSilver == false then
+						if bot.buildMonkey == false and bot.buildShadow == false and bot.buildSilver == false
+						and bot.buildWitch == false
+						then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -728,7 +770,9 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_javelin" then --1100
-						if bot.buildMonkey == false and bot.buildMjollnir == false then
+						if bot.buildMonkey == false and bot.buildMaelstrom == false and bot.buildMjollnir == false 
+						and bot.buildGleipnir == false
+						then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -750,13 +794,13 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_veil_of_discord" then --1525
-						if #bot.itemToBuy <= 4 then
+					elseif item == "item_hood_of_defiance" then --1500
+						if bot.buildPipe == false and bot.buildShroud == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_hood_of_defiance" then --1750
-						if bot.buildPipe == false then
+					elseif item == "item_veil_of_discord" then --1525
+						if #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -795,11 +839,11 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_necronomicon" then --2050
-						if bot.buildNecronomicon == false then
-							slotToSell = itemSlot;
-							break;
-						end
+					-- elseif item == "item_necronomicon" then --2050
+					-- 	if bot.buildNecronomicon == false then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
 					elseif item == "item_force_staff" then --2175
 						if bot.buildHurricane == false then
 							slotToSell = itemSlot;
@@ -811,7 +855,7 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_helm_of_the_dominator" then --2350
-						if #bot.itemToBuy <= 4 then
+						if bot.buildOverlord == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -821,7 +865,7 @@ function ItemPurchaseThink()
 							break;
 						end	
 					elseif item == "item_maelstrom" then --2700
-						if bot.buildMjollnir == false then
+						if bot.buildMjollnir == false and bot.buildGleipnir == false then
 							slotToSell = itemSlot;
 							break;
 						end
