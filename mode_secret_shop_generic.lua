@@ -123,7 +123,15 @@ function HaveItemToSell()
 		 "item_blitz_knuckles",
 		 "item_necronomicon",
 		 "item_ring_of_tarrasque",
-		 "item_cloak"
+		 "item_cloak",
+		 "item_orb_of_corrosion",
+		 "item_fluffy_hat",
+		 "item_falcon_blade",
+		 "item_aether_lens",
+		 "item_cyclone",
+		 "item_mage_slayer",
+		 "item_witch_blade",
+		 "item_rod_of_atos",
 	}
 	local slotToSell = nil;
 	for _,item in pairs(earlyGameItem) do
@@ -140,7 +148,7 @@ function HaveItemToSell()
 					break;
 				end
 			elseif item == "item_ring_of_protection" then --175
-				if npcBot.buildBuckler== false and npcBot.buildAssault == false and npcBot.buildMek == false
+				if npcBot.buildBuckler== false and npcBot.buildAssault == false and npcBot.buildVlad == false
 				and npcBot.buildGreaves == false and npcBot.buildUrn == false and npcBot.buildSpirit == false 
 				and npcBot.buildSoul == false 
 				then
@@ -149,7 +157,8 @@ function HaveItemToSell()
 				end
 			elseif item == "item_ring_of_regen" then --175
 				if npcBot.buildHeaddress == false and npcBot.buildMek == false and npcBot.buildPipe == false 
-				and npcBot.buildForce == false and npcBot.buildHood == false 
+				and npcBot.buildForce == false and npcBot.buildHood == false and npcBot.buildHoly == false
+				and npcBot.buildShroud == false and npcBot.buildGreaves == false
 				then
 					slotToSell = itemSlot;
 					break;
@@ -158,7 +167,7 @@ function HaveItemToSell()
 				if npcBot.buildOblivion == false and npcBot.buildOrchid == false and npcBot.buildBloodthorn == false 
 				and npcBot.buildEcho == false and npcBot.buildSilver == false and npcBot.buildBasilius == false 
 				and npcBot.buildVeil == false and npcBot.buildVlad == false and npcBot.buildUrn == false 
-				and npcBot.buildSpirit == false and npcBot.buildNecronomicon == false and npcBot.buildDrum == false 
+				and npcBot.buildSpirit == false and npcBot.buildFalcon == false
 				and npcBot.buildMedallion == false and npcBot.buildSolar == false 
 				then
 					slotToSell = itemSlot;
@@ -166,18 +175,28 @@ function HaveItemToSell()
 				end
 			elseif item == "item_wind_lace" then --250
 				if npcBot.buildCyclone == false and npcBot.buildDrum == false and npcBot.buildSolar == false 
-				and npcBot.buildTranquil == false 
+				and npcBot.buildTranquil == false and npcBot.buildWaker == false
+				then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_fluffy_hat" then --250
+				if npcBot.buildForce == false and npcBot.buildHurricane == false and npcBot.buildCorrosion == false 
+				and npcBot.buildFalcon == false and npcBot.buildHoly == false
 				then
 					slotToSell = itemSlot;
 					break;
 				end
 			elseif item == "item_blight_stone" then --300
-				if npcBot.buildMedallion == false and npcBot.buildSolar == false and npcBot.buildDesolator == false then
+				if npcBot.buildMedallion == false and npcBot.buildSolar == false and npcBot.buildDesolator == false 
+				and npcBot.buildCorrosion == false
+				then
 					slotToSell = itemSlot;
 					break;
 				end
-			elseif item == "item_buckler" then --375
-				if npcBot.buildAssault == false and npcBot.buildMek == false then
+			elseif item == "item_buckler" then --425
+				if npcBot.buildAssault == false and npcBot.buildVlad == false and npcBot.buildGreaves == false
+				then
 					slotToSell = itemSlot;
 					break;
 				end
@@ -187,17 +206,13 @@ function HaveItemToSell()
 					break;
 				end
 			elseif item == "item_headdress" then --425
-				if npcBot.buildMek == false and npcBot.buildPipe == false then
+				if npcBot.buildMek == false and npcBot.buildPipe == false and npcBot.buildHoly == false
+				then
 					slotToSell = itemSlot;
 					break;
 				end
 			elseif item == "item_gloves" then --450
-				if npcBot.buildMidas == false and npcBot.buildArmlet == false and npcBot.buildGlimmer == false then
-					slotToSell = itemSlot;
-					break;
-				end
-			elseif item == "item_cloak" then --450
-				if npcBot.buildHood == false and npcBot.buildGlimmer == false and npcBot.buildPipe == false then
+				if npcBot.buildMidas == false and npcBot.buildArmlet == false then
 					slotToSell = itemSlot;
 					break;
 				end
@@ -206,15 +221,23 @@ function HaveItemToSell()
 					slotToSell = itemSlot;
 					break;
 				end	
-			elseif item == "item_ring_of_tarrasque" then --650
-				if npcBot.buildHeart == false and npcBot.buildHoly == false then
+			elseif item == "item_cloak" then --500
+				if npcBot.buildHood == false and npcBot.buildGlimmer == false and npcBot.buildPipe == false 
+				and npcBot.buildShroud == false and npcBot.buildMage == false 
+				then
 					slotToSell = itemSlot;
 					break;
 				end
+			-- elseif item == "item_ring_of_tarrasque" then --650
+			-- 	if npcBot.buildHeart == false and npcBot.buildHoly == false then
+			-- 		slotToSell = itemSlot;
+			-- 		break;
+			-- 	end
 			elseif item == "item_ring_of_health" then --825
 				if npcBot.buildPerseverance == false and npcBot.buildRefresher == false and npcBot.buildSphere == false 
 				and npcBot.buildLotus == false and npcBot.buildMeteor == false and npcBot.buildBFury == false 
-				and npcBot.buildVanguard == false and npcBot.buildHood == false
+				and npcBot.buildVanguard == false and npcBot.buildHood == false and npcBot.buildShroud == false
+				and npcBot.buildPipe == false and npcBot.buildCrimson == false and npcBot.buildAbyssal == false
 				then
 					slotToSell = itemSlot;
 					break;
@@ -229,8 +252,15 @@ function HaveItemToSell()
 					slotToSell = itemSlot;
 					break;
 				end
+			elseif item == "item_orb_of_corrosion" then --925
+				if #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
 			elseif item == "item_blitz_knuckles" then --1000
-				if npcBot.buildMonkey == false and npcBot.buildShadow == false and npcBot.buildSilver == false then
+				if npcBot.buildMonkey == false and npcBot.buildShadow == false and npcBot.buildSilver == false
+				and npcBot.buildWitch == false
+				then
 					slotToSell = itemSlot;
 					break;
 				end
@@ -240,7 +270,14 @@ function HaveItemToSell()
 					break;
 				end
 			elseif item == "item_javelin" then --1100
-				if npcBot.buildMonkey == false and npcBot.buildMjollnir == false then
+				if npcBot.buildMonkey == false and npcBot.buildMaelstrom == false and npcBot.buildMjollnir == false 
+				and npcBot.buildGleipnir == false
+				then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_falcon_blade" then --1100
+				if #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
@@ -252,23 +289,23 @@ function HaveItemToSell()
 					break;
 				end
 			elseif item == "item_ancient_janggo" then --1475
-				local jg = npcBot:GetItemInSlot(itemSlot);
+				local jg = bot:GetItemInSlot(itemSlot);
 				if jg~=nil and jg:GetCurrentCharges() == 0 and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end	
 			elseif item == "item_ghost" then --1500
-				if npcBot.buildEthereal == false and npcBot.itemToBuy <= 4 then
+				if npcBot.buildEthereal == false and #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_hood_of_defiance" then --1500
+				if npcBot.buildPipe == false and npcBot.buildShroud == false then
 					slotToSell = itemSlot;
 					break;
 				end
 			elseif item == "item_veil_of_discord" then --1525
 				if #npcBot.itemToBuy <= 4 then
-					slotToSell = itemSlot;
-					break;
-				end
-			elseif item == "item_hood_of_defiance" then --1750
-				if npcBot.buildPipe == false then
 					slotToSell = itemSlot;
 					break;
 				end
@@ -298,22 +335,22 @@ function HaveItemToSell()
 					break;
 				end
 			elseif item == "item_kaya" then --2050
-				if npcBot.buildBloodstone == false and npcBot.buildYK == false and npcBot.buildKS == false then
+				if npcBot.buildBloodstone == false and npcBot.buildYK == false and npcBot.buildKS == false and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
 			elseif item == "item_yasha" then --2050
-				if npcBot.buildManta == false and npcBot.buildYK == false and npcBot.buildSY == false then
+				if npcBot.buildManta == false and npcBot.buildYK == false and npcBot.buildSY == false and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
-			elseif item == "item_necronomicon" then --2050
-				if npcBot.buildNecronomicon == false then
-					slotToSell = itemSlot;
-					break;
-				end
+			-- elseif item == "item_necronomicon" then --2050
+			-- 	if npcBot.buildNecronomicon == false then
+			-- 		slotToSell = itemSlot;
+			-- 		break;
+			-- 	end
 			elseif item == "item_force_staff" then --2175
-				if npcBot.buildHurricane == false then
+				if npcBot.buildHurricane == false and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
@@ -322,33 +359,63 @@ function HaveItemToSell()
 					slotToSell = itemSlot;
 					break;
 				end
+			elseif item == "item_aether_lens" then --2275
+				if npcBot.buildOctarine == false and #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
 			elseif item == "item_helm_of_the_dominator" then --2350
+				if npcBot.buildOverlord == false and #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_armlet" then --2475
 				if #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
 			elseif item == "item_echo_sabre" then --2500
-				if npcBot.buildSilver == false then
+				if #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_witch_blade" then --2600
+				if #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end	
 			elseif item == "item_maelstrom" then --2700
-				if npcBot.buildMjollnir == false then
+				if npcBot.buildMjollnir == false and npcBot.buildGleipnir == false and #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_cyclone" then --2725
+				if npcBot.buildWaker == false and #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
+			elseif item == "item_recipe_rod_of_atos" then --2750
+				if npcBot.buildGleipnir == false and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
 			elseif item == "item_basher" then --2950
-				if npcBot.buildAbyssal == false then
+				if npcBot.buildAbyssal == false and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
 			elseif item == "item_invis_sword" then --3000
-				if npcBot.buildSilver == false then
+				if npcBot.buildSilver == false and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end	
+			elseif item == "item_mage_slayer" then --3250
+				if #npcBot.itemToBuy <= 4 then
+					slotToSell = itemSlot;
+					break;
+				end
 			elseif item == "item_orchid" then --3475
-				if npcBot.buildBloodthorn == false then
+				if npcBot.buildBloodthorn == false and #npcBot.itemToBuy <= 4 then
 					slotToSell = itemSlot;
 					break;
 				end
