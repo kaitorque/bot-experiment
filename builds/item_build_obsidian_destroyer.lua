@@ -19,8 +19,9 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
+	"item_boots",
 	"item_magic_wand",
-	"item_boots"
+	"item_wind_lace",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -28,13 +29,17 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_power_treads_int"
+	"item_power_treads_int",
+	"item_tranquil_boots",
 }
 
 transItem = {
+	"item_aether_lens",
+	"item_ancient_janggo",
 	"item_force_staff",
+	"item_invis_sword",
 	"item_kaya",
-	"item_invis_sword"
+	"item_witch_blade",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -44,19 +49,24 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_hurricane_pike",
-	"item_yasha_and_kaya",
+	"item_aeon_disk",
+	"item_assault",
 	"item_black_king_bar",
-	"item_shivas_guard",
-	"item_sheepstick",
-	"item_refresher",
 	"item_blink",
 	"item_bloodstone",
+	"item_glimmer_cape",
+	"item_hurricane_pike",
+	"item_lotus_orb",
+	"item_meteor_hammer",
+	"item_octarine_core",
+	"item_refresher",
+	"item_sheepstick",
+	"item_shivas_guard",
 	"item_sphere",
-	"item_assault"
+	"item_yasha_and_kaya",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

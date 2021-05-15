@@ -18,12 +18,12 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };
 
 earlyItem = {
-	"item_magic_wand",
 	"item_boots",
-	"item_orb_of_venom",
-	"item_soul_ring",
+	"item_magic_wand",
 	"item_medallion_of_courage",
-	"item_ring_of_health"
+	"item_orb_of_venom",
+	"item_ring_of_health",
+	"item_soul_ring",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -36,9 +36,9 @@ boot = {
 }
 
 transItem = {
-	"item_vanguard",
+	"item_ancient_janggo",
 	"item_hood_of_defiance",
-	"item_ancient_janggo"
+	"item_vanguard",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -48,23 +48,26 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_blade_mail",
-	"item_pipe",
-	"item_crimson_guard",
-	"item_shivas_guard",
-	"item_octarine_core",
-	"item_solar_crest",
-	"item_lotus_orb",
-	"item_guardian_greaves",
-	"item_vladmir",
+	"item_abyssal_blade",
 	"item_assault",
 	"item_black_king_bar",
-	"item_heavens_halberd",
+	"item_blade_mail",
+	"item_crimson_guard",
+	"item_eternal_shroud",
+	"item_guardian_greaves",
 	"item_heart",
-	"item_radiance"
+	"item_heavens_halberd",
+	"item_lotus_orb",
+	"item_octarine_core",
+	"item_pipe",
+	"item_radiance",
+	"item_sange_and_yasha",
+	"item_shivas_guard",
+	"item_solar_crest",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

@@ -21,7 +21,8 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 earlyItem = {
 	"item_magic_wand",
 	"item_boots",
-	"item_blitz_knuckles"
+	"item_blitz_knuckles",
+	"item_gloves",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -29,14 +30,18 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_phase_boots", 
-	"item_power_treads_str"
+	"item_phase_boots",
+	"item_power_treads_str",
 }
 
 transItem = {
 	"item_armlet",
+	"item_basher",
 	"item_echo_sabre",
-	"item_invis_sword"
+	"item_hand_of_midas",
+	"item_invis_sword",
+	"item_orb_of_corrosion",
+	"item_sange",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -46,24 +51,26 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_black_king_bar",
-	"item_silver_edge",
-	"item_assault",
-	"item_radiance",
 	"item_abyssal_blade",
-	"item_blink",
-	"item_heavens_halberd",
-	"item_satanic",
+	"item_assault",
+	"item_black_king_bar",
 	"item_blade_mail",
+	"item_blink",
 	"item_bloodthorn",
-	"item_monkey_king_bar",
+	"item_desolator",
+	"item_heavens_halberd",
 	"item_mjollnir",
-	"item_shivas_guard",
+	"item_monkey_king_bar",
+	"item_radiance",
 	"item_refresher",
-	"item_sheepstick"
+	"item_sange_and_yasha",
+	"item_satanic",
+	"item_sheepstick",
+	"item_shivas_guard",
+	"item_silver_edge",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 1)
+randItem = KUtil.getItem(item, 5, 0, 0, 1, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

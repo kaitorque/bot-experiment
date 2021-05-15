@@ -13,7 +13,7 @@ local bearState = "";
 
 local BearItem = {
 	-- "item_stout_shield",
-	"item_quelling_blade"
+	"item_quelling_blade",
 	"item_boots",
 	"item_orb_of_venom",
 	"item_blight_stone",

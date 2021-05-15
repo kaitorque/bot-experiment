@@ -20,11 +20,10 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };	
 			
 earlyItem = {
-	"item_magic_wand",
-	"item_ring_of_tarrasque",
 	"item_boots",
-	"item_ring_of_protection",
+	"item_magic_wand",
 	"item_ring_of_health",
+	"item_ring_of_protection",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -32,15 +31,16 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_phase_boots", 
+	"item_phase_boots",
+	"item_power_treads_str",
 	"item_tranquil_boots",
-	"item_travel_boots"
+	"item_travel_boots",
 }
 
 transItem = {
 	"item_force_staff",
+	"item_hood_of_defiance",
 	"item_vanguard",
-	"item_hood_of_defiance"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -50,17 +50,18 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_pipe",
+	"item_assault",
+	"item_black_king_bar",
+	"item_blade_mail",
+	"item_blink",
 	"item_crimson_guard",
 	"item_heart",
-	"item_shivas_guard",
-	"item_blink",
-	"item_assault",
-	"item_vladmir",
-	"item_blade_mail",
-	"item_black_king_bar",
+	"item_lotus_orb",
+	"item_pipe",
 	"item_refresher",
-	"item_lotus_orb"
+	"item_shivas_guard",
+	"item_solar_crest",
+	"item_vladmir",
 }
 
 randItem = KUtil.getItem(item, 5, 0, 0, 0)

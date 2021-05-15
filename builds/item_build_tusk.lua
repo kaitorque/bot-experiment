@@ -18,10 +18,11 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };	
 
 earlyItem = {
-	"item_magic_wand",
 	"item_boots",
+	"item_magic_wand",
 	"item_orb_of_venom",
-	"item_urn_of_shadows"
+	"item_urn_of_shadows",
+	
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -29,15 +30,19 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
+	"item_arcane_boots",
 	"item_phase_boots",
 	"item_power_treads_str",
-	"item_arcane_boots"
+	"item_tranquil_boots",
 }
 
 transItem = {
-	"item_invis_sword",
+	"item_ancient_janggo",
+	"item_cloak",
 	"item_force_staff",
-	"item_ancient_janggo"
+	"item_invis_sword",
+	"item_orb_of_corrosion",
+	"item_urn_of_shadows",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -47,25 +52,24 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_sange_and_yasha",
-	"item_desolator",
-	"item_silver_edge",
-	"item_blink",
-	"item_monkey_king_bar",
-	"item_black_king_bar",
-	"item_assault",
-	"item_crimson_guard",
-	"item_blade_mail",
-	"item_vladmir",
-	"item_necronomicon_3",
-	"item_solar_crest",
 	"item_abyssal_blade",
-	"item_spirit_vessel",
+	"item_assault",
+	"item_black_king_bar",
+	"item_blade_mail",
+	"item_blink",
+	"item_crimson_guard",
+	"item_desolator",
 	"item_lotus_orb",
-	"item_pipe"
+	"item_monkey_king_bar",
+	"item_pipe",
+	"item_sange_and_yasha",
+	"item_silver_edge",
+	"item_solar_crest",
+	"item_spirit_vessel",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

@@ -20,8 +20,8 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(3));
 -- };		
 
 earlyItem = {
+	"item_boots",
 	"item_magic_wand",
-	"item_boots"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -29,14 +29,15 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_power_treads_agi", 
-	"item_travel_boots"
+	"item_power_treads_agi",
+	"item_travel_boots",
 }
 
 transItem = {
+	"item_ancient_janggo",
+	"item_cyclone",
 	"item_dragon_lance",
 	"item_invis_sword",
-	"item_ancient_janggo"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -46,24 +47,29 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_black_king_bar",
-	"item_yasha_and_kaya",
-	"item_silver_edge",
-	"item_butterfly",
-	"item_hurricane_pike",
-	"item_greater_crit",
-	"item_satanic",
 	"item_abyssal_blade",
-	"item_blink",
-	"item_sange_and_yasha",
-	"item_ethereal_blade",
-	"item_shivas_guard",
-	"item_manta",
 	"item_assault",
-	"item_sheepstick"
+	"item_black_king_bar",
+	"item_blink",
+	"item_bloodthorn",
+	"item_butterfly",
+	"item_ethereal_blade",
+	"item_greater_crit",
+	"item_hurricane_pike",
+	"item_kaya_and_sange",
+	"item_manta",
+	"item_octarine_core",
+	"item_refresher",
+	"item_sange_and_yasha",
+	"item_satanic",
+	"item_sheepstick",
+	"item_shivas_guard",
+	"item_silver_edge",
+	"item_wind_waker",
+	"item_yasha_and_kaya",
 }		
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

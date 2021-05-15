@@ -18,11 +18,10 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };
 
 earlyItem = {
+	"item_boots",
 	"item_magic_wand",
 	"item_orb_of_venom",
-	"item_boots",
 	"item_ring_of_protection",
-	"item_buckler"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -30,16 +29,18 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_phase_boots", 
 	"item_arcane_boots",
-	"item_travel_boots"
+	"item_phase_boots",
+	"item_travel_boots",
 }
 
 transItem = {
-	"item_force_staff",
-	"item_medallion_of_courage",
+	"item_buckler",
 	"item_ancient_janggo",
-	"item_helm_of_the_dominator"
+	"item_force_staff",
+	"item_helm_of_the_dominator",
+	"item_medallion_of_courage",
+	"item_orb_of_corrosion"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -49,27 +50,28 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_vladmir",
-	"item_solar_crest",
-	"item_glimmer_cape",
-	"item_spirit_vessel",
-	"item_crimson_guard",
-	"item_pipe",
+	"item_assault",
 	"item_blade_mail",
+	"item_blink",
+	"item_crimson_guard",
+	"item_eternal_shroud",
+	"item_glimmer_cape",
+	"item_heart",
+	"item_heavens_halberd",
 	"item_holy_locket",
 	"item_kaya_and_sange",
 	"item_lotus_orb",
-	"item_shivas_guard",
-	"item_assault",
-	"item_blink",
+	"item_pipe",
 	"item_radiance",
 	"item_sange_and_yasha",
-	"item_heart",
+	"item_shivas_guard",
 	"item_skadi",
-	"item_heavens_halberd"
+	"item_solar_crest",
+	"item_spirit_vessel",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

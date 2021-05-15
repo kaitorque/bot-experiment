@@ -19,10 +19,11 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(2));
 -- };
 
 earlyItem = {
-	"item_magic_wand",
 	"item_boots",
+	"item_magic_wand",
+	"item_ring_of_basilius",
 	"item_ring_of_protection",
-	"item_ring_of_basilius"
+	"item_helm_of_the_dominator",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -30,16 +31,16 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_phase_boots", 
-	"item_travel_boots"
+	"item_phase_boots",
+	"item_travel_boots",
 }
 
 transItem = {
-	"item_force_staff",
-	"item_medallion_of_courage",
-	"item_helm_of_the_dominator",
 	"item_ancient_janggo",
-	"item_invis_sword"
+	"item_force_staff",
+	"item_invis_sword",
+	"item_medallion_of_courage",
+	"item_soul_ring",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -49,19 +50,21 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_necronomicon_3",
-	"item_solar_crest",
-	"item_vladmir",
-	"item_heavens_halberd",
 	"item_assault",
 	"item_black_king_bar",
 	"item_blink",
-	"item_silver_edge",
+	"item_bloodstone",
+	"item_eternal_shroud",
+	"item_heart",
+	"item_heavens_halberd",
+	"item_kaya_and_sange",
 	"item_sheepstick",
-	"item_heart"
+	"item_silver_edge",
+	"item_solar_crest",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

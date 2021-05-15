@@ -34,10 +34,13 @@ boot = {
 }
 
 transItem = {
-	"item_force_staff",
+	"item_aether_lens",
+	"item_cyclone",
 	"item_dragon_lance",
+	"item_falcon_blade",
+	"item_force_staff",
 	"item_maelstrom",
-	"item_veil_of_discord"
+	"item_veil_of_discord",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -48,30 +51,28 @@ randBoot = KUtil.getBoot(boot)
 
 item = {
 	"item_black_king_bar",
-	"item_hurricane_pike",
-	"item_mjollnir",
+	"item_blink",
+	"item_bloodthorn",
+	"item_glimmer_cape",
 	"item_greater_crit",
+	"item_guardian_greaves",
+	"item_hurricane_pike",
+	"item_lotus_orb",
+	"item_manta",
+	"item_mjollnir",
 	"item_monkey_king_bar",
 	"item_octarine_core",
-	"item_sheepstick",
-	"item_blink",
-	"item_guardian_greaves",
-	"item_aether_lens",
-	"item_glimmer_cape",
-	"item_lotus_orb",
-	"item_sphere",
-	"item_solar_crest",
-	"item_cyclone",
-	"item_vladmir",
-	"item_spirit_vessel",
-	"item_silver_edge",
-	"item_bloodthorn",
 	"item_satanic",
-	"item_manta",
-	"item_skadi"
+	"item_sheepstick",
+	"item_silver_edge",
+	"item_skadi",
+	"item_solar_crest",
+	"item_sphere",
+	"item_spirit_vessel",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 1, 0, 1)
+randItem = KUtil.getItem(item, 5, 1, 0, 1, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

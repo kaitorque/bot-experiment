@@ -22,7 +22,7 @@ is a clone and skill/item decisions will possilby break! ]]
 -- };			
 
 earlyItem = {
-	"item_boots"
+	"item_boots",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -31,11 +31,11 @@ randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
 	"item_power_treads_agi",
-	"item_travel_boots"
+	"item_travel_boots",
 }
 
 transItem = {
-	"item_invis_sword"
+	"item_invis_sword",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -45,18 +45,18 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
+	"item_assault",
 	"item_blink",
-	"item_sheepstick",
-	"item_skadi",
-	"item_heart",
-	"item_octarine_core",
 	"item_ethereal_blade",
-	"item_silver_edge",
+	"item_heart",
 	"item_manta",
-	"item_assault"
+	"item_octarine_core",
+	"item_sheepstick",
+	"item_silver_edge",
+	"item_skadi",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

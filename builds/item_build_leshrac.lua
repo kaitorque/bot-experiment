@@ -18,8 +18,8 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
+	"item_boots",
 	"item_magic_wand",
-	"item_boots"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -28,13 +28,16 @@ randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
 	"item_arcane_boots",
-	"item_travel_boots"
+	"item_travel_boots",
 }
 
 transItem = {
-	"item_urn_of_shadows",
 	"item_ancient_janggo",
-	"item_ghost"
+	"item_ghost",
+	"item_urn_of_shadows",
+	"item_cyclone",
+	"item_rod_of_atos",
+	"item_aether_lens",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -44,25 +47,23 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_bloodstone",
-	"item_cyclone",
-	"item_black_king_bar",
-	"item_octarine_core",
-	"item_shivas_guard",
-	"item_guardian_greaves",
-	"item_lotus_orb",
-	"item_glimmer_cape",
-	"item_aether_lens",
-	"item_sheepstick",
-	"item_rod_of_atos",
-	"item_kaya_and_sange",
-	"item_yasha_and_kaya",
 	"item_aeon_disk",
+	"item_black_king_bar",
+	"item_blink",
+	"item_bloodstone",
+	"item_glimmer_cape",
+	"item_guardian_greaves",
+	"item_kaya_and_sange",
+	"item_lotus_orb",
+	"item_octarine_core",
+	"item_sheepstick",
+	"item_shivas_guard",
 	"item_sphere",
-	"item_blink"
+	"item_yasha_and_kaya",
+	"item_wind_waker",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

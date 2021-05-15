@@ -21,7 +21,7 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
-	"item_magic_wand"
+	"item_magic_wand",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -29,16 +29,19 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
+	"item_arcane_boots",
 	"item_power_treads_int",
-	"item_arcane_boots"
 }
 
 transItem = {
+	"item_cyclone",
 	"item_force_staff",
 	"item_ghost",
-	"item_mekansm",
 	"item_hood_of_defiance",
-	"item_veil_of_discord"
+	"item_mekansm",
+	"item_rod_of_atos",
+	"item_veil_of_discord",
+	"item_witch_blade",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -48,25 +51,25 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_holy_locket",
-	"item_pipe",
-	"item_guardian_greaves",
-	"item_shivas_guard",
-	"item_octarine_core",
-	"item_radiance",
-	"item_black_king_bar",
 	"item_aeon_disk",
-	"item_sheepstick",
-	"item_kaya_and_sange",
-	"item_sphere",
-	"item_lotus_orb",
-	"item_dagon_5",
+	"item_black_king_bar",
 	"item_blink",
-	"item_rod_of_atos",
-	"item_cyclone"
+	"item_dagon_5",
+	"item_eternal_shroud",
+	"item_guardian_greaves",
+	"item_holy_locket",
+	"item_kaya_and_sange",
+	"item_lotus_orb",
+	"item_octarine_core",
+	"item_pipe",
+	"item_radiance",
+	"item_sheepstick",
+	"item_shivas_guard",
+	"item_sphere",
+	
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

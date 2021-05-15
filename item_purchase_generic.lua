@@ -692,6 +692,13 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_fluffy_hat" then --250
+						if bot.buildForce == false and bot.buildHurricane == false and bot.buildCorrosion == false 
+						and bot.buildFalcon == false and bot.buildHoly == false
+						then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_blight_stone" then --300
 						if bot.buildMedallion == false and bot.buildSolar == false and bot.buildDesolator == false 
 						and bot.buildCorrosion == false
@@ -742,7 +749,7 @@ function ItemPurchaseThink()
 						if bot.buildPerseverance == false and bot.buildRefresher == false and bot.buildSphere == false 
 						and bot.buildLotus == false and bot.buildMeteor == false and bot.buildBFury == false 
 						and bot.buildVanguard == false and bot.buildHood == false and bot.buildShroud == false
-						aand bot.buildPipe == false and bot.buildCrimson == false and bot.buildAbyssal == false
+						and bot.buildPipe == false and bot.buildCrimson == false and bot.buildAbyssal == false
 						then
 							slotToSell = itemSlot;
 							break;
@@ -754,6 +761,11 @@ function ItemPurchaseThink()
 						end
 					elseif item == "item_lifesteal" then --900
 						if bot.buildSatanic == false and bot.buildMask == false and bot.buildVlad == false then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_orb_of_corrosion" then --925
+						if #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -776,6 +788,11 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_falcon_blade" then --1100
+						if #bot.itemToBuy <= 4 then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_point_booster" then --1200
 						if bot.buildScepter== false and bot.buildScepter2 == false and bot.buildBooster == false 
 						and bot.buildOctarine == false and bot.buildBloodstone == false and bot.buildSkadi == false
@@ -790,7 +807,7 @@ function ItemPurchaseThink()
 							break;
 						end	
 					elseif item == "item_ghost" then --1500
-						if bot.buildEthereal == false and bot.itemToBuy <= 4 then
+						if bot.buildEthereal == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -830,12 +847,12 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_kaya" then --2050
-						if bot.buildBloodstone == false and bot.buildYK == false and bot.buildKS == false then
+						if bot.buildBloodstone == false and bot.buildYK == false and bot.buildKS == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_yasha" then --2050
-						if bot.buildManta == false and bot.buildYK == false and bot.buildSY == false then
+						if bot.buildManta == false and bot.buildYK == false and bot.buildSY == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -845,7 +862,7 @@ function ItemPurchaseThink()
 					-- 		break;
 					-- 	end
 					elseif item == "item_force_staff" then --2175
-						if bot.buildHurricane == false then
+						if bot.buildHurricane == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -854,33 +871,63 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_aether_lens" then --2275
+						if bot.buildOctarine == false and #bot.itemToBuy <= 4 then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_helm_of_the_dominator" then --2350
 						if bot.buildOverlord == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
+					elseif item == "item_armlet" then --2475
+						if #bot.itemToBuy <= 4 then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_echo_sabre" then --2500
-						if bot.buildSilver == false then
+						if #bot.itemToBuy <= 4 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_witch_blade" then --2600
+						if #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end	
 					elseif item == "item_maelstrom" then --2700
-						if bot.buildMjollnir == false and bot.buildGleipnir == false then
+						if bot.buildMjollnir == false and bot.buildGleipnir == false and #bot.itemToBuy <= 4 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_cyclone" then --2725
+						if bot.buildWaker == false and #bot.itemToBuy <= 4 then
+							slotToSell = itemSlot;
+							break;
+						end
+					elseif item == "item_recipe_rod_of_atos" then --2750
+						if bot.buildGleipnir == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_basher" then --2950
-						if bot.buildAbyssal == false then
+						if bot.buildAbyssal == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_invis_sword" then --3000
-						if bot.buildSilver == false then
+						if bot.buildSilver == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end	
+					elseif item == "item_mage_slayer" then --3250
+						if #bot.itemToBuy <= 4 then
+							slotToSell = itemSlot;
+							break;
+						end
 					elseif item == "item_orchid" then --3475
-						if bot.buildBloodthorn == false then
+						if bot.buildBloodthorn == false and #bot.itemToBuy <= 4 then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -926,10 +973,18 @@ function ItemPurchaseThink()
 	end
 	
 	--Fill purchase table with super late game item
-	if #bot.itemToBuy == 0 and addVeryLateGameItem == false then
+	if #bot.itemToBuy == 0 and addVeryLateGameItem == false and bot:HasModifier("modifier_item_moon_shard_consumed") == false then
 		bot.itemToBuy = {
 			'item_travel_boots_2',
 			'item_moon_shard',	
+		}
+		if items.HasItem(bot, 'item_travel_boots') == false then
+			bot.itemToBuy[#bot.itemToBuy+1] = 'item_travel_boots';
+		end
+		addVeryLateGameItem = true;
+	elseif #bot.itemToBuy == 0 and addVeryLateGameItem == false and bot:HasModifier("modifier_item_moon_shard_consumed") == true then
+		bot.itemToBuy = {
+			'item_travel_boots_2'	
 		}
 		if items.HasItem(bot, 'item_travel_boots') == false then
 			bot.itemToBuy[#bot.itemToBuy+1] = 'item_travel_boots';

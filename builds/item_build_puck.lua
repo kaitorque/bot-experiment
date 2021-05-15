@@ -19,9 +19,10 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
+	"item_boots",
 	"item_magic_wand",
 	"item_ring_of_basilius",
-	"item_boots"
+	"item_witch_blade",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -30,12 +31,13 @@ randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
 	"item_power_treads_int",
-	"item_travel_boots"
+	"item_travel_boots",
 }
 
 transItem = {
 	"item_force_staff",
-	"item_veil_of_discord"
+	"item_veil_of_discord",
+	"item_cyclone",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -45,26 +47,26 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_blink",
-	"item_cyclone",
-	"item_sheepstick",
-	"item_octarine_core",
-	"item_sphere",
-	"item_solar_crest",
-	"item_spirit_vessel",
-	"item_glimmer_cape",
-	"item_desolator",
-	"item_greater_crit",
 	"item_aeon_disk",
-	"item_dagon_5",
-	"item_mjollnir",
 	"item_black_king_baar",
-	"item_yasha_and_kaya",
+	"item_blink",
+	"item_dagon_5",
+	"item_desolator",
+	"item_ethereal_blade",
+	"item_glimmer_cape",
+	"item_greater_crit",
+	"item_kaya_and_sange",
+	"item_mjollnir",
+	"item_octarine_core",
 	"item_refresher",
-	"item_ethereal_blade"
+	"item_sheepstick",
+	"item_solar_crest",
+	"item_sphere",
+	"item_spirit_vessel",
+	"item_yasha_and_kaya",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

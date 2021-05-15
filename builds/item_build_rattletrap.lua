@@ -35,11 +35,12 @@ boot = {
 }
 
 transItem = {
-	"item_urn_of_shadows",
-	"item_force_staff",
 	"item_ancient_janggo",
+	"item_cyclone",
+	"item_force_staff",
+	"item_orchid",
+	"item_urn_of_shadows",
 	"item_veil_of_discord",
-	"item_orchid"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -49,24 +50,24 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_blade_mail",
-	"item_lotus_orb",
-	"item_hurricane_pike",
-	"item_shivas_guard",
-	"item_octarine_core",
 	"item_black_king_bar",
+	"item_blade_mail",
+	"item_crimson_guard",
+	"item_eternal_shroud",
 	"item_glimmer_cape",
-	"item_vladmir",
-	"item_cyclone",
-	"item_solar_crest",
 	"item_holy_locket",
-	"item_spirit_vessel",
-	"item_sheepstick",
+	"item_hurricane_pike",
+	"item_lotus_orb",
+	"item_octarine_core",
 	"item_pipe",
-	"item_crimson_guard"
+	"item_sheepstick",
+	"item_shivas_guard",
+	"item_solar_crest",
+	"item_spirit_vessel",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

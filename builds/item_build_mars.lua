@@ -19,10 +19,10 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
-	"item_magic_wand",
+	'item_orb_of_venom',
 	"item_boots",
+	"item_magic_wand",
 	"item_soul_ring",
-	'item_orb_of_venom'
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -34,9 +34,11 @@ boot = {
 }
 
 transItem = {
-	"item_hood_of_defiance",
 	"item_ancient_janggo",
-	"item_armlet"
+	"item_armlet",
+	"item_hood_of_defiance",
+	"item_orb_of_corrosion",
+	"item_cyclone",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -46,25 +48,25 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_vladmir",
-	"item_heavens_halberd",
-	"item_pipe",
-	"item_black_king_bar",
-	"item_lotus_orb",
-	"item_desolator",
 	"item_assault",
-	"item_blink",
-	"item_satanic",
-	"item_sange_and_yasha",
+	"item_black_king_bar",
 	"item_blade_mail",
-	"item_heart",
+	"item_blink",
 	"item_crimson_guard",
+	"item_desolator",
+	"item_heart",
+	"item_heavens_halberd",
+	"item_lotus_orb",
+	"item_pipe",
 	"item_radiance",
+	"item_sange_and_yasha",
+	"item_satanic",
+	"item_shivas_guard",
 	"item_solar_crest",
-	"item_shivas_guard"
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 1, 0, 0)
+randItem = KUtil.getItem(item, 5, 1, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

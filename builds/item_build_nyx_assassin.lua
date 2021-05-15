@@ -19,8 +19,8 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
+	"item_boots",
 	"item_magic_wand",
-	"item_boots"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -32,9 +32,11 @@ boot = {
 }
 
 transItem = {
+	"item_aether_lens",
+	"item_ancient_janggo",
+	"item_cyclone",
 	"item_force_staff",
 	"item_urn_of_shadows",
-	"item_ancient_janggo"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -44,20 +46,18 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_aether_lens",
-	"item_cyclone",
+	"item_aeon_disk",
 	"item_blink",
 	"item_dagon_5",
-	"item_octarine_core",
-	"item_meteor_hammer",
-	"item_lotus_orb",
-	"item_aeon_disk",
-	"item_sheepstick",
 	"item_ethereal_blade",
-	"item_spirit_vessel"
+	"item_lotus_orb",
+	"item_meteor_hammer",
+	"item_octarine_core",
+	"item_sheepstick",
+	"item_spirit_vessel",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 1, 0)
+randItem = KUtil.getItem(item, 5, 0, 1, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

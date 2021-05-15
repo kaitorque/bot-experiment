@@ -21,7 +21,7 @@ earlyItem = {
 	"item_magic_wand",
 	"item_sobi_mask",
 	"item_ring_of_protection",
-	"item_necronomicon"
+	"item_helm_of_the_dominator"
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -34,7 +34,6 @@ boot = {
 
 transItem = {
 	"item_basher",
-	"item_helm_of_the_dominator"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -44,19 +43,21 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_necronomicon_3",
-	"item_desolator",
-	"item_black_king_bar",
 	"item_abyssal_blade",
 	"item_assault",
-	"item_vladmir",
-	"item_nullifier",
+	"item_black_king_bar",
+	"item_desolator",
+	"item_heart",
 	"item_heavens_halberd",
+	"item_helm_of_the_dominator_2",
+	"item_nullifier",
+	"item_sange_and_yasha",
 	"item_sheepstick",
-	"item_heart"
+	"item_solar_crest",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

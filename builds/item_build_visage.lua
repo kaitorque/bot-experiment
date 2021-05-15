@@ -21,9 +21,9 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };	
 
 earlyItem = {
-	"item_magic_wand",
 	"item_boots",
-	"item_hand_of_midas"
+	"item_hand_of_midas",
+	"item_magic_wand",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -32,15 +32,17 @@ randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
 	"item_arcane_boots",
+	"item_phase_boots",
+	"item_tranquil_boots",
 	"item_travel_boots",
-	"item_phase_boots"
 }
 
 transItem = {
-	"item_medallion_of_courage",
-	"item_hood_of_defiance",
 	"item_ancient_janggo",
-	"item_helm_of_the_dominator"
+	"item_helm_of_the_dominator",
+	"item_hood_of_defiance",
+	"item_medallion_of_courage",
+	"item_rod_of_atos",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -50,21 +52,20 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_rod_of_atos",
-	"item_solar_crest",
-	"item_pipe",
-	"item_shivas_guard",
-	"item_monkey_king_bar",
-	"item_vladmir",
 	"item_assault",
-	"item_sheepstick",
 	"item_black_king_bar",
-	"item_lotus_orb",
 	"item_blink",
-	"item_mjollnir"
+	"item_lotus_orb",
+	"item_mjollnir",
+	"item_monkey_king_bar",
+	"item_pipe",
+	"item_sheepstick",
+	"item_shivas_guard",
+	"item_solar_crest",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

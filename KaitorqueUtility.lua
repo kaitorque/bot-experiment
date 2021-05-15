@@ -15,6 +15,14 @@ function KaitorqueModule.getNum(maxItem)
     return RandomInt( 0, maxItem );
 end
 
+function KaitorqueModule.findIndex(tInput, itemStr)
+	local index = {}
+	for k, v in pairs(tInput) do
+		index[v] = k
+	end
+	return index[itemStr]
+end
+
 function KaitorqueModule.getEarlyItem(tInput, maxItem)
 	if next(tInput) ~= nil then
 		while (#tInput > maxItem)
@@ -32,17 +40,38 @@ function KaitorqueModule.getBoot(tInput)
 	return tInput[bootNum];
 end
 
-function KaitorqueModule.getItem(tInput, maxItem, rapier, gem, moon)
+function KaitorqueModule.getItem(tInput, maxItem, rapier, gem, moon, scepter, shard)
+	local tReturn = {}
 	while (#tInput > maxItem)
 	do
 		table.remove (tInput, RandomInt(1,#tInput));
 	end
-	table.insert(tInput, "item_ultimate_scepter");
-	local tReturn = {}
-	repeat
+
+	if scepter == 1 then
+		table.insert(tInput, "item_ultimate_scepter");
+		repeat
+			tReturn = KaitorqueModule.FYShuffle( tInput );
+		until(tReturn[6] ~= "item_ultimate_scepter")
+		table.insert(tReturn, 6,"item_ultimate_scepter_2");
+	else
 		tReturn = KaitorqueModule.FYShuffle( tInput );
-	until(tReturn[6] ~= "item_ultimate_scepter")
-	table.insert(tReturn, 6,"item_ultimate_scepter_2");
+	end
+
+	local blinkIndex = KaitorqueModule.findIndex(tInput, "item_blink")
+	if blinkIndex ~= nil then
+		local blinkType = RandomInt(1,3)
+		if blinkType == 1 then
+			table.insert(tReturn, RandomInt(blinkIndex+1,#tReturn+1), "item_overwhelming_blink")
+		elseif blinkType == 2 then
+			table.insert(tReturn, RandomInt(blinkIndex+1,#tReturn+1), "item_swift_blink")
+		elseif blinkType == 3 then
+			table.insert(tReturn, RandomInt(blinkIndex+1,#tReturn+1), "item_arcane_blink")
+		end
+	end
+	
+	if shard == 1 then
+		table.insert(tReturn, RandomInt(1,#tReturn+1),"item_aghanims_shard");
+	end
 	if gem == 1 then
 		if RandomInt(1,4) == 4 then
 			table.insert(tReturn, RandomInt(1,#tReturn+1),"item_gem");
@@ -81,7 +110,7 @@ end
 
 teamItem  = {["item_ancient_janggo"] = "Drum of Endurance", ["item_mekansm"] = "Mekansm", ["item_vladmir"] = "Vladimir's Offering", ["item_urn_of_shadows"] = "Urn of Shadows",
 ["item__pipe"] = "Pipe of Insight", ["item_guardian_greaves"] = "Guardian Greaves", ["item_shivas_guard"] = "Shiva's Guard", ["item_assault"] = "Assault Cuirass",
-["item_crimson_guard"] = "Crimson Guard", ["item_urn_of_shadows"] = "Urn of Shadows", ["item_spirit_vessel"] = "Spirit Vessel", ["item_desolator"] = "Desolator"}
+["item_crimson_guard"] = "Crimson Guard", ["item_spirit_vessel"] = "Spirit Vessel", ["item_desolator"] = "Desolator"}
 function KaitorqueModule.chatItem(bot, item)
 	itemList = {}
 	for i=1, #item

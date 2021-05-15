@@ -21,9 +21,9 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
-	"item_magic_wand",
+	"item_boots",
 	"item_buckler",
-	"item_boots"
+	"item_magic_wand",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -31,16 +31,20 @@ numEarlyItem = KUtil.getNum(#earlyItem)
 randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
-	"item_power_treads_agi", 
-	"item_arcane_boots"
+	"item_arcane_boots",
+	"item_power_treads_agi",
 }
 
 transItem = {
+	"item_aether_lens",
+	"item_ancient_janggo",
+	"item_cyclone",
+	"item_dragon_lance",
 	"item_force_staff",
+	"item_helm_of_the_dominator",
+	"item_hood_of_defiance",
 	"item_medallion_of_courage",
 	"item_urn_of_shadows",
-	"item_ancient_janggo",
-	"item_helm_of_the_dominator"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -50,19 +54,24 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
-	"item_aether_lens",
-	"item_solar_crest",
-	"item_cyclone",
-	"item_hurricane_pike",
-	"item_monkey_king_bar",
-	"item_vladmir",
+	"item_assault",
+	"item_black_king_bar",
+	"item_butterfly",
+	"item_desolator",
 	"item_glimmer_cape",
+	"item_greater_crit",
 	"item_guardian_greaves",
+	"item_hurricane_pike",
+	"item_manta",
+	"item_monkey_king_bar",
+	"item_pipe",
+	"item_sange_and_yasha",
+	"item_solar_crest",
 	"item_spirit_vessel",
-	"item_pipe"
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 

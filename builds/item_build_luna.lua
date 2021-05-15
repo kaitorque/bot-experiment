@@ -20,10 +20,10 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
-	"item_magic_wand",
-	"item_ring_of_basilius",
 	"item_boots",
-	"item_wind_lace"
+	"item_magic_wand",
+	"item_ring_of_protection",
+	"item_wind_lace",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -32,18 +32,20 @@ randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
 	"item_power_treads_agi",
-	"item_travel_boots"
+	"item_tranquil_boots",
+	"item_travel_boots",
 }
 
 transItem = {
+	"item_ancient_janggo",
 	"item_dragon_lance",
-	"item_yasha",
-	"item_urn_of_shadows",
 	"item_force_staff",
-	"item_medallion_of_courage",
 	"item_helm_of_the_dominator",
 	"item_mask_of_madness",
-	"item_ancient_janggo"
+	"item_medallion_of_courage",
+	"item_ring_of_basilius",
+	"item_urn_of_shadows",
+	"item_yasha",
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -54,23 +56,23 @@ randBoot = KUtil.getBoot(boot)
 
 item = {
 	"item_black_king_bar",
-	"item_manta",
-	"item_hurricane_pike",
 	"item_butterfly",
-	"item_satanic",
-	"item_vladmir",
-	"item_refresher",
-	"item_spirit_vessel",
 	"item_glimmer_cape",
-	"item_pipe",
+	"item_greater_crit",
+	"item_hurricane_pike",
 	"item_lotus_orb",
+	"item_manta",
+	"item_monkey_king_bar",
+	"item_pipe",
+	"item_refresher",
+	"item_satanic",
 	"item_skadi",
 	"item_sphere",
-	"item_monkey_king_bar",
-	"item_greater_crit"
+	"item_spirit_vessel",
+	"item_vladmir",
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 
 KUtil.chatItem(npcBot, X["items"]);

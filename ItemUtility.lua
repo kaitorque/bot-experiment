@@ -138,10 +138,18 @@ ItemModule['earlyGameItem'] = {
 	"item_ring_of_health",
 	"item_lifesteal",
 	"item_blitz_knuckles",
-	"item_necronomicon",
-	"item_ring_of_tarrasque",
-	"item_cloak"
+	-- "item_necronomicon",
+	-- "item_ring_of_tarrasque",
+	"item_cloak",
 	 --"item_tpscroll"
+	 "item_orb_of_corrosion",
+	 "item_fluffy_hat",
+	 "item_falcon_blade",
+	 "item_aether_lens",
+	 "item_cyclone",
+	 "item_mage_slayer",
+	 "item_witch_blade",
+	 "item_rod_of_atos",
 }
 
 ItemModule['earlyBoots'] = {  
@@ -221,9 +229,9 @@ ItemModule["basic_items"] = {
 	"item_vitality_booster";
 	"item_void_stone";
 	"item_wind_lace";
-	"item_ring_of_tarrasque";
-	"item_crown";    
-	"item_blitz_knuckles";    
+	-- "item_ring_of_tarrasque";
+	"item_crown";
+	"item_blitz_knuckles";
 	"item_voodoo_mask";
 	"item_fluffy_hat";
 	"item_aghanims_shard";

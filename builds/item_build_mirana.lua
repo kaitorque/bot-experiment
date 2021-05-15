@@ -20,9 +20,9 @@ local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));
 -- };			
 
 earlyItem = {
-	"item_magic_wand",
 	"item_boots",
-	"item_wind_lace"
+	"item_magic_wand",
+	"item_wind_lace",
 }
 
 numEarlyItem = KUtil.getNum(#earlyItem)
@@ -31,15 +31,17 @@ randEarlyItem = KUtil.getEarlyItem(earlyItem, numEarlyItem)
 
 boot = {
 	"item_phase_boots",
-	"item_power_treads_agi"
+	"item_power_treads_agi",
 }
 
 transItem = {
+	"item_cyclone",
 	"item_force_staff",
-	"item_urn_of_shadows",
+	"item_lesser_crit",
 	"item_maelstrom",
+	"item_rod_of_atos",
+	"item_urn_of_shadows",
 	"item_veil_of_discord",
-	"item_lesser_crit"
 }
 
 numTransItem = KUtil.getNum(#transItem)
@@ -49,31 +51,29 @@ randTranItem = KUtil.getEarlyItem(transItem, numTransItem)
 randBoot = KUtil.getBoot(boot)
 
 item = {
+	"item_aeon_disk",
 	"item_black_king_bar",
+	"item_blink",
+	"item_butterfly",
+	"item_desolator",
+	"item_diffusal_blade",
+	"item_glimmer_cape",
+	"item_greater_crit",
+	"item_guardian_greaves",
+	"item_hurricane_pike",
+	"item_lotus_orb",
 	"item_manta",
 	"item_mjollnir",
 	"item_monkey_king_bar",
-	"item_butterfly",
-	"item_guardian_greaves",
-	"item_blink",
-	"item_glimmer_cape",
 	"item_pipe",
+	"item_satanic",
+	"item_solar_crest",
+	"ïtem_sphere",
 	"item_spirit_vessel",
 	"item_vladmir",
-	"item_solar_crest",
-	"item_rod_of_atos",
-	"item_cyclone",
-	"item_aeon_disk",
-	"item_lotus_orb",
-	"item_desolator",
-	"item_greater_crit",
-	"ïtem_sphere",
-	"item_satanic",
-	"item_diffusal_blade",
-	"item_hurricane_pike"
 }
 
-randItem = KUtil.getItem(item, 5, 0, 0, 0)
+randItem = KUtil.getItem(item, 5, 0, 0, 0, 1, 1)
 
 X["items"] = KUtil.getListItem(randEarlyItem,randBoot,randTranItem,randItem)
 
