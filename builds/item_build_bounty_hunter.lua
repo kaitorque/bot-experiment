@@ -62,7 +62,6 @@ item = {
 	"item_lotus_orb",
 	"item_manta",
 	"item_monkey_king_bar",
-	"item_moonshard",
 	"item_nullifier",
 	"item_pipe",
 	"item_sange_and_yasha",

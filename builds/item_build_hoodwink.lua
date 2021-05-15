@@ -1,6 +1,7 @@
 X = {}
 
 local IBUtil = require(GetScriptDirectory() .. "/ItemBuildUtility");
+local KUtil  = require(GetScriptDirectory() .. "/KaitorqueUtility");
 local npcBot = GetBot();
 local talents = IBUtil.FillTalenTable(npcBot);
 local skills  = IBUtil.FillSkillTable(npcBot, IBUtil.GetSlotPattern(1));

@@ -950,6 +950,22 @@ ItemUsageModule.Use['item_moon_shard'] = function(item, bot, mode, extra_range)
 	end
 end
 
+--item_aghanims_shard_roshan
+ItemUsageModule.Use['item_aghanims_shard_roshan'] = function(item, bot, mode, extra_range)
+	if bot:HasModifier("modifier_item_aghanims_shard") == false
+	then
+		return BOT_ACTION_DESIRE_ABSOLUTE, bot, 'unit';
+	end
+end
+
+ItemUsageModule.Use['item_ultimate_scepter_roshan'] = function(item, bot, mode, extra_range)
+	if bot:HasModifier("modifier_item_ultimate_scepter_consumed") or bot:HasModifier("modifier_item_ultimate_scepter_consumed_alchemist") == false
+	then
+		return BOT_ACTION_DESIRE_ABSOLUTE, bot, 'unit';
+	end
+end
+
+
 --item_phase_boots
 ItemUsageModule.Use['item_phase_boots'] = function(item, bot, mode, extra_range)
 	if mutil.IsGoingOnSomeone(bot) == true 

@@ -944,6 +944,24 @@ function ItemPurchaseThink()
 		fullInvCheck = DotaTime();
 	end
 	
+	if bot.itemToBuy[#bot.itemToBuy] == "item_aghanims_shard" and bot:HasModifier("modifier_item_aghanims_shard") then
+		bot.itemToBuy[#bot.itemToBuy] = nil
+	end
+
+	if (bot.itemToBuy[#bot.itemToBuy] == "item_ultimate_scepter") or (bot.itemToBuy[#bot.itemToBuy] == "item_recipe_ultimate_scepter_2")
+	and (bot:HasModifier("modifier_item_ultimate_scepter_consumed") or bot:HasModifier("modifier_item_ultimate_scepter_consumed_alchemist")) then
+		bot.itemToBuy[#bot.itemToBuy] = nil
+	end
+
+	if (bot:HasModifier("modifier_item_ultimate_scepter_consumed") or bot:HasModifier("modifier_item_ultimate_scepter_consumed_alchemist")) and 
+	items.HasItem( bot, "item_ultimate_scepter") 
+	then
+		local scepterslot = bot:FindItemSlot("item_ultimate_scepter")
+		if scepterslot >= 0 then
+			bot:ActionImmediate_SellItem(bot:GetItemInSlot(scepterslot));
+		end
+	end
+
 	--Sell non BoT boots when have BoT
 	if DotaTime() > 30*60 and ( items.HasItem( bot, "item_travel_boots") or items.HasItem( bot, "item_travel_boots_2") or items.HasItem( bot, "item_guardian_greaves")) and
 	   ( bot:DistanceFromFountain() == 0 or bot:DistanceFromSecretShop() == 0 )
@@ -1008,6 +1026,7 @@ function ItemPurchaseThink()
 		
 	end
 	
+
 	--Check if the bot already has the item formed from its components in their inventory (not stash)
 	if  #bot.currListItemToBuy == 0 and DotaTime() > lastInvCheck + 3.0 then
 	    if items.IsItemInHero(bot.currentItemToBuy) or ( bot.currentItemToBuy == 'item_ultimate_scepter_2' and  bot:HasScepter() ) then

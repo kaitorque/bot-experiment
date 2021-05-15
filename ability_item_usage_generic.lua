@@ -80,15 +80,8 @@ local function RemoveMinusOne(tableSkill)
 end
 
 bot.abilities = RemoveMinusOne(bot.abilities);
-local sayMyRole = false;
-function AbilityLevelUpThink()  
 
-	if sayMyRole == false and GetGameMode() == GAMEMODE_CM then
-		if DotaTime() > -75.0 then
-			bot:ActionImmediate_Chat("My Role: "..tostring(PairsHeroNameNRole[bot:GetUnitName()]),false);
-			sayMyRole = true;
-		end
-	end
+function AbilityLevelUpThink()  
 
 	if GetGameState() ~= GAME_STATE_PRE_GAME and GetGameState() ~= GAME_STATE_GAME_IN_PROGRESS 
 	then
@@ -1029,6 +1022,24 @@ function UnImplementedItemUsage()
 	local msh=IsItemAvailable("item_moon_shard");
 	if msh~=nil and msh:IsFullyCastable() then
 		if not bot:HasModifier("modifier_item_moon_shard_consumed")
+		then
+			bot:Action_UseAbilityOnEntity(msh, bot);
+			return;
+		end
+	end
+
+	local msh=IsItemAvailable("item_aghanims_shard_roshan");
+	if msh~=nil and msh:IsFullyCastable() then
+		if not bot:HasModifier("modifier_item_aghanims_shard")
+		then
+			bot:Action_UseAbilityOnEntity(msh, bot);
+			return;
+		end
+	end
+
+	local msh=IsItemAvailable("item_ultimate_scepter_roshan");
+	if msh~=nil and msh:IsFullyCastable() then
+		if not (bot:HasModifier("modifier_item_ultimate_scepter_consumed") or bot:HasModifier("modifier_item_ultimate_scepter_consumed_alchemist"))
 		then
 			bot:Action_UseAbilityOnEntity(msh, bot);
 			return;
