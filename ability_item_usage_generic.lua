@@ -80,16 +80,16 @@ local function RemoveMinusOne(tableSkill)
 end
 
 bot.abilities = RemoveMinusOne(bot.abilities);
-local sayMyRole = false;
+-- local sayMyRole = false;
 
 function AbilityLevelUpThink()
 
-	if sayMyRole == false and GetGameMode() == GAMEMODE_CM then
-		if DotaTime() > -75.0 then
-			bot:ActionImmediate_Chat("My Role: "..tostring(PairsHeroNameNRole[bot:GetUnitName()]),false);
-			sayMyRole = true;
-		end
-	end
+	-- if sayMyRole == false and GetGameMode() == GAMEMODE_CM then
+	-- 	if DotaTime() > -75.0 then
+	-- 		bot:ActionImmediate_Chat("My Role: "..tostring(PairsHeroNameNRole[bot:GetUnitName()]),false);
+	-- 		sayMyRole = true;
+	-- 	end
+	-- end
 
 	if GetGameState() ~= GAME_STATE_PRE_GAME and GetGameState() ~= GAME_STATE_GAME_IN_PROGRESS 
 	then
