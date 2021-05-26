@@ -764,11 +764,11 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_orb_of_corrosion" then --925
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end
+					-- elseif item == "item_orb_of_corrosion" then --925
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
 					elseif item == "item_blitz_knuckles" then --1000
 						if bot.buildMonkey == false and bot.buildShadow == false and bot.buildSilver == false
 						and bot.buildWitch == false
@@ -788,11 +788,11 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_falcon_blade" then --1100
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end
+					-- elseif item == "item_falcon_blade" then --1100
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
 					elseif item == "item_point_booster" then --1200
 						if bot.buildScepter== false and bot.buildScepter2 == false and bot.buildBooster == false 
 						and bot.buildOctarine == false and bot.buildBloodstone == false and bot.buildSkadi == false
@@ -802,12 +802,12 @@ function ItemPurchaseThink()
 						end
 					elseif item == "item_ancient_janggo" then --1475
 						local jg = bot:GetItemInSlot(itemSlot);
-						if jg~=nil and jg:GetCurrentCharges() == 0 and #bot.itemToBuy <= 4 then
+						if jg~=nil and jg:GetCurrentCharges() == 0 and #bot.itemToBuy <= 5 then
 							slotToSell = itemSlot;
 							break;
 						end	
 					elseif item == "item_ghost" then --1500
-						if bot.buildEthereal == false and #bot.itemToBuy <= 4 then
+						if bot.buildEthereal == false then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -816,16 +816,16 @@ function ItemPurchaseThink()
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_veil_of_discord" then --1525
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_mask_of_madness" then --1775
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end
+					-- elseif item == "item_veil_of_discord" then --1525
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
+					-- elseif item == "item_mask_of_madness" then --1775
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
 					elseif item == "item_dragon_lance" then --1900
 						if bot.buildHurricane == false then
 							slotToSell = itemSlot;
@@ -847,12 +847,12 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_kaya" then --2050
-						if bot.buildBloodstone == false and bot.buildYK == false and bot.buildKS == false and #bot.itemToBuy <= 4 then
+						if bot.buildBloodstone == false and bot.buildYK == false and bot.buildKS == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_yasha" then --2050
-						if bot.buildManta == false and bot.buildYK == false and bot.buildSY == false and #bot.itemToBuy <= 4 then
+						if bot.buildManta == false and bot.buildYK == false and bot.buildSY == false then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -862,7 +862,7 @@ function ItemPurchaseThink()
 					-- 		break;
 					-- 	end
 					elseif item == "item_force_staff" then --2175
-						if bot.buildHurricane == false and #bot.itemToBuy <= 4 then
+						if bot.buildHurricane == false then
 							slotToSell = itemSlot;
 							break;
 						end
@@ -872,62 +872,62 @@ function ItemPurchaseThink()
 							break;
 						end
 					elseif item == "item_aether_lens" then --2275
-						if bot.buildOctarine == false and #bot.itemToBuy <= 4 then
+						if bot.buildOctarine == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_helm_of_the_dominator" then --2350
-						if bot.buildOverlord == false and #bot.itemToBuy <= 4 then
+						if bot.buildOverlord == false then
 							slotToSell = itemSlot;
 							break;
 						end
-					elseif item == "item_armlet" then --2475
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_echo_sabre" then --2500
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end
-					elseif item == "item_witch_blade" then --2600
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end	
+					-- elseif item == "item_armlet" then --2475
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
+					-- elseif item == "item_echo_sabre" then --2500
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
+					-- elseif item == "item_witch_blade" then --2600
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end	
 					elseif item == "item_maelstrom" then --2700
-						if bot.buildMjollnir == false and bot.buildGleipnir == false and #bot.itemToBuy <= 4 then
+						if bot.buildMjollnir == false and bot.buildGleipnir == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_cyclone" then --2725
-						if bot.buildWaker == false and #bot.itemToBuy <= 4 then
+						if bot.buildWaker == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_recipe_rod_of_atos" then --2750
-						if bot.buildGleipnir == false and #bot.itemToBuy <= 4 then
+						if bot.buildGleipnir == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_basher" then --2950
-						if bot.buildAbyssal == false and #bot.itemToBuy <= 4 then
+						if bot.buildAbyssal == false then
 							slotToSell = itemSlot;
 							break;
 						end
 					elseif item == "item_invis_sword" then --3000
-						if bot.buildSilver == false and #bot.itemToBuy <= 4 then
+						if bot.buildSilver == false then
 							slotToSell = itemSlot;
 							break;
 						end	
-					elseif item == "item_mage_slayer" then --3250
-						if #bot.itemToBuy <= 4 then
-							slotToSell = itemSlot;
-							break;
-						end
+					-- elseif item == "item_mage_slayer" then --3250
+					-- 	if #bot.itemToBuy <= 4 then
+					-- 		slotToSell = itemSlot;
+					-- 		break;
+					-- 	end
 					elseif item == "item_orchid" then --3475
-						if bot.buildBloodthorn == false and #bot.itemToBuy <= 4 then
+						if bot.buildBloodthorn == false then
 							slotToSell = itemSlot;
 							break;
 						end

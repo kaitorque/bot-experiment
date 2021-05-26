@@ -190,7 +190,7 @@ function Think()
 		end
 	end
 
-	if uItem.HasItem(bot, items.HasItem( bot, "item_ultimate_scepter_roshan")) 
+	if uItem.HasItem( bot, "item_ultimate_scepter_roshan")
 	and (bot:HasModifier("modifier_item_ultimate_scepter_consumed") or bot:HasModifier("modifier_item_ultimate_scepter_consumed_alchemist"))
 	then
 		local scepterslot = bot:FindItemSlot("item_ultimate_scepter_roshan")
@@ -200,7 +200,7 @@ function Think()
 		end
 	end
 
-	if uItem.HasItem(bot, items.HasItem( bot, "item_aghanims_shard_roshan")) 
+	if uItem.HasItem( bot, "item_aghanims_shard_roshan")
 	and bot:HasModifier("modifier_item_aghanims_shard")
 	then
 		local aghshardslot = bot:FindItemSlot("item_aghanims_shard_roshan")

@@ -349,7 +349,7 @@ function OnStart()
 		end
 	end
 
-	bot:ActionImmediate_Chat('enter',false);
+	-- bot:ActionImmediate_Chat('enter',false);
 end
 
 function OnEnd()
@@ -366,7 +366,7 @@ function OnEnd()
 		end
 	end
 
-	bot:ActionImmediate_Chat("exit",false);
+	-- bot:ActionImmediate_Chat("exit",false);
 end
 
 function Think()
